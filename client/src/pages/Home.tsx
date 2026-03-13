@@ -1,4 +1,4 @@
-/**
+/*
  * Simply Sharon - Home Page
  * Design: Elegant beauty/wellness brand for mature women
  * Fonts: Italianno (script headings), Source Sans 3 (body/buttons), Helvetica (paragraphs)
@@ -8,7 +8,112 @@
  * Mobile: Stacked cards, gray bg showcase cards, smaller typography
  */
 
+import { useState } from "react";
 import { Link } from "wouter";
+import { ChevronDown, ChevronUp, Menu, X } from "lucide-react";
+
+// ─── Mobile Nav ──────────────────────────────────────────────────────────────
+const NAV_ITEMS = [
+  { label: "Blogcast", href: "/blogcast" },
+  { label: "Make-Betters", href: "/" },
+  { label: "Poise", href: "/" },
+  { label: "About", href: "/" },
+  { label: "Archives", href: "/blogcast" },
+  { label: "Contact", href: "/" },
+];
+
+function MobileNav() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      {/* Hamburger trigger - only visible on mobile */}
+      <div className="fixed top-4 right-4 z-50 md:hidden">
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-12 h-12 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white shadow-lg"
+          aria-label="Toggle navigation"
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      {/* Full-screen overlay */}
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/95 flex flex-col items-center justify-center gap-8 md:hidden"
+          onClick={() => setOpen(false)}
+        >
+          <span className="text-white text-[56px] font-normal font-['Italianno'] mb-4">Simply Sharon</span>
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.label} href={item.href}>
+              <span
+                className="text-white text-3xl font-bold font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </span>
+            </Link>
+          ))}
+          <Link href="/admin">
+            <span className="text-gray-400 text-sm mt-8 hover:text-white transition-colors cursor-pointer">
+              Admin Login
+            </span>
+          </Link>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ─── Collapsible Gallery Accordion ───────────────────────────────────────────
+const GALLERY_CATEGORIES = [
+  {
+    label: "Makeup",
+    items: ["Ordinary to Extraordinary", "Golden Girls", "Eyebrows", "Bridal", "Males"],
+  },
+  {
+    label: "SFX",
+    items: ["Characters 1", "Characters 2", "Film", "TV", "Bus. SFX", "Facepainting"],
+  },
+  {
+    label: "Hairstyling",
+    items: ["Historical/Fashion/Character", "Updos", "Short & Long", "Vintage", "Thin Hair Help"],
+  },
+];
+
+function GalleryAccordion() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  return (
+    <div className="w-full flex flex-col gap-3 mt-6">
+      <p className="text-center text-black text-2xl font-bold font-['Source_Sans_3'] mb-2">Sharon's Photo Gallery Links Below</p>
+      {GALLERY_CATEGORIES.map((cat, idx) => (
+        <div key={cat.label} className="border border-black rounded-lg overflow-hidden">
+          <button
+            className="w-full flex items-center justify-between px-6 py-4 bg-white hover:bg-gray-50 transition-colors"
+            onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+          >
+            <span className="text-black text-xl font-bold font-['Source_Sans_3']">{cat.label}</span>
+            {openIdx === idx ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+          {openIdx === idx && (
+            <div className="px-6 py-4 bg-gray-50 flex flex-wrap gap-3">
+              {cat.items.map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-['Source_Sans_3'] text-black hover:bg-black hover:text-white transition-colors"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 // CDN asset URLs
 const ASSETS = {
@@ -94,6 +199,9 @@ function MobilePlaylistButton({ icon, label }: { icon: string; label: string }) 
 export default function Home() {
   return (
     <div className="w-full bg-white flex flex-col items-center overflow-hidden">
+
+      {/* Mobile hamburger nav */}
+      <MobileNav />
 
       {/* ── Hero Section ── */}
       <section className="w-full">
@@ -416,6 +524,10 @@ export default function Home() {
             <span className="text-center text-[#4e4e4e] text-[32px] font-normal" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>Click to Enlarge</span>
           </button>
         </div>
+        {/* Gallery Accordion - Desktop */}
+        <div className="w-full max-w-[1046px] px-4">
+          <GalleryAccordion />
+        </div>
       </section>
 
       {/* Mobile Behind the Scenes */}
@@ -444,12 +556,24 @@ export default function Home() {
             <span className="text-center text-[#4e4e4e] text-xl font-normal" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>Click to Enlarge</span>
           </button>
         </div>
+        {/* Gallery Accordion - Mobile */}
+        <div className="w-full px-4">
+          <GalleryAccordion />
+        </div>
       </section>
 
       {/* ── Footer Section ── */}
       <footer className="w-full">
         <img src={ASSETS.footerDesktop} alt="Connect with Sharon" className="w-full h-auto block hidden md:block" />
         <img src={ASSETS.footerMobile} alt="Connect with Sharon" className="w-full h-auto block md:hidden" />
+        {/* Admin access link */}
+        <div className="w-full bg-black py-3 flex justify-center items-center">
+          <Link href="/admin">
+            <span className="text-gray-500 text-xs hover:text-gray-300 transition-colors cursor-pointer font-['Source_Sans_3']">
+              Admin Login
+            </span>
+          </Link>
+        </div>
       </footer>
 
     </div>

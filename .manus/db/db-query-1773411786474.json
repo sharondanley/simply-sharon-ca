@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `posts` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `slug` varchar(255) NOT NULL,\n  `title` varchar(500) NOT NULL,\n  `subtitle` varchar(500),\n  `summary` text,\n  `thumbnailUrl` text,\n  `thumbnailKey` text,\n  `hashtags` json,\n  `topic` varchar(100),\n  `episode` int,\n  `authorName` varchar(255) DEFAULT 'Sharon Danley',\n  `blocks` json,\n  `published` boolean NOT NULL DEFAULT false,\n  `publishedAt` timestamp NULL,\n  `createdAt` timestamp NOT NULL DEFAULT (now()),\n  `updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `posts_id` PRIMARY KEY(`id`),\n  CONSTRAINT `posts_slug_unique` UNIQUE(`slug`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4FP1fHMMFaUgJ5B.root --database S7VRvsAR3NFvJQTWWaYkyz --execute CREATE TABLE IF NOT EXISTS `posts` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `slug` varchar(255) NOT NULL,\n  `title` varchar(500) NOT NULL,\n  `subtitle` varchar(500),\n  `summary` text,\n  `thumbnailUrl` text,\n  `thumbnailKey` text,\n  `hashtags` json,\n  `topic` varchar(100),\n  `episode` int,\n  `authorName` varchar(255) DEFAULT 'Sharon Danley',\n  `blocks` json,\n  `published` boolean NOT NULL DEFAULT false,\n  `publishedAt` timestamp NULL,\n  `createdAt` timestamp NOT NULL DEFAULT (now()),\n  `updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `posts_id` PRIMARY KEY(`id`),\n  CONSTRAINT `posts_slug_unique` UNIQUE(`slug`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 242
+}

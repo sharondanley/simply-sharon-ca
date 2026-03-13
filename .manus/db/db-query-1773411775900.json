@@ -1,0 +1,16 @@
+{
+  "query": "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME IN ('posts', 'comments', 'comment_reactions') ORDER BY TABLE_NAME;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4FP1fHMMFaUgJ5B.root --database S7VRvsAR3NFvJQTWWaYkyz --execute SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME IN ('posts', 'comments', 'comment_reactions') ORDER BY TABLE_NAME;",
+  "rows": [
+    {
+      "TABLE_NAME": "comment_reactions"
+    },
+    {
+      "TABLE_NAME": "comments"
+    }
+  ],
+  "messages": [],
+  "stdout": "TABLE_NAME\ncomment_reactions\ncomments\n",
+  "stderr": "",
+  "execution_time_ms": 116
+}
