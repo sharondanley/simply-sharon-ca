@@ -7,7 +7,83 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
-import { Search, ChevronLeft, ChevronRight, SortAsc } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, SortAsc, Menu, X, Mail, Youtube, Facebook } from "lucide-react";
+
+const heroBg = {
+  background: "linear-gradient(135deg, #2a2a2e 0%, #3d3d42 30%, #4a4a50 50%, #3a3a40 70%, #2e2e34 100%)",
+};
+
+const NAV_ITEMS = [
+  { label: "Blogcast", href: "/blogcast" },
+  { label: "Make-Betters", href: "/#make-betters" },
+  { label: "Poise", href: "/#poise" },
+  { label: "About", href: "/#about" },
+  { label: "Archives", href: "/blogcast" },
+  { label: "Contact", href: "/#contact" },
+];
+
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  return (
+    <>
+      <nav className="w-full flex items-center justify-between px-8 md:px-12 py-5" style={heroBg}>
+        <Link href="/" className="flex items-center gap-3 no-underline">
+          <div className="w-12 h-12 rounded-full border-2 border-white/80 flex items-center justify-center bg-white/10 flex-shrink-0">
+            <span className="text-white text-xl font-['Italianno'] leading-none">S</span>
+          </div>
+          <span className="text-white text-3xl font-normal font-['Italianno'] leading-none whitespace-nowrap">SimplySharon</span>
+        </Link>
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.label} href={item.href}>
+              <span className="text-white text-base lg:text-lg font-normal font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer whitespace-nowrap">{item.label}</span>
+            </Link>
+          ))}
+        </div>
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Toggle navigation">
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center gap-8 md:hidden" onClick={() => setMobileOpen(false)}>
+          <button className="absolute top-5 right-5 text-white" onClick={() => setMobileOpen(false)}><X size={28} /></button>
+          <span className="text-white text-[56px] font-normal font-['Italianno'] mb-4">Simply Sharon</span>
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
+              <span className="text-white text-3xl font-bold font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer">{item.label}</span>
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer id="contact" className="w-full relative overflow-hidden" style={heroBg}>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 80% at 75% 40%, rgba(180,180,190,0.18) 0%, transparent 70%)" }} />
+      <div className="relative z-10 max-w-[1100px] mx-auto px-8 md:px-16 py-16 flex flex-col md:flex-row gap-12 justify-between items-start">
+        <div className="flex flex-col gap-6 flex-1">
+          <h2 className="text-white" style={{ fontFamily: "Italianno, cursive", fontSize: "clamp(40px, 4vw, 64px)" }}>Connect with Sharon</h2>
+          <div className="flex items-center gap-4">
+            <a href="mailto:info@SimplySharon.ca" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Mail size={18} /></a>
+            <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Facebook size={18} /></a>
+            <a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Youtube size={18} /></a>
+          </div>
+          <div className="flex flex-col gap-4 text-white font-['Source_Sans_3']">
+            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">Email:</span><a href="mailto:info@SimplySharon.ca" className="text-lg hover:text-gray-300 underline">info@SimplySharon.ca</a></div>
+            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">YouTube:</span><a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-gray-300 underline">YouTube.com/@SimplySharonTips</a></div>
+            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">Facebook:</span><div className="flex flex-col gap-2"><a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer" className="text-base hover:text-gray-300 underline">Facebook.com/groups/GoinGray.LovinIt</a><a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" className="text-base hover:text-gray-300 underline">Facebook.com/SharonDanleyBeauty</a></div></div>
+          </div>
+          <p className="text-white/60 text-sm font-['Source_Sans_3'] max-w-[600px] mt-4">Not monetized, sponsored, or compensated. Shared freely to inspire a <strong className="text-white/80">legacy of giving in honour of my children Andrea &amp; Matthew Main</strong>.</p>
+          <p className="text-white/50 text-sm font-['Source_Sans_3']">© 2025 Sharon Danley | All images, content and design created by Sharon Danley.</p>
+          <Link href="/admin"><span className="text-white/30 text-xs hover:text-white/60 transition-colors cursor-pointer font-['Source_Sans_3']">Admin Login</span></Link>
+        </div>
+      </div>
+    </footer>
+  );
+}
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/75-344_8b8c1a79.webp";
 const PLACEHOLDER_THUMB = "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/81-436_a928ba59.webp";
@@ -203,24 +279,7 @@ export default function BlogcastArchive() {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Navbar ── */}
-      <nav className="w-full bg-white border-b border-gray-100 sticky top-0 z-30 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/">
-            <span className="text-black text-4xl font-normal font-['Italianno'] cursor-pointer hover:opacity-80 transition-opacity">
-              Simply Sharon
-            </span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            {["Blogcast", "Make-Betters", "Poise", "About", "Archives", "Contact"].map((item) => (
-              <Link key={item} href={item === "Blogcast" || item === "Archives" ? "/blogcast" : "/"}>
-                <span className="text-black text-sm font-bold font-['Source_Sans_3'] hover:underline cursor-pointer">
-                  {item}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* ── Header ── */}
       <section className="w-full bg-gradient-to-b from-gray-50 to-white py-16 px-6">
@@ -302,17 +361,7 @@ export default function BlogcastArchive() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="w-full bg-black py-8 px-6 mt-12">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="text-white text-3xl font-normal font-['Italianno']">Simply Sharon</span>
-          <p className="text-gray-400 text-sm font-['Source_Sans_3']">© 2025 Simply Sharon. All rights reserved.</p>
-          <Link href="/admin">
-            <span className="text-gray-600 text-xs hover:text-gray-400 transition-colors cursor-pointer font-['Source_Sans_3']">
-              Admin Login
-            </span>
-          </Link>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

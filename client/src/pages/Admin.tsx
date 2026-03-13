@@ -4,7 +4,7 @@
  * Only accessible to authenticated admin users.
  */
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -12,8 +12,8 @@ import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 import {
   Plus, Trash2, GripVertical, Image, Type, Quote, Video,
-  Bold, Italic, Hash, Eye, EyeOff, Save, ArrowLeft, Upload,
-  FileText, Settings, LogOut, ChevronDown, ChevronRight, X
+  Bold, Italic, Underline, Hash, Eye, EyeOff, Save, ArrowLeft, Upload,
+  FileText, Settings, LogOut, ChevronDown, ChevronRight, X, Heading1, Heading2, Heading3
 } from "lucide-react";
 
 // ─── Block Types ──────────────────────────────────────────────────────────────
@@ -31,9 +31,176 @@ function generateId() {
   return Math.random().toString(36).slice(2);
 }
 
-// ─── Block Editor ─────────────────────────────────────────────────────────────
-function BlockIcon({ type }: { type: BlockType }) {
-  const icons: Record<BlockType, React.ReactNode> = {
+// ─── Rich Text Toolbar ────────────────────────────────────────────────────────
+function RichTextToolbar({ editorRef }: { editorRef: React.RefObject<HTMLDivElement | null> }) {
+  const [activeFormats, setActiveFormats] = useState<Set<string>>(new Set());
+
+  // Update active format state when selection changes
+  const updateActiveFormats = useCallback(() => {
+    const formats = new Set<string>();
+    if (document.queryCommandState("bold")) formats.add("bold");
+    if (document.queryCommandState("italic")) formats.add("italic");
+    if (document.queryCommandState("underline")) formats.add("underline");
+    const block = document.queryCommandValue("formatBlock");
+    if (block) formats.add(block.toLowerCase());
+    setActiveFormats(formats);
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("selectionchange", updateActiveFormats);
+    return () => document.removeEventListener("selectionchange", updateActiveFormats);
+  }, [updateActiveFormats]);
+
+  const exec = (cmd: string, value?: string) => {
+    editorRef.current?.focus();
+    document.execCommand(cmd, false, value);
+    updateActiveFormats();
+  };
+
+  const ToolBtn = ({
+    cmd, value, title, children, active
+  }: {
+    cmd: string; value?: string; title: string;
+    children: React.ReactNode; active?: boolean;
+  }) => (
+    <button
+      type="button"
+      onMouseDown={(e) => { e.preventDefault(); exec(cmd, value); }}
+      title={title}
+      className={`p-1.5 rounded text-sm transition-colors ${
+        active
+          ? "bg-black text-white"
+          : "text-gray-600 hover:bg-gray-100 hover:text-black"
+      }`}
+    >
+      {children}
+    </button>
+  );
+
+  return (
+    <div className="flex items-center gap-0.5 px-2 py-1.5 bg-gray-50 border border-gray-200 rounded-t-lg flex-wrap">
+      {/* Text formatting */}
+      <ToolBtn cmd="bold" title="Bold (Ctrl+B)" active={activeFormats.has("bold")}>
+        <Bold size={14} />
+      </ToolBtn>
+      <ToolBtn cmd="italic" title="Italic (Ctrl+I)" active={activeFormats.has("italic")}>
+        <Italic size={14} />
+      </ToolBtn>
+      <ToolBtn cmd="underline" title="Underline (Ctrl+U)" active={activeFormats.has("underline")}>
+        <Underline size={14} />
+      </ToolBtn>
+
+      <div className="w-px h-5 bg-gray-300 mx-1" />
+
+      {/* Heading sizes */}
+      <ToolBtn cmd="formatBlock" value="h1" title="Heading 1" active={activeFormats.has("h1")}>
+        <Heading1 size={14} />
+      </ToolBtn>
+      <ToolBtn cmd="formatBlock" value="h2" title="Heading 2" active={activeFormats.has("h2")}>
+        <Heading2 size={14} />
+      </ToolBtn>
+      <ToolBtn cmd="formatBlock" value="h3" title="Heading 3" active={activeFormats.has("h3")}>
+        <Heading3 size={14} />
+      </ToolBtn>
+      <ToolBtn cmd="formatBlock" value="p" title="Normal text" active={activeFormats.has("p")}>
+        <Type size={14} />
+      </ToolBtn>
+
+      <div className="w-px h-5 bg-gray-300 mx-1" />
+
+      {/* Lists */}
+      <ToolBtn cmd="insertUnorderedList" title="Bullet list">
+        <span className="text-xs font-bold leading-none">••</span>
+      </ToolBtn>
+      <ToolBtn cmd="insertOrderedList" title="Numbered list">
+        <span className="text-xs font-bold leading-none">1.</span>
+      </ToolBtn>
+
+      <div className="w-px h-5 bg-gray-300 mx-1" />
+
+      {/* Alignment */}
+      <ToolBtn cmd="justifyLeft" title="Align left">
+        <span className="text-xs leading-none">≡</span>
+      </ToolBtn>
+      <ToolBtn cmd="justifyCenter" title="Align center">
+        <span className="text-xs leading-none">≡</span>
+      </ToolBtn>
+      <ToolBtn cmd="justifyRight" title="Align right">
+        <span className="text-xs leading-none">≡</span>
+      </ToolBtn>
+
+      <div className="w-px h-5 bg-gray-300 mx-1" />
+
+      {/* Clear formatting */}
+      <ToolBtn cmd="removeFormat" title="Clear formatting">
+        <span className="text-xs font-bold leading-none">Tx</span>
+      </ToolBtn>
+    </div>
+  );
+}
+
+// ─── Rich Text Block Editor ────────────────────────────────────────────────────
+function RichTextBlock({
+  block,
+  onChange,
+}: {
+  block: Block;
+  onChange: (updated: Block) => void;
+}) {
+  const editorRef = useRef<HTMLDivElement>(null);
+  const [focused, setFocused] = useState(false);
+  // Track if we're currently updating from outside to avoid cursor reset
+  const isInternalUpdate = useRef(false);
+
+  // Sync content from block to editor only when block.content changes externally
+  useEffect(() => {
+    if (editorRef.current && !isInternalUpdate.current) {
+      const currentHtml = editorRef.current.innerHTML;
+      if (currentHtml !== (block.content || "")) {
+        editorRef.current.innerHTML = block.content || "";
+      }
+    }
+    isInternalUpdate.current = false;
+  }, [block.content]);
+
+  const handleInput = () => {
+    if (editorRef.current) {
+      isInternalUpdate.current = true;
+      onChange({ ...block, content: editorRef.current.innerHTML });
+    }
+  };
+
+  const blockStyles: Record<string, string> = {
+    paragraph: "text-base text-gray-800 leading-relaxed",
+    heading: "text-2xl font-bold text-black leading-tight",
+    quote: "text-lg italic text-gray-700 border-l-4 border-black pl-4",
+  };
+
+  const placeholders: Record<string, string> = {
+    paragraph: "Start writing...",
+    heading: "Heading text...",
+    quote: "Quote text...",
+  };
+
+  return (
+    <div className="border border-gray-200 rounded-lg overflow-hidden focus-within:ring-1 focus-within:ring-black focus-within:border-black transition-all">
+      {focused && <RichTextToolbar editorRef={editorRef} />}
+      <div
+        ref={editorRef}
+        contentEditable
+        suppressContentEditableWarning
+        onInput={handleInput}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        data-placeholder={placeholders[block.type] || "Write here..."}
+        className={`min-h-[80px] px-3 py-2 outline-none font-['Source_Sans_3'] ${blockStyles[block.type] || "text-base"} empty:before:content-[attr(data-placeholder)] empty:before:text-gray-400 empty:before:pointer-events-none`}
+      />
+    </div>
+  );
+}
+
+// ─── Block Editor ──────────────────────────────────────────────────────────────
+function BlockIcon({ type }: { type: BlockType }) {  const icons: Record<BlockType, React.ReactNode> = {
     paragraph: <Type size={14} />,
     heading: <Hash size={14} />,
     quote: <Quote size={14} />,
@@ -97,25 +264,8 @@ function BlockEditor({
       );
     }
 
-    const textareaClasses: Record<string, string> = {
-      paragraph: "text-base text-gray-800",
-      heading: "text-2xl font-bold text-black",
-      quote: "text-lg italic text-gray-700 border-l-4 border-black pl-4",
-    };
-
-    return (
-      <textarea
-        value={block.content || ""}
-        onChange={(e) => onChange({ ...block, content: e.target.value })}
-        placeholder={
-          block.type === "heading" ? "Heading text..." :
-          block.type === "quote" ? "Quote text..." :
-          "Start writing..."
-        }
-        rows={block.type === "heading" ? 1 : 3}
-        className={`w-full px-3 py-2 border border-transparent hover:border-gray-200 focus:border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-black transition-colors ${textareaClasses[block.type] || "text-base"} font-['Source_Sans_3']`}
-      />
-    );
+    // Use rich text editor for text-based blocks
+    return <RichTextBlock block={block} onChange={onChange} />;
   };
 
   return (

@@ -43,3 +43,14 @@
 - [x] Post list management (create, edit, delete, publish)
 - [x] Role-based access control (admin only)
 - [x] 25 vitest unit tests passing
+
+## Phase 7: Real HTML/CSS Sections (replacing image-based)
+- [x] Rebuild navbar as real HTML/CSS component (logo, nav links, mobile hamburger)
+- [x] Rebuild hero section as real HTML/CSS (background image, script headings, body text)
+- [x] Rebuild footer as real HTML/CSS (social links, contact info, admin login)
+- [x] Audit remaining image-based sections (make-betters, gray-is-gorgeous, about-sharon)
+
+## Phase 8: Rich Text Editor Toolbar
+- [x] Add formatting toolbar to paragraph blocks (bold, italic, underline)
+- [x] Add heading size selector to heading blocks (H1, H2, H3)
+- [x] Render formatted HTML in the blog post view

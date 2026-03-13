@@ -7,12 +7,90 @@
 import { useState, useMemo } from "react";
 import { Link, useParams } from "wouter";
 import { trpc } from "@/lib/trpc";
-import { Heart, ThumbsUp, Laugh, Reply, ChevronDown, ChevronUp } from "lucide-react";
+import { Heart, ThumbsUp, Laugh, Reply, ChevronDown, ChevronUp, Menu, X, Mail, Youtube, Facebook } from "lucide-react";
 import { toast } from "sonner";
+
+// ─── Nav Items ───────────────────────────────────────────────────────────────
+const NAV_ITEMS = [
+  { label: "Blogcast", href: "/blogcast" },
+  { label: "Make-Betters", href: "/#make-betters" },
+  { label: "Poise", href: "/#poise" },
+  { label: "About", href: "/#about" },
+  { label: "Archives", href: "/blogcast" },
+  { label: "Contact", href: "/#contact" },
+];
+
+// ─── Navbar Component ────────────────────────────────────────────────────────
+const heroBg = {
+  background: "linear-gradient(135deg, #2a2a2e 0%, #3d3d42 30%, #4a4a50 50%, #3a3a40 70%, #2e2e34 100%)",
+};
+
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  return (
+    <>
+      <nav className="w-full flex items-center justify-between px-8 md:px-12 py-5" style={heroBg}>
+        <Link href="/" className="flex items-center gap-3 no-underline">
+          <div className="w-12 h-12 rounded-full border-2 border-white/80 flex items-center justify-center bg-white/10 flex-shrink-0">
+            <span className="text-white text-xl font-['Italianno'] leading-none">S</span>
+          </div>
+          <span className="text-white text-3xl font-normal font-['Italianno'] leading-none whitespace-nowrap">SimplySharon</span>
+        </Link>
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.label} href={item.href}>
+              <span className="text-white text-base lg:text-lg font-normal font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer whitespace-nowrap">{item.label}</span>
+            </Link>
+          ))}
+        </div>
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Toggle navigation">
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center gap-8 md:hidden" onClick={() => setMobileOpen(false)}>
+          <button className="absolute top-5 right-5 text-white" onClick={() => setMobileOpen(false)}><X size={28} /></button>
+          <span className="text-white text-[56px] font-normal font-['Italianno'] mb-4">Simply Sharon</span>
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
+              <span className="text-white text-3xl font-bold font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer">{item.label}</span>
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+// ─── Footer Component ────────────────────────────────────────────────────────
+function SiteFooter() {
+  return (
+    <footer id="contact" className="w-full relative overflow-hidden" style={heroBg}>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 80% at 75% 40%, rgba(180,180,190,0.18) 0%, transparent 70%)" }} />
+      <div className="relative z-10 max-w-[1100px] mx-auto px-8 md:px-16 py-16 flex flex-col md:flex-row gap-12 justify-between items-start">
+        <div className="flex flex-col gap-6 flex-1">
+          <h2 className="text-white" style={{ fontFamily: "Italianno, cursive", fontSize: "clamp(40px, 4vw, 64px)" }}>Connect with Sharon</h2>
+          <div className="flex items-center gap-4">
+            <a href="mailto:info@SimplySharon.ca" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Mail size={18} /></a>
+            <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Facebook size={18} /></a>
+            <a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Youtube size={18} /></a>
+          </div>
+          <div className="flex flex-col gap-4 text-white font-['Source_Sans_3']">
+            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">Email:</span><a href="mailto:info@SimplySharon.ca" className="text-lg hover:text-gray-300 underline">info@SimplySharon.ca</a></div>
+            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">YouTube:</span><a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-gray-300 underline">YouTube.com/@SimplySharonTips</a></div>
+            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">Facebook:</span><div className="flex flex-col gap-2"><a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer" className="text-base hover:text-gray-300 underline">Facebook.com/groups/GoinGray.LovinIt</a><a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" className="text-base hover:text-gray-300 underline">Facebook.com/SharonDanleyBeauty</a></div></div>
+          </div>
+          <p className="text-white/60 text-sm font-['Source_Sans_3'] max-w-[600px] mt-4">Not monetized, sponsored, or compensated. Shared freely to inspire a <strong className="text-white/80">legacy of giving in honour of my children Andrea &amp; Matthew Main</strong>.</p>
+          <p className="text-white/50 text-sm font-['Source_Sans_3']">© 2025 Sharon Danley | All images, content and design created by Sharon Danley.</p>
+          <Link href="/admin"><span className="text-white/30 text-xs hover:text-white/60 transition-colors cursor-pointer font-['Source_Sans_3']">Admin Login</span></Link>
+        </div>
+      </div>
+    </footer>
+  );
+}
 
 // ─── CDN Assets ──────────────────────────────────────────────────────────────
 const ASSETS = {
-  navbar: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/111-531_3c5a2f93.webp",
   breadcrumbIcon: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/111-551_82d1e49d.webp",
   sharonPortrait: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/114-683_95699440.webp",
   videoThumbnail: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/116-7_9373465d.webp",
@@ -382,13 +460,7 @@ export default function BlogPost() {
     <div className="w-full bg-white flex flex-col items-start">
 
       {/* ── Navbar ── */}
-      <header className="w-full">
-        <img
-          src={ASSETS.navbar}
-          alt="Simply Sharon Navigation"
-          className="w-full h-auto block"
-        />
-      </header>
+      <Navbar />
 
       {/* ── Main Content ── */}
       <main className="w-full px-4 md:px-[135px] bg-white flex flex-col gap-8 md:gap-[43px]">
@@ -552,20 +624,7 @@ export default function BlogPost() {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="w-full">
-        <img
-          src={ASSETS.footer}
-          alt="Connect with Sharon"
-          className="w-full h-auto block"
-        />
-        <div className="w-full bg-black py-3 flex justify-center items-center">
-          <Link href="/admin">
-            <span className="text-gray-500 text-xs hover:text-gray-300 transition-colors cursor-pointer font-['Source_Sans_3']">
-              Admin Login
-            </span>
-          </Link>
-        </div>
-      </footer>
+      <SiteFooter />
 
     </div>
   );
