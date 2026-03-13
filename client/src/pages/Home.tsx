@@ -21,7 +21,10 @@ const NAV_ITEMS = [
 
 // ─── CDN asset URLs ───────────────────────────────────────────────────────────
 const ASSETS = {
-  // Hero
+  // Hero section assets (from hero-section Figma export - correct assets)
+  heroLogo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/hero-logo-correct_3c19972d.webp",
+  heroSharon: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/hero-sharon-correct_0a0b4071.webp",
+  // Hero (legacy - kept for mobile)
   sharonHero: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/81-436_a928ba59.webp",
   heroMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-3_a429c158.webp",
   // Blogcast
@@ -85,37 +88,77 @@ function Navbar() {
 
   return (
     <>
-      {/* Desktop + Mobile Navbar */}
+      {/* ── Desktop Navbar (exact Figma CSS: 1543px wide, 108px tall, pl-60px, gap-63px) ── */}
       <nav
-        className="w-full absolute top-0 left-0 z-30 flex items-center justify-between px-8 md:px-12 py-5"
-        style={{ background: "transparent" }}
+        className="w-full z-30 hidden md:flex items-center"
+        style={{
+          paddingLeft: "60px",
+          gap: "63px",
+          height: "108px",
+          background: "transparent",
+        }}
       >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 no-underline">
-          <div className="w-14 h-14 rounded-full border-2 border-white/80 flex items-center justify-center overflow-hidden bg-white/10 backdrop-blur-sm flex-shrink-0">
-            {/* Silhouette icon - stylized S */}
-            <span className="text-white text-2xl font-['Italianno'] leading-none">S</span>
-          </div>
-          <span className="text-white text-3xl md:text-4xl font-normal font-['Italianno'] leading-none whitespace-nowrap">
+        {/* brand-logo: flex row, gap 15px, 336×108px */}
+        <Link href="/" className="flex items-center no-underline flex-shrink-0" style={{ gap: "15px", height: "108px" }}>
+          {/* site-logo: 75×108px */}
+          <img
+            src={ASSETS.heroLogo}
+            alt="Simply Sharon Logo"
+            style={{ width: "75px", height: "108px", objectFit: "contain" }}
+          />
+          {/* site-name: Italianno 64px/80px */}
+          <span
+            style={{
+              fontFamily: "Italianno, cursive",
+              fontWeight: 400,
+              fontSize: "64px",
+              lineHeight: "80px",
+              color: "#FFFFFF",
+              whiteSpace: "nowrap",
+            }}
+          >
             SimplySharon
           </span>
         </Link>
 
-        {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+        {/* navlink-group: flex row, gap 26px, Inter 40px/48px, drop-shadow */}
+        <div className="flex items-center" style={{ gap: "26px" }}>
           {NAV_ITEMS.map((item) => (
             <Link key={item.label} href={item.href}>
-              <span className="text-white text-base lg:text-lg font-normal font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer whitespace-nowrap">
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 400,
+                  fontSize: "40px",
+                  lineHeight: "48px",
+                  color: "#FFFFFF",
+                  filter: "drop-shadow(0px 4px 4px rgba(0,0,0,0.25))",
+                  whiteSpace: "nowrap",
+                  cursor: "pointer",
+                }}
+                className="hover:opacity-80 transition-opacity"
+              >
                 {item.label}
               </span>
             </Link>
           ))}
         </div>
+      </nav>
 
-        {/* Mobile hamburger */}
+      {/* ── Mobile Navbar ── */}
+      <nav
+        className="w-full z-30 flex md:hidden items-center justify-between px-5"
+        style={{ height: "64px", background: "transparent" }}
+      >
+        <Link href="/" className="flex items-center no-underline" style={{ gap: "10px" }}>
+          <img src={ASSETS.heroLogo} alt="Simply Sharon Logo" style={{ width: "40px", height: "58px", objectFit: "contain" }} />
+          <span style={{ fontFamily: "Italianno, cursive", fontSize: "36px", lineHeight: "45px", color: "#FFFFFF" }}>
+            SimplySharon
+          </span>
+        </Link>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden w-10 h-10 flex items-center justify-center text-white"
+          className="w-10 h-10 flex items-center justify-center text-white"
           aria-label="Toggle navigation"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -231,8 +274,18 @@ function MobilePlaylistButton({ icon, label }: { icon: string; label: string }) 
 }
 
 // ─── Hero Background Style ────────────────────────────────────────────────────
+// Figma: background: url(Darker-right-1.jpg) — dark charcoal with diagonal light ray from upper-right
+// The Figma shows a dark gray background (#2e2e36 approx) with a bright diagonal streak from top-right
 const heroBg = {
-  background: "linear-gradient(135deg, #2a2a2e 0%, #3d3d42 30%, #4a4a50 50%, #3a3a40 70%, #2e2e34 100%)",
+  background: "#2e2e38",
+};
+
+// Diagonal light ray overlay - matches the Figma's Darker-right-1.jpg light streak
+const heroRayOverlay = {
+  background: "linear-gradient(145deg, transparent 20%, rgba(160,160,170,0.22) 40%, rgba(200,200,210,0.28) 50%, rgba(160,160,170,0.18) 60%, transparent 75%)",
+  position: "absolute" as const,
+  inset: 0,
+  pointerEvents: "none" as const,
 };
 
 // ─── Main Component ───────────────────────────────────────────────────────────
@@ -241,59 +294,140 @@ export default function Home() {
     <div className="w-full bg-white flex flex-col items-center overflow-hidden">
 
       {/* ── Navbar + Hero Section (dark bg) ── */}
+      {/* hero-section: flex col, center items, padding 49px top / 109px bottom, gap 60px */}
       <section
         id="hero"
-        className="w-full relative overflow-hidden"
-        style={heroBg}
+        className="w-full relative overflow-hidden flex-col items-center"
+        style={{
+          ...heroBg,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: "49px",
+          paddingBottom: "109px",
+          gap: "60px",
+        }}
       >
-        {/* Diagonal light ray overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 60% 80% at 75% 40%, rgba(180,180,190,0.18) 0%, transparent 70%)",
-          }}
-        />
+        {/* Diagonal light ray overlay matching Figma's Darker-right-1.jpg */}
+        <div style={heroRayOverlay} />
 
         {/* Navbar */}
         <Navbar />
 
-        {/* Desktop Hero Content */}
-        <div className="hidden md:flex w-full max-w-[1400px] mx-auto px-12 pt-32 pb-24 items-center justify-between relative z-10">
-          {/* Left: Text */}
-          <div className="flex flex-col gap-6 max-w-[600px]">
-            <h1
-              className="text-white leading-tight"
-              style={{ fontFamily: "Italianno, cursive", fontSize: "clamp(56px, 5vw, 80px)" }}
-            >
-              Simlpy Sharon.ca
-            </h1>
-            <h2
-              className="text-white"
-              style={{ fontFamily: "Italianno, cursive", fontSize: "clamp(32px, 3vw, 48px)" }}
-            >
-              Healthy Beauty &amp; Confident Aging
-            </h2>
-            <p className="text-white text-xl md:text-2xl font-normal font-['Source_Sans_3'] leading-relaxed">
-              Achieve Radiant Beauty, Glowing Health<br />
-              Meaningful Aging with{" "}
-              <strong>Simplicity, Strength, Style, Grace</strong>
-            </p>
-            <p
-              className="text-white mt-2"
-              style={{ fontFamily: "Italianno, cursive", fontSize: "clamp(28px, 2.5vw, 40px)" }}
-            >
-              Design Your Life with Purpose<br />
-              for a Compelling Destiny
-            </p>
+        {/* ── Desktop Hero Content (exact Figma CSS) ── */}
+        {/* hero-content: flex row, gap 64px, 1488px wide, 791px tall */}
+        <div
+          className="hidden md:flex relative z-10 items-center"
+          style={{
+            width: "1488px",
+            maxWidth: "calc(100vw - 40px)",
+            gap: "64px",
+          }}
+        >
+          {/* hero-text-group: flex col, gap 20px, 1039×791px */}
+          <div
+            className="flex flex-col items-center"
+            style={{ gap: "20px", flex: "0 0 auto" }}
+          >
+            {/* heading-title: Italianno 140px/175px */}
+            <div style={{ padding: "10px" }}>
+              <h1
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "140px",
+                  lineHeight: "175px",
+                  color: "#FFFFFF",
+                  margin: 0,
+                }}
+              >
+                Simlpy Sharon.ca
+              </h1>
+            </div>
+
+            {/* heading-subtitle: Italianno 90px/112px */}
+            <div style={{ padding: "0 10px" }}>
+              <h2
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "90px",
+                  lineHeight: "112px",
+                  color: "#FFFFFF",
+                  margin: 0,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Healthy Beauty &amp; Confident Aging
+              </h2>
+            </div>
+
+            {/* Body-Text-Group: Source Sans Pro 60px/75px, centered */}
+            <div style={{ padding: "10px" }}>
+              <p
+                style={{
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "60px",
+                  lineHeight: "75px",
+                  color: "#FFFFFF",
+                  textAlign: "center",
+                  margin: 0,
+                  width: "1019px",
+                  maxWidth: "100%",
+                }}
+              >
+                Achieve Radiant Beauty, Glowing Health<br />
+                Meaningful Aging<br />
+                with Simplicity, Strength, Style &amp; Grace
+              </p>
+            </div>
+
+            {/* Call-to-Action: Italianno 90px/112px, first line margin -18px */}
+            <div className="flex flex-col items-center" style={{ alignSelf: "stretch" }}>
+              <p
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "90px",
+                  lineHeight: "112px",
+                  color: "#FFFFFF",
+                  textAlign: "center",
+                  margin: "-18px 0 0 0",
+                  alignSelf: "stretch",
+                }}
+              >
+                Design Your Life with Purpose
+              </p>
+              <p
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "90px",
+                  lineHeight: "112px",
+                  color: "#FFFFFF",
+                  textAlign: "center",
+                  margin: 0,
+                  alignSelf: "stretch",
+                }}
+              >
+                for a Compelling Destiny
+              </p>
+            </div>
           </div>
 
-          {/* Right: Sharon portrait */}
-          <div className="flex-shrink-0 ml-8">
+          {/* hero-image: 453×586px, Sharon photo (transparent bg PNG/WebP) */}
+          <div style={{ padding: "10px", flexShrink: 0 }}>
             <img
-              src={ASSETS.sharonHero}
+              src={ASSETS.heroSharon}
               alt="Sharon Danley"
-              className="w-[320px] h-[380px] object-cover object-top rounded-sm"
-              style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.5))" }}
+              style={{
+                width: "453px",
+                height: "585.78px",
+                objectFit: "contain",
+                objectPosition: "top center",
+              }}
             />
           </div>
         </div>
