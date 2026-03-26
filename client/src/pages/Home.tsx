@@ -52,8 +52,10 @@ const ASSETS = {
   gigCard2: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/gig-card2_73f2543c.webp",
   grayIsGorgeousDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/93-53_88b9047e.webp",
   grayIsGorgeousMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-91_08f34d98.webp",
-  // About Sharon portrait
-  aboutSharonPortrait: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-207_8eccdfae.webp",
+  // About Sharon portrait (Figma 98-280)
+  aboutSharonPortrait: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/sharon-portrait_9be6848e.webp",
+  dropdownArrow: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/dropdown-arrow_cbe41a8a.svg",
+  aboutSharonPortraitOld: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-207_8eccdfae.webp",
   aboutSharonMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-201_7973673f.webp",
   collageDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/106-400_fadc236a.webp",
   collageMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-253_1c63c9e9.webp",
@@ -1985,101 +1987,353 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── About Sharon Section (rebuilt as HTML) ── */}
-      <section
-        id="about"
-        className="w-full relative overflow-hidden hidden md:block"
-        style={heroBg}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
+      {/* ── Meet Sharon Section — Figma 1920×2605px, scale transform ── */}
+      <div id="about" className="w-full hidden md:block relative" style={{ height: "2605px" }}>
+        <section
           style={{
-            background: "radial-gradient(ellipse 60% 80% at 75% 40%, rgba(180,180,190,0.18) 0%, transparent 70%)",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1920px",
+            height: "2605px",
+            transform: "scale(min(1, calc(100vw / 1920)))",
+            transformOrigin: "top left",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "0px 0px 96px",
+            gap: "30px",
+            background: "linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 40%, #1a1a1a 100%)",
           }}
-        />
-        <div className="relative z-10 max-w-[1100px] mx-auto px-12 py-16 flex flex-col gap-10">
-          {/* Title */}
-          <div className="text-center">
-            <h2
-              className="text-white"
-              style={{ fontFamily: "Italianno, cursive", fontSize: "clamp(48px, 4vw, 72px)" }}
+        >
+          {/* section-header: 892×191px */}
+          <div
+            style={{
+              padding: "0px 10px 10px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              overflow: "hidden",
+              width: "892px",
+            }}
+          >
+            {/* blogcast-title */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "0px 156px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                overflow: "hidden",
+                margin: "-15px 0px",
+              }}
             >
-              Gray is Gorgeous! Own-it Your Way
-            </h2>
-            <p className="text-white text-2xl font-bold font-['Source_Sans_3'] mt-2">
-              Sharon's Journey to Gray Hair Freedom
-            </p>
+              <span
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "96px",
+                  lineHeight: "120px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                }}
+              >
+                Meet Sharon Danley
+              </span>
+            </div>
+            {/* section-subtitle */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "13px 42px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                overflow: "hidden",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "40px",
+                  lineHeight: "50px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                }}
+              >
+                Your Guide to Beauty, Wellness, Wisdom
+              </span>
+            </div>
           </div>
 
-          {/* Bio content */}
-          <div className="flex gap-12 items-start">
-            {/* Left: Bio text */}
-            <div className="flex-1 flex flex-col gap-5">
-              <p className="text-white text-xl font-['Source_Sans_3'] leading-relaxed">
-                I'm Sharon Danley, a Master Makeup &amp; Hair Artist with over 45 years experience helping empower women to embrace their natural beauty and inner strength.
-              </p>
-              <p className="text-white text-xl font-['Source_Sans_3'] leading-relaxed">
-                I've spent 25 years in the business sector during the "Mad Men" era, 18 years in front of, and 15 years behind, the camera and microphone in Film, TV &amp; Stage. I ran my own casting company, mobile bridal service, and corporate services for business executives. I'm a veteran trainer and seminar leader, and have taught vocal presence, modelling, and acting along the way.
-              </p>
-              {/* Right: Portrait - shown inline on smaller desktops */}
-              <div className="float-right ml-8 mb-4 hidden lg:block">
+          {/* about-story: 1522×1577px */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              gap: "67px",
+              width: "1522px",
+            }}
+          >
+            {/* about-top-row: 1292×616px */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                padding: "0px 2px 0px 0px",
+                gap: "51px",
+                width: "1292px",
+              }}
+            >
+              {/* paragraph-top: 920px wide */}
+              <div
+                style={{
+                  width: "920px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "24px",
+                }}
+              >
+                {/* paragraph-top-1 */}
+                <div
+                  style={{
+                    alignSelf: "stretch",
+                    padding: "10px 0px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "26px",
+                  }}
+                >
+                  <p
+                    style={{
+                      flex: 1,
+                      fontFamily: "Helvetica, Arial, sans-serif",
+                      fontWeight: 400,
+                      fontSize: "40px",
+                      lineHeight: "46px",
+                      color: "#FFFFFF",
+                      margin: 0,
+                    }}
+                  >
+                    I'm Sharon Danley, a Master Makeup &amp; Hair Artist with over 45 years experience helping empower women to embrace their natural beauty and inner strength.
+                  </p>
+                </div>
+                {/* paragraph-top-2 */}
+                <div
+                  style={{
+                    alignSelf: "stretch",
+                    padding: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <p
+                    style={{
+                      flex: 1,
+                      fontFamily: "Helvetica, Arial, sans-serif",
+                      fontWeight: 400,
+                      fontSize: "40px",
+                      lineHeight: "46px",
+                      color: "#FFFFFF",
+                      margin: 0,
+                    }}
+                  >
+                    I've spent 25 years in the business sector during the “Mad Men” era, 18 years in front of, and 15 years behind, the camera and microphone in Film, TV &amp; Stage. I ran my own casting company, mobile bridal service, and corporate services for business executives. I'm a veteran trainer and seminar leader, and have taught vocal presence, modelling, and acting along the way.
+                  </p>
+                </div>
+              </div>
+
+              {/* about-author-image: 319×462px container, 466×511px image absolutely positioned */}
+              <div
+                style={{
+                  width: "319px",
+                  height: "462px",
+                  position: "relative",
+                  flexShrink: 0,
+                }}
+              >
                 <img
                   src={ASSETS.aboutSharonPortrait}
                   alt="Sharon Danley"
-                  className="w-[220px] h-[260px] object-cover object-top"
-                  style={{ filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.4))" }}
+                  style={{
+                    position: "absolute",
+                    width: "466px",
+                    height: "511px",
+                    left: "-0.5px",
+                    top: "-59px",
+                    objectFit: "cover",
+                  }}
                 />
               </div>
-              <p className="text-white text-xl font-['Source_Sans_3'] leading-relaxed">
-                From professional makeovers to accessible techniques, I've help thousands enhance their look and presence with "Simplicity &amp; Style", building confidence through timeless practices.
-              </p>
-              <p className="text-white text-xl font-['Source_Sans_3'] leading-relaxed">
-                My journey hasn't been without challenges—I've overcome significant barriers, immense personal hurdles and extensive loss including my precious children, Andrea &amp; Matthew Main.
-              </p>
-              <p className="text-white text-xl font-['Source_Sans_3'] leading-relaxed">
-                Through these experiences, I've cultivated strategies for mental, spiritual and emotional resilience, focusing on wisdom and positivity that I continue to apply in my daily life, inspiring my work with "Authenticity &amp; Grace".
-              </p>
-              <p className="text-white text-xl font-['Source_Sans_3'] leading-relaxed">
-                The warm "welcome back" from my community recently has reaffirmed my purpose; to share these insights and encourage women to age confidently with "Strength &amp; Grace".
-              </p>
-              <p className="text-white text-xl font-['Source_Sans_3'] leading-relaxed">
-                Through Simply Sharon, I blend beauty, wellness and wisdom to guide you on a meaningful journey of self-discovery and growth. Join me and be part of our growing community.
-              </p>
-              <div className="mt-4">
-                <a
-                  href="#"
-                  className="text-white text-xl font-bold font-['Source_Sans_3'] underline hover:text-gray-300 transition-colors"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Select clients &amp; Testimonials →
-                </a>
+            </div>
+
+            {/* about-paragraph-continued: 1522×894px */}
+            <div
+              style={{
+                width: "1522px",
+                padding: "10px 0px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "11px",
+              }}
+            >
+              <div
+                style={{
+                  flex: 1,
+                  fontFamily: "Helvetica, Arial, sans-serif",
+                  fontWeight: 400,
+                  fontSize: "40px",
+                  lineHeight: "46px",
+                  color: "#FFFFFF",
+                }}
+              >
+                <p style={{ margin: "0 0 20px" }}>From professional makeovers to accessible techniques, I've help thousands enhance their look and presence with “Simplicity &amp; Style”, building confidence through timeless practices.</p>
+                <p style={{ margin: "0 0 20px" }}>My journey hasn't been without challenges—I've overcome significant barriers, immense personal hurdles and extensive loss including my precious children, Andrea &amp; Matthew Main.</p>
+                <p style={{ margin: "0 0 20px" }}>Through these experiences, I've cultivated strategies for mental, spiritual and emotional resilience, focusing on wisdom and positivity that I continue to apply in my daily life, inspiring my work with “Authenticity &amp; Grace”.</p>
+                <p style={{ margin: "0 0 20px" }}>The warm “welcome back” from my community recently has reaffirmed my purpose; to share these insights and encourage women to age confidently with “Strength &amp; Grace”.</p>
+                <p style={{ margin: 0 }}>Through Simply Sharon, I blend beauty, wellness and wisdom to guide you on a meaningful journey of self-discovery and growth. Join me and be part of our growing community.</p>
               </div>
             </div>
-
-            {/* Right: Portrait (large screens) */}
-            <div className="flex-shrink-0 hidden lg:block">
-              <img
-                src={ASSETS.aboutSharonPortrait}
-                alt="Sharon Danley"
-                className="w-[260px] h-[320px] object-cover object-top"
-                style={{ filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.4))" }}
-              />
-            </div>
           </div>
 
-          {/* Gallery Accordion */}
-          <div className="mt-4">
-            <div className="w-full flex flex-col gap-3">
-              <p className="text-center text-white text-2xl font-['Source_Sans_3'] mb-2">
+          {/* testimonials-page-link: 666×80px */}
+          <div
+            style={{
+              padding: "10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <a
+              href="/testimonials"
+              style={{
+                fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                fontWeight: 700,
+                fontSize: "48px",
+                lineHeight: "60px",
+                textAlign: "center",
+                textDecoration: "underline",
+                color: "#FFFFFF",
+                cursor: "pointer",
+              }}
+            >
+              Select Clients &amp; Testimonials →
+            </a>
+          </div>
+
+          {/* photo-gallery-section: 1076×206px */}
+          <div
+            style={{
+              width: "1076px",
+              paddingTop: "26px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "21px",
+            }}
+          >
+            {/* section-header */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "10px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "48px",
+                  lineHeight: "60px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                }}
+              >
                 Sharon's Photo Gallery Links Below
-              </p>
-              {GALLERY_CATEGORIES.map((cat, idx) => (
-                <GalleryAccordionDark key={cat.label} cat={cat} idx={idx} />
-              ))}
+              </span>
+            </div>
+            {/* gallery-links: 3 buttons */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "0px 20px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "52px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                  gap: "117px",
+                }}
+              >
+                {[
+                  { label: "Makeup", href: "/gallery/makeup" },
+                  { label: "Hairstyling", href: "/gallery/hairstyling" },
+                  { label: "SFX", href: "/gallery/sfx" },
+                ].map(({ label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      padding: "9px 0px 9px 20px",
+                      gap: "14px",
+                      background: "rgba(36, 36, 36, 0.60)",
+                      textDecoration: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                        fontWeight: 700,
+                        fontSize: "40px",
+                        lineHeight: "50px",
+                        textAlign: "center",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      {label}
+                    </span>
+                    {/* dropdown arrow — white filled triangle pointing down */}
+                    <div style={{ padding: "10px", display: "flex", alignItems: "flex-start" }}>
+                      <svg width="28" height="23" viewBox="0 0 28 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="14,22 0,0 28,0" fill="#FFFFFF" />
+                      </svg>
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Mobile About Sharon */}
       <section className="w-full md:hidden">
