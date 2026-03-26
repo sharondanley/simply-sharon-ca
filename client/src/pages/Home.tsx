@@ -57,6 +57,12 @@ const ASSETS = {
   aboutSharonMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-201_7973673f.webp",
   collageDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/106-400_fadc236a.webp",
   collageMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-253_1c63c9e9.webp",
+  // LAST-ing Impressions YouTube screenshots
+  lastingYt1: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/lasting-yt1_67bb67e0.webp",
+  lastingYt2: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/lasting-yt2_f83b8dd6.webp",
+  lastingYt3: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/lasting-yt3_82a05891.webp",
+  lastingYt4: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/lasting-yt4_9edd7bbb.webp",
+  lastingYt5: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/lasting-yt5_c6955cff.webp",
   // LAST-ing Impressions showcase images (desktop)
   lookImage: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/96-126_b2845828.webp",
   actImage: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/98-354_89e725eb.webp",
@@ -1634,96 +1640,275 @@ export default function Home() {
       </section>
 
       {/* ── Enjoy Positive LAST-ing Impressions Section ── */}
-      {/* Desktop */}
-      <section id="poise" className="w-full px-[109px] py-[60px] hidden md:flex flex-col justify-start items-start gap-[51px] bg-white">
-        <div className="self-stretch p-2.5 flex flex-col justify-start items-start gap-[5px] overflow-hidden">
-          <div className="self-stretch px-[156px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-            <span className="text-center text-black text-8xl font-normal font-['Italianno']">
-              Enjoy Positive LAST-ing Impressions
-            </span>
-          </div>
-          <div className="self-stretch px-[42px] py-[13px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-            <span className="text-center text-black text-4xl font-bold font-['Source_Sans_3']">
-              Look, Act, Speak, Think - Your Best
-            </span>
-          </div>
-        </div>
-
-        {/* LOOK */}
-        <div className="self-stretch min-h-[456px] pr-10 flex justify-start items-center gap-[95px]">
-          <div className="p-2.5 outline outline-1 outline-offset-[-1px] outline-black flex justify-start items-center gap-2.5 flex-shrink-0">
-            <img src={ASSETS.lookImage} alt="Look" className="w-[311px] h-[311px] object-cover" />
-          </div>
-          <div className="flex-1 inline-flex flex-col justify-start items-start gap-[33px]">
-            <div className="self-stretch p-2.5 inline-flex justify-center items-center gap-2.5">
-              <span className="flex-1 text-black text-[32px] font-normal font-['Source_Sans_3']">
-                LOOK – Embrace simple techniques that enhance your natural beauty, hairstyles that frame your face and suit your body type, and wardrobe wisdom with timeless pieces that work for your body frame, preferences and lifestyle. Check these Playlists.
+      {/* Desktop: LAST-ing Impressions — Figma 1920×3050px, bg #D4D4D4, scale transform */}
+      <div id="poise" className="w-full hidden md:block relative" style={{ height: "3050px" }}>
+        <section
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1920px",
+            height: "3050px",
+            transform: "scale(min(1, calc(100vw / 1920)))",
+            transformOrigin: "top left",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "0px 109px 86px",
+            gap: "56px",
+            background: "#D4D4D4",
+          }}
+        >
+          {/* section-header: 1702×202px */}
+          <div
+            style={{
+              alignSelf: "stretch",
+              padding: "10px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              overflow: "hidden",
+            }}
+          >
+            {/* blogcast-title */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "0px 156px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                overflow: "hidden",
+                margin: "-24px 0px",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "96px",
+                  lineHeight: "120px",
+                  textAlign: "center",
+                  color: "#000000",
+                }}
+              >
+                Enjoy Positive LAST-ing Impressions
               </span>
             </div>
-            <div className="self-stretch inline-flex justify-start items-start gap-11 flex-wrap content-start">
-              <DesktopPlaylistButton icon={ASSETS.makeupIcon} label="Makeup" />
-              <DesktopPlaylistButton icon={ASSETS.beautyTipsIcon} label="Best Beauty Tips" />
-              <DesktopPlaylistButton icon={ASSETS.hairstylesIcon} label="Hairstyles" />
-              <DesktopPlaylistButton icon={ASSETS.wardrobeIcon} label="Wardrobe" />
-              <DesktopPlaylistButton icon={ASSETS.digitalMakeBettersIcon} label="Digital Make-Betters" />
-              <DesktopPlaylistButton icon={ASSETS.hairExtensionsIcon} label="Hair Extensions" />
-            </div>
-          </div>
-        </div>
-
-        {/* ACT */}
-        <div className="self-stretch min-h-[456px] pr-10 flex justify-start items-center gap-[95px]">
-          <div className="p-2.5 outline outline-1 outline-offset-[-1px] outline-black flex justify-start items-center gap-2.5 flex-shrink-0">
-            <img src={ASSETS.actImage} alt="Act" className="w-[311px] h-[311px] object-cover" />
-          </div>
-          <div className="flex-1 inline-flex flex-col justify-start items-start gap-[51px]">
-            <div className="self-stretch p-2.5 inline-flex justify-center items-center gap-2.5">
-              <span className="flex-1 text-black text-[32px] font-normal" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
-                ACT – Move and interact with confident posture, purposeful body language and facial expression to polish strong, flexible and striking presentation skills that shine in every situation, ensuring your message resonates with any audience.
+            {/* section-subtitle */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "13px 42px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                overflow: "hidden",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "48px",
+                  lineHeight: "60px",
+                  textAlign: "center",
+                  color: "#000000",
+                }}
+              >
+                Look, Act, Speak, Think - Your Best
               </span>
             </div>
-            <div className="self-stretch inline-flex justify-start items-start gap-11 flex-wrap content-start">
-              <DesktopPlaylistButton icon={ASSETS.performancePrecisionIcon} label="Performance Precision" />
-            </div>
           </div>
-        </div>
 
-        {/* SPEAK */}
-        <div className="self-stretch min-h-[456px] pr-10 flex justify-start items-center gap-[95px]">
-          <div className="p-2.5 outline outline-1 outline-offset-[-1px] outline-black flex justify-start items-center gap-2.5 flex-shrink-0">
-            <img src={ASSETS.speakImage} alt="Speak" className="w-[311px] h-[311px] object-cover" />
+          {/* section-description: 1846×280px */}
+          <div
+            style={{
+              padding: "10px 0px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "30px",
+              width: "1846px",
+            }}
+          >
+            <p
+              style={{
+                width: "1846px",
+                fontFamily: "Helvetica, Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: "40px",
+                lineHeight: "46px",
+                color: "#000000",
+                margin: 0,
+              }}
+            >
+              Welcome to a Treasure Trove of Self-Help Beauty, Wellness &amp; Wisdom. Inside this channel you'll find practical guidance on makeup, hair, style, etiquette, and personal presence—designed to help you look your best, feel confident, and present yourself with strength, style &amp; grace.
+            </p>
+            <p
+              style={{
+                width: "1846px",
+                fontFamily: "Helvetica, Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: "40px",
+                lineHeight: "46px",
+                color: "#000000",
+                margin: 0,
+              }}
+            >
+              Many of these videos were recorded live and contain timeless insights, real conversations, and answers to questions from viewers just like you.
+            </p>
           </div>
-          <div className="flex-1 inline-flex flex-col justify-start items-start gap-[51px]">
-            <div className="self-stretch p-2.5 inline-flex justify-center items-center gap-2.5">
-              <span className="flex-1 text-black text-[32px] font-normal" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
-                SPEAK – Stretch and strengthen your voice with simple, fun exercises to keep it limber and captivating with "Strength &amp; Style" for business, video chats, storytelling or public speaking. These techniques enhance vocal clarity, ensuring your voice commands attention.
-              </span>
-            </div>
-            <div className="self-stretch inline-flex justify-start items-start gap-11 flex-wrap content-start">
-              <DesktopPlaylistButton icon={ASSETS.vocalPowerIcon} label="Vocal Power" />
-            </div>
-          </div>
-        </div>
 
-        {/* THINK */}
-        <div className="self-stretch min-h-[456px] pr-10 flex justify-start items-center gap-[95px]">
-          <div className="p-2.5 outline outline-1 outline-offset-[-1px] outline-black flex justify-start items-center gap-2.5 flex-shrink-0">
-            <img src={ASSETS.thinkImage} alt="Think" className="w-[311px] h-[311px] object-cover" />
-          </div>
-          <div className="flex-1 inline-flex flex-col justify-start items-start gap-[51px]">
-            <div className="self-stretch p-2.5 inline-flex justify-center items-center gap-2.5">
-              <span className="flex-1 text-black text-[32px] font-normal" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
-                THINK – Master your wisdom, character and interactions by cultivating positive thoughts and overcoming limited beliefs to empower your daily life. You are what you focus on, so consistently practicing emotional and spiritual fitness, creates a powerful present and compelling future.
-              </span>
+          {/* content-container: two columns — text left (889px), YouTube screenshots right (903px) */}
+          <div
+            style={{
+              width: "1920px",
+              padding: "0px 46px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "flex-start",
+              gap: "44px",
+            }}
+          >
+            {/* lasting-impression-text: 889px wide */}
+            <div
+              style={{
+                width: "889px",
+                padding: "0px 26px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "19px",
+              }}
+            >
+              {/* showcase-blocs: LOOK, ACT, SPEAK, THINK */}
+              <div style={{ width: "889px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "19px" }}>
+                {[
+                  { title: "LOOK", desc: "Simple, smart beauty techniques, flattering hairstyles, and timeless wardrobe choices that enhance your natural presence." },
+                  { title: "ACT", desc: "Confident posture, purposeful body language, and expressive presentation skills that strengthen how your message lands." },
+                  { title: "SPEAK", desc: "Clear, vibrant vocal expression with practical exercises that build authority, warmth, and vocal confidence." },
+                  { title: "THINK", desc: "Perspective and mindset that support wise decisions, personal growth, and a confident life presence." },
+                ].map(({ title, desc }) => (
+                  <div key={title} style={{ alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                    <div style={{ padding: "10px 0px", display: "inline-flex", justifyContent: "center", alignItems: "center", gap: "10px", margin: "-13px 0px" }}>
+                      <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 700, fontSize: "40px", lineHeight: "46px", color: "#000000" }}>{title}</span>
+                    </div>
+                    <div style={{ alignSelf: "stretch", padding: "10px 0px", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                      <p style={{ flex: 1, fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "46px", color: "#000000", margin: 0 }}>{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* PLUS heading */}
+              <div
+                style={{
+                  alignSelf: "stretch",
+                  padding: "10px 346px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "30px",
+                }}
+              >
+                <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 700, fontSize: "40px", lineHeight: "46px", color: "#000000" }}>PLUS</span>
+              </div>
+
+              {/* plus-blocs: WELLNESS, SHARON UNFILTERED, BRIDES BEAUTIFUL, FUTURE PROOFING, LIVE CONVERSATIONS */}
+              <div style={{ width: "889px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "19px" }}>
+                {[
+                  { title: "WELLNESS", desc: "Simple, practical habits that support energy, resilience, and healthy aging." },
+                  { title: "SHARON UNFILTERED", desc: "Reflections and authentic talks about life, perspective, and the wisdom that comes with experience." },
+                  { title: "BRIDES BEAUTIFUL", desc: "Timeless elegant Makeup & Hairstyling for the entire bridal party including Flower Girls & Mothers" },
+                  { title: "FUTURE PROOFING YOUR ENVIRONMENT", desc: "Simple ideas on shaping your surroundings, and daily habits to support safety, clarity, confidence, and well-being." },
+                  { title: "LIVE CONVERSATIONS", desc: "Interactive discussions, demonstrations, and real-time questions exploring beauty, communication, and living well." },
+                ].map(({ title, desc }) => (
+                  <div key={title} style={{ alignSelf: "stretch", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                    <div style={{ padding: "10px 0px", display: "inline-flex", justifyContent: "center", alignItems: "center", gap: "10px", margin: "-13px 0px" }}>
+                      <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 700, fontSize: "40px", lineHeight: "46px", color: "#000000" }}>{title}</span>
+                    </div>
+                    <div style={{ alignSelf: "stretch", padding: "10px 0px", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                      <p style={{ flex: 1, fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "46px", color: "#000000", margin: 0 }}>{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="self-stretch inline-flex justify-start items-start gap-11 flex-wrap content-start">
-              <DesktopPlaylistButton icon={ASSETS.bossOfMeIcon} label="I'm the boss of me" />
-              <DesktopPlaylistButton icon={ASSETS.innerUIcon} label="Inner U" />
-              <DesktopPlaylistButton icon={ASSETS.modernEtiquetteIcon} label="Modern Etiquette" />
+
+            {/* youtube-screenshot-bloc: 903px wide, 5 clickable screenshots */}
+            <div
+              style={{
+                padding: "29px 0px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "31px",
+              }}
+            >
+              {[
+                { src: ASSETS.lastingYt1, w: 901, h: 499, alt: "Simply Sharon YouTube Channel" },
+                { src: ASSETS.lastingYt2, w: 901, h: 472, alt: "Blogcast, Beauty Brief, Shorts playlists" },
+                { src: ASSETS.lastingYt3, w: 903, h: 387, alt: "Makeup Techniques, Eye Training, Make-Betters" },
+                { src: ASSETS.lastingYt4, w: 902, h: 205, alt: "Everything Hair playlists" },
+                { src: ASSETS.lastingYt5, w: 902, h: 457, alt: "Hybrid Timeless Interactive Lives" },
+              ].map(({ src, w, h, alt }) => (
+                <a
+                  key={src}
+                  href="https://www.youtube.com/@SimplySharonTips/featured"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "block", cursor: "pointer" }}
+                >
+                  <img
+                    src={src}
+                    alt={alt}
+                    style={{
+                      width: `${w}px`,
+                      height: `${h}px`,
+                      objectFit: "cover",
+                      display: "block",
+                      transition: "opacity 0.2s",
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                    onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                  />
+                </a>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+
+          {/* cta-text: 1189×112px */}
+          <div
+            style={{
+              padding: "10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              width: "1189px",
+            }}
+          >
+            <p
+              style={{
+                width: "1169px",
+                fontFamily: "Helvetica, Arial, sans-serif",
+                fontWeight: 700,
+                fontSize: "40px",
+                lineHeight: "46px",
+                textAlign: "center",
+                color: "#000000",
+                margin: 0,
+              }}
+            >
+              Explore the playlists and videos within each section to begin Mastering your Authenticity.
+            </p>
+          </div>
+        </section>
+      </div>
 
       {/* Mobile LAST-ing Impressions */}
       <section className="w-full md:hidden flex flex-col justify-start items-center gap-[29px]">
