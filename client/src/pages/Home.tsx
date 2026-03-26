@@ -2406,144 +2406,271 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Footer Section (rebuilt as HTML) ── */}
-      <footer
-        id="contact"
-        className="w-full relative overflow-hidden"
-        style={heroBg}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
+      {/* ── Footer Section — Figma 1920×1172px, scale transform ── */}
+      <div id="contact" className="w-full relative" style={{ height: "1172px" }}>
+        <footer
           style={{
-            background: "radial-gradient(ellipse 60% 80% at 75% 40%, rgba(180,180,190,0.18) 0%, transparent 70%)",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1920px",
+            height: "1172px",
+            transform: "scale(min(1, calc(100vw / 1920)))",
+            transformOrigin: "top left",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "13px 20px",
+            gap: "30px",
+            background: "linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 40%, #1a1a1a 100%)",
           }}
-        />
-        <div className="relative z-10 max-w-[1100px] mx-auto px-8 md:px-16 py-16 flex flex-col md:flex-row gap-12 justify-between items-start">
-          {/* Left: Contact info */}
-          <div className="flex flex-col gap-6 flex-1">
-            <h2
-              className="text-white"
-              style={{ fontFamily: "Italianno, cursive", fontSize: "clamp(40px, 4vw, 64px)" }}
+        >
+          {/* connect: 1556×823px */}
+          <div
+            style={{
+              width: "1556px",
+              padding: "54px 0px",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              gap: "10px",
+            }}
+          >
+            {/* connect-row-top: 1402×715px */}
+            <div
+              style={{
+                width: "1402px",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+                gap: "59px",
+              }}
             >
-              Connect with Sharon
-            </h2>
-
-            {/* Social icons row */}
-            <div className="flex items-center gap-4">
-              <a
-                href="mailto:info@SimplySharon.ca"
-                className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                aria-label="Email"
+              {/* connect-info: 1364×715px */}
+              <div
+                style={{
+                  width: "1364px",
+                  height: "715px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "95px",
+                }}
               >
-                <Mail size={18} />
-              </a>
-              <a
-                href="https://www.facebook.com/SharonDanleyBeauty"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={18} />
-              </a>
-              <a
-                href="https://www.youtube.com/@SimplySharonTips"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube size={18} />
-              </a>
-            </div>
-
-            {/* Contact details */}
-            <div className="flex flex-col gap-4 text-white font-['Source_Sans_3']">
-              <div className="flex gap-4">
-                <span className="font-bold text-lg w-24 flex-shrink-0">Email:</span>
-                <a href="mailto:info@SimplySharon.ca" className="text-lg hover:text-gray-300 underline transition-colors">
-                  info@SimplySharon.ca
-                </a>
-              </div>
-              <div className="flex gap-4">
-                <span className="font-bold text-lg w-24 flex-shrink-0">YouTube:</span>
-                <a
-                  href="https://www.youtube.com/@SimplySharonTips"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg hover:text-gray-300 underline transition-colors"
+                {/* social-connect: 1364×160px */}
+                <div
+                  style={{
+                    alignSelf: "stretch",
+                    height: "160px",
+                    padding: "14px 0px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    gap: "26px",
+                  }}
                 >
-                  YouTube.com/@SimplySharonTips
-                </a>
-              </div>
-              <div className="flex gap-4">
-                <span className="font-bold text-lg w-24 flex-shrink-0">Facebook:</span>
-                <div className="flex flex-col gap-2">
-                  <div>
-                    <span className="text-base text-white/70">Private Group: </span>
-                    <a
-                      href="https://www.facebook.com/groups/GoinGray.LovinIt"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-base hover:text-gray-300 underline transition-colors"
+                  {/* section-header: Italianno 96px */}
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <span
+                      style={{
+                        fontFamily: "Italianno, cursive",
+                        fontWeight: 400,
+                        fontSize: "96px",
+                        lineHeight: "120px",
+                        textAlign: "center",
+                        color: "#FFFFFF",
+                      }}
                     >
-                      Facebook.com/groups/GoinGray.LovinIt
-                    </a>
-                    <p className="text-sm text-white/70 mt-1">
-                      For biological women going gray; please confirm your agreement to the join question.
-                    </p>
+                      Connect with Sharon
+                    </span>
                   </div>
-                  <div>
-                    <span className="text-base text-white/70">Public Page: </span>
-                    <a
-                      href="https://www.facebook.com/SharonDanleyBeauty"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-base hover:text-gray-300 underline transition-colors"
-                    >
-                      Facebook.com/SharonDanleyBeauty
+                  {/* social-media-icons: 3 × 70×70px icons */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "26px",
+                    }}
+                  >
+                    <a href="mailto:info@SimplySharon.ca" aria-label="Email" style={{ opacity: 1, transition: "opacity 0.2s" }}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = "0.75")}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/footer-email-icon_1cbe3fcb.webp" alt="Email" style={{ width: "70px", height: "70px" }} />
                     </a>
-                    <p className="text-sm text-white/70 mt-1">
-                      For everyone, including those who've completed their gray hair journey.
-                    </p>
+                    <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style={{ opacity: 1, transition: "opacity 0.2s" }}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = "0.75")}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/footer-facebook-icon_a1775ee7.webp" alt="Facebook" style={{ width: "70px", height: "70px" }} />
+                    </a>
+                    <a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style={{ opacity: 1, transition: "opacity 0.2s" }}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = "0.75")}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
+                      <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/footer-youtube-icon_c16a14af.webp" alt="YouTube" style={{ width: "70px", height: "70px" }} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* contact-links: absolute-positioned rows per Figma */}
+                <div
+                  style={{
+                    position: "relative",
+                    width: "1438px",
+                    height: "460px",
+                  }}
+                >
+                  {/* Email row: label at left=0, address at left=286 */}
+                  <div style={{ position: "absolute", left: 0, top: 0, display: "flex", alignItems: "center", gap: "29px" }}>
+                    <div style={{ padding: "10px 0px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                      <a href="mailto:info@SimplySharon.ca"
+                        style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", textDecoration: "underline", color: "#FFFFFF" }}>
+                        Email:
+                      </a>
+                    </div>
+                  </div>
+                  <div style={{ position: "absolute", left: 286, top: 0, padding: "10px", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                    <a href="mailto:info@SimplySharon.ca"
+                      style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", textDecoration: "underline", color: "#FFFFFF" }}>
+                      info@SimplySharon.ca
+                    </a>
+                  </div>
+
+                  {/* YouTube row: label at top=91, link at left=286 top=91 */}
+                  <div style={{ position: "absolute", left: 0, top: 91, width: "286px", padding: "10px 0px", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                    <a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer"
+                      style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", textDecoration: "underline", color: "#FFFFFF", flex: 1 }}>
+                      YouTube:
+                    </a>
+                  </div>
+                  <div style={{ position: "absolute", left: 286, top: 91, padding: "10px", display: "flex", alignItems: "center", gap: "10px" }}>
+                    <a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer"
+                      style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", textDecoration: "underline", color: "#FFFFFF" }}>
+                      YouTube.com/@SimplySharonTips
+                    </a>
+                  </div>
+
+                  {/* Facebook label at top=182 */}
+                  <div style={{ position: "absolute", left: 0, top: 182, width: "243px", padding: "10px 0px", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                    <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", textDecoration: "underline", color: "#FFFFFF", width: "243px" }}>
+                      Facebook:
+                    </span>
+                  </div>
+
+                  {/* Private Group block: left=286, top=182 */}
+                  <div style={{ position: "absolute", left: 286, top: 182, width: "1152px", padding: "10px 0px 10px 10px", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                      <a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer"
+                        style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "45px", textDecoration: "underline", color: "#FFFFFF" }}>
+                        Facebook.com/groups/GoinGray.LovinIt<br />
+                        For biological women going gray; please confirm your agreement to the join question.
+                      </a>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: "10px" }}>
+                      <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", color: "#FFFFFF" }}>
+                        Private Group:
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Public Page block: left=286, top=367 */}
+                  <div style={{ position: "absolute", left: 286, top: 367, width: "1048px", padding: "10px 0px 10px 10px", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                    <div style={{ width: "795px", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                      <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer"
+                        style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "45px", textDecoration: "underline", color: "#FFFFFF" }}>
+                        Facebook.com/SharonDanleyBeauty<br />
+                        For everyone, including those who've completed their gray hair journey.
+                      </a>
+                    </div>
+                    <div style={{ alignSelf: "stretch", display: "flex", justifyContent: "center", alignItems: "flex-start", gap: "10px" }}>
+                      <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", color: "#FFFFFF", width: "233px" }}>
+                        Public Page:
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Disclaimer */}
-            <p className="text-white/60 text-sm font-['Source_Sans_3'] max-w-[600px] mt-4">
-              Not monetized, sponsored, or compensated. Shared freely to inspire a{" "}
-              <strong className="text-white/80">legacy of giving in honour of my children Andrea &amp; Matthew Main</strong>{" "}
-              and to encourage paying it forward in your own way.
-            </p>
-
-            {/* Copyright */}
-            <p className="text-white/50 text-sm font-['Source_Sans_3']">
-              © 2025 Sharon Danley | All images, content and design created by Sharon Danley.
-            </p>
-
-            {/* Admin link */}
-            <Link href="/admin">
-              <span className="text-white/30 text-xs hover:text-white/60 transition-colors cursor-pointer font-['Source_Sans_3']">
-                Admin Login
-              </span>
-            </Link>
-          </div>
-
-          {/* Right: Illustrated silhouette (decorative) */}
-          <div className="hidden md:flex flex-shrink-0 items-end justify-end self-stretch">
-            <div
-              className="w-[140px] h-[280px] opacity-60"
-              style={{
-                background: "linear-gradient(180deg, transparent 0%, rgba(200,200,210,0.3) 100%)",
-                borderRadius: "50% 50% 0 0",
-                clipPath: "ellipse(50% 60% at 50% 60%)",
-              }}
+            {/* logo-image: 242×591px caricature */}
+            <img
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/footer-caricature-logo_bd7c4397.webp"
+              alt="Simply Sharon caricature"
+              style={{ width: "242px", height: "591px", objectFit: "contain", flexShrink: 0 }}
             />
           </div>
-        </div>
-      </footer>
+
+          {/* disclaimer-paragraph: 990×91px, Source Sans 24px centered */}
+          <div
+            style={{
+              width: "990px",
+              paddingTop: "32px",
+              paddingBottom: "10px",
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              gap: "10px",
+            }}
+          >
+            <p
+              style={{
+                width: "1142px",
+                fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                fontWeight: 400,
+                fontSize: "24px",
+                lineHeight: "30px",
+                textAlign: "center",
+                color: "#FFFFFF",
+                margin: 0,
+              }}
+            >
+              Not monetized, sponsored, or compensated. Shared freely to inspire a{" "}
+              <strong>legacy of giving in honour of my children Andrea &amp; Matthew Main</strong>{" "}
+              and to encourage paying it forward in your own way.
+            </p>
+          </div>
+
+          {/* copyright: 1036×37px */}
+          <div
+            style={{
+              width: "1036px",
+              padding: "0px 10px 7px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              position: "relative",
+            }}
+          >
+            <p
+              style={{
+                position: "absolute",
+                width: "1130px",
+                left: "20px",
+                top: 0,
+                fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                fontWeight: 400,
+                fontSize: "24px",
+                lineHeight: "30px",
+                textAlign: "center",
+                color: "#FFFFFF",
+                margin: 0,
+              }}
+            >
+              © 2025 Sharon Danley | All images, content and design created by Sharon Danley.
+            </p>
+          </div>
+
+          {/* Admin link — hidden, accessible */}
+          <Link href="/admin">
+            <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "14px", cursor: "pointer", fontFamily: "'Source Sans Pro', sans-serif" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.2)")}>
+              Admin Login
+            </span>
+          </Link>
+        </footer>
+      </div>
 
     </div>
   );
