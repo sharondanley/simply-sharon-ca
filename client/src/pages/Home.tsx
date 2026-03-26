@@ -46,6 +46,10 @@ const ASSETS = {
   rlmbEvening: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/rlmb-evening_cf80d24c.webp",
   realLifeMakeBettersDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/92-3_2de42173.webp",
   realLifeMakeBettersMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-72_0756d509.webp",
+  gigVideoThumb: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/gig-video-thumb_911d6b6f.webp",
+  gigFaces: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/gig-faces_ad19bfd5.webp",
+  gigCard1: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/gig-card1_71ea00fc.webp",
+  gigCard2: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/gig-card2_73f2543c.webp",
   grayIsGorgeousDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/93-53_88b9047e.webp",
   grayIsGorgeousMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-91_08f34d98.webp",
   // About Sharon portrait
@@ -1304,9 +1308,329 @@ export default function Home() {
       </section>
 
       {/* ── Gray is Gorgeous Section ── */}
-      <section className="w-full">
-        <img src={ASSETS.grayIsGorgeousDesktop} alt="Gray is Gorgeous! Own-it Your Way" className="w-full h-auto block hidden md:block" />
-        <img src={ASSETS.grayIsGorgeousMobile} alt="Gray is Gorgeous! Own-it Your Way" className="w-full h-auto block md:hidden" />
+      {/* Desktop: 1920px wide, scales like other sections */}
+      <div className="w-full hidden md:block relative" style={{ height: "2529px" }}>
+        <section
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1920px",
+            height: "2529px",
+            transform: "scale(min(1, calc(100vw / 1920)))",
+            transformOrigin: "top left",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "87px 0px 95px",
+            gap: "80px",
+            background: "linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 40%, #3a3535 70%, #4a3f3f 100%)",
+          }}
+        >
+          {/* section-header: 1345×193px */}
+          <div
+            style={{
+              padding: "10px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              width: "1345px",
+              height: "193px",
+              overflow: "hidden",
+            }}
+          >
+            {/* blogcast-title */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "0px 156px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                overflow: "hidden",
+                margin: "-18px 0px",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "96px",
+                  lineHeight: "120px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  width: "1013px",
+                }}
+              >
+                Gray is Gorgeous! Own-it Your Way
+              </span>
+            </div>
+            {/* section-subtitle */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "13px 42px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                overflow: "hidden",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "48px",
+                  lineHeight: "60px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  width: "1241px",
+                }}
+              >
+                Sharon's Journey to Gray Hair Freedom
+              </span>
+            </div>
+          </div>
+
+          {/* section-video-thumbnail: 1033×600px */}
+          <div
+            style={{
+              padding: "10px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "10px",
+              width: "1033px",
+              height: "600px",
+            }}
+          >
+            <img
+              src={ASSETS.gigVideoThumb}
+              alt="Going Gray & Lovin' It - Sharon Danley's Transition"
+              style={{
+                width: "1013px",
+                height: "580px",
+                objectFit: "cover",
+              }}
+            />
+          </div>
+
+          {/* faces-gallery: 1181×254px */}
+          <div
+            style={{
+              padding: "10px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "10px",
+              width: "1181px",
+              height: "254px",
+            }}
+          >
+            <img
+              src={ASSETS.gigFaces}
+              alt="Gray hair faces gallery"
+              style={{
+                width: "1161px",
+                height: "234px",
+                objectFit: "cover",
+                border: "1px solid #000000",
+                boxSizing: "border-box",
+              }}
+            />
+          </div>
+
+          {/* section-paragraph: 1920×380px */}
+          <div
+            style={{
+              alignSelf: "stretch",
+              padding: "10px 192px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "42px",
+              height: "380px",
+            }}
+          >
+            <p
+              style={{
+                alignSelf: "stretch",
+                fontFamily: "Helvetica, Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: "40px",
+                lineHeight: "46px",
+                textAlign: "center",
+                color: "#FFFFFF",
+                margin: 0,
+              }}
+            >
+              Gray hair is a statement of classic style and confidence. This 3-part video series celebrates women of all ages embracing their silver with radiant, achievable looks.
+            </p>
+            <p
+              style={{
+                alignSelf: "stretch",
+                fontFamily: "Helvetica, Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: "40px",
+                lineHeight: "46px",
+                textAlign: "center",
+                color: "#FFFFFF",
+                margin: 0,
+              }}
+            >
+              Featuring balanced makeup and hairstyling with subtle, and doable, Photoshop enhancements, these empowering make-betters highlight timeless beauty for all ages.
+            </p>
+            <p
+              style={{
+                alignSelf: "stretch",
+                fontFamily: "Helvetica, Arial, sans-serif",
+                fontWeight: 400,
+                fontSize: "40px",
+                lineHeight: "46px",
+                textAlign: "center",
+                color: "#FFFFFF",
+                margin: 0,
+              }}
+            >
+              Discover how to love your gray hair with confidence and without dyes or drastic cuts, in this inspiring journey.
+            </p>
+          </div>
+
+          {/* cta-video-cards: 1256×600px, flex row, gap 110px */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "flex-start",
+              gap: "110px",
+              width: "1256px",
+              height: "600px",
+            }}
+          >
+            {/* video-card 1: 567×600px, bg #6C6C6C */}
+            <div
+              style={{
+                width: "567px",
+                alignSelf: "stretch",
+                background: "#6C6C6C",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "28px",
+              }}
+            >
+              <div style={{ alignSelf: "stretch", padding: "10px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "10px" }}>
+                <img
+                  src={ASSETS.gigCard1}
+                  alt="Young and Gray video thumbnail"
+                  style={{
+                    alignSelf: "stretch",
+                    height: "382px",
+                    objectFit: "cover",
+                    border: "4px solid #000000",
+                    boxSizing: "border-box",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  alignSelf: "stretch",
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <p
+                  style={{
+                    width: "539px",
+                    fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                    fontWeight: 700,
+                    fontSize: "32px",
+                    lineHeight: "40px",
+                    textAlign: "center",
+                    color: "#FFFFFF",
+                    margin: 0,
+                  }}
+                >
+                  <strong>Young and Gray?</strong> See women <strong>under 45</strong> confidently embrace their silver–no drastic approaches needed
+                </p>
+              </div>
+            </div>
+
+            {/* video-card 2: 530×600px, bg #6C6C6C */}
+            <div
+              style={{
+                width: "530px",
+                alignSelf: "stretch",
+                paddingBottom: "20px",
+                background: "#6C6C6C",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "27px",
+              }}
+            >
+              <div
+                style={{
+                  alignSelf: "stretch",
+                  padding: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <img
+                  src={ASSETS.gigCard2}
+                  alt="Matriarchs Glow video thumbnail"
+                  style={{
+                    width: "510px",
+                    height: "382px",
+                    objectFit: "cover",
+                    border: "4px solid #000000",
+                    boxSizing: "border-box",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  alignSelf: "stretch",
+                  height: "151px",
+                  padding: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <p
+                  style={{
+                    flex: 1,
+                    fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                    fontWeight: 700,
+                    fontSize: "32px",
+                    lineHeight: "40px",
+                    textAlign: "center",
+                    color: "#FFFFFF",
+                    margin: 0,
+                  }}
+                >
+                  <strong>Matriarchs Glow</strong> with Gray Hair! Watch the timeless results of embracing their silver with style, confidence and aplomb
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      {/* Mobile Gray is Gorgeous */}
+      <section className="w-full md:hidden">
+        <img src={ASSETS.grayIsGorgeousMobile} alt="Gray is Gorgeous! Own-it Your Way" className="w-full h-auto block" />
       </section>
 
       {/* ── Enjoy Positive LAST-ing Impressions Section ── */}
