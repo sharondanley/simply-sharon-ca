@@ -88,62 +88,85 @@ function Navbar() {
 
   return (
     <>
-      {/* ── Desktop Navbar (exact Figma CSS: 1543px wide, 108px tall, pl-60px, gap-63px) ── */}
-      <nav
-        className="w-full z-30 hidden md:flex items-center"
-        style={{
-          paddingLeft: "60px",
-          gap: "63px",
-          height: "108px",
-          background: "transparent",
-        }}
+      {/* ── Desktop Navbar ── */}
+      {/* Outer wrapper: full width, 108px tall, clips overflow, centers the scaled inner bar */}
+      <div
+        className="w-full hidden md:block relative z-30"
+        style={{ height: "108px", overflow: "visible" }}
       >
-        {/* brand-logo: flex row, gap 15px, 336×108px */}
-        <Link href="/" className="flex items-center no-underline flex-shrink-0" style={{ gap: "15px", height: "108px" }}>
-          {/* site-logo: 75×108px */}
-          <img
-            src={ASSETS.heroLogo}
-            alt="Simply Sharon Logo"
-            style={{ width: "75px", height: "108px", objectFit: "contain" }}
-          />
-          {/* site-name: Italianno 64px/80px */}
-          <span
+        {/* Inner bar: fixed at 1920px wide (Figma design width), scaled down to fit viewport */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1920px",
+            height: "108px",
+            transform: "scale(min(1, calc(100vw / 1920)))",
+            transformOrigin: "top left",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            paddingLeft: "60px",
+            paddingRight: "60px",
+          }}
+        >
+          {/* brand-logo: flex row, gap 15px, 336×108px — fixed left */}
+          <Link href="/" className="flex items-center no-underline flex-shrink-0" style={{ gap: "15px", height: "108px" }}>
+            {/* site-logo: 75×108px */}
+            <img
+              src={ASSETS.heroLogo}
+              alt="Simply Sharon Logo"
+              style={{ width: "75px", height: "108px", objectFit: "contain" }}
+            />
+            {/* site-name: Italianno 64px/80px */}
+            <span
+              style={{
+                fontFamily: "Italianno, cursive",
+                fontWeight: 400,
+                fontSize: "64px",
+                lineHeight: "80px",
+                color: "#FFFFFF",
+                whiteSpace: "nowrap",
+              }}
+            >
+              SimplySharon
+            </span>
+          </Link>
+
+          {/* navlink-group: centered in remaining space — flex:1, justify-content:center, gap 26px */}
+          <div
             style={{
-              fontFamily: "Italianno, cursive",
-              fontWeight: 400,
-              fontSize: "64px",
-              lineHeight: "80px",
-              color: "#FFFFFF",
-              whiteSpace: "nowrap",
+              flex: 1,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "26px",
             }}
           >
-            SimplySharon
-          </span>
-        </Link>
-
-        {/* navlink-group: flex row, gap 26px, Inter 40px/48px, drop-shadow */}
-        <div className="flex items-center" style={{ gap: "26px" }}>
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.label} href={item.href}>
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 400,
-                  fontSize: "40px",
-                  lineHeight: "48px",
-                  color: "#FFFFFF",
-                  filter: "drop-shadow(0px 4px 4px rgba(0,0,0,0.25))",
-                  whiteSpace: "nowrap",
-                  cursor: "pointer",
-                }}
-                className="hover:opacity-80 transition-opacity"
-              >
-                {item.label}
-              </span>
-            </Link>
-          ))}
+            {NAV_ITEMS.map((item) => (
+              <Link key={item.label} href={item.href}>
+                <span
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "40px",
+                    lineHeight: "48px",
+                    color: "#FFFFFF",
+                    filter: "drop-shadow(0px 4px 4px rgba(0,0,0,0.25))",
+                    whiteSpace: "nowrap",
+                    cursor: "pointer",
+                  }}
+                  className="hover:opacity-80 transition-opacity"
+                >
+                  {item.label}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
-      </nav>
+      </div>
 
       {/* ── Mobile Navbar ── */}
       <nav
