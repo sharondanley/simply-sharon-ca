@@ -466,65 +466,289 @@ export default function Home() {
       </section>
 
       {/* ── Blogcast Section ── */}
-      {/* Desktop Blogcast */}
-      <section className="w-full pl-[42px] pb-[95px] hidden md:flex flex-col justify-center items-center gap-[23px]">
-        <div className="p-2.5 flex flex-col justify-start items-start gap-[5px] overflow-hidden">
-          <div className="self-stretch px-[156px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-            <span className="text-center text-black text-8xl font-normal font-['Italianno']">Blogcast</span>
-            <img src={ASSETS.newTag} alt="New" className="w-20 h-20" />
-          </div>
-          <div className="self-stretch px-[42px] py-[13px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-            <span className="text-center text-black text-4xl font-bold font-['Source_Sans_3']">
-              Wisdom You Can Read, Listen, or Watch
-            </span>
-          </div>
-        </div>
-        <div className="px-[63px] py-2.5 inline-flex justify-center items-center gap-[15px] overflow-hidden">
-          <span className="w-[1036px] text-center text-black text-[40px] font-normal font-['Source_Sans_3']">
-            Thoughtful explorations of beauty, wellness, and wisdom for confident aging — in the format that works for you
-          </span>
-        </div>
-        <div className="px-[19px] py-12 bg-[#d9d9d9] inline-flex justify-start items-center gap-[25px]">
-          <div className="w-[1167px] inline-flex flex-col justify-start items-center gap-[51px]">
-            <div className="self-stretch inline-flex justify-center items-center gap-[33px]">
-              <div className="w-[356px] self-stretch py-[29px] inline-flex flex-col justify-start items-center gap-[33px]">
-                <img src={ASSETS.readIcon} alt="Read" className="w-20 h-20" />
-                <span className="text-center text-black text-[40px] font-bold font-['Source_Sans_3']">Read</span>
-                <span className="flex-1 text-center text-black text-[28px] font-normal" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
-                  Deep dives into beauty myths, practical advice, and inspiring stories
-                </span>
-              </div>
-              <div className="w-[366px] self-stretch py-[29px] inline-flex flex-col justify-start items-center gap-[33px]">
-                <img src={ASSETS.listenIcon} alt="Listen" className="w-20 h-20" />
-                <span className="text-center text-black text-[40px] font-bold font-['Source_Sans_3']">Listen</span>
-                <span className="flex-1 text-center text-black text-[28px] font-normal" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
-                  Empowering conversations on personal growth, wisdom, and holistic health
-                </span>
-              </div>
-              <div className="w-[330px] self-stretch py-[29px] inline-flex flex-col justify-start items-center gap-[33px]">
-                <img src={ASSETS.watchIcon} alt="Watch" className="w-20 h-20" />
-                <span className="text-center text-black text-[40px] font-bold font-['Source_Sans_3']">Watch</span>
-                <span className="flex-1 text-center text-black text-[28px] font-normal" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
-                  Visual tutorials and real talk about living with strength and grace
-                </span>
-              </div>
+      {/* Desktop Blogcast — 1920px wide, scales like navbar */}
+      <div className="w-full hidden md:block relative" style={{ height: "1286px" }}>
+        <section
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1920px",
+            height: "1286px",
+            transform: "scale(min(1, calc(100vw / 1920)))",
+            transformOrigin: "top left",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingBottom: "95px",
+            gap: "23px",
+          }}
+        >
+          {/* section-header: 938×231px, flex col, gap 5px, padding 10px */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              padding: "10px",
+              gap: "5px",
+              width: "938px",
+              height: "231px",
+            }}
+          >
+            {/* blogcast-title: 918×120px, px 156px, flex row center */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "0px 156px",
+                gap: "10px",
+                width: "918px",
+                height: "120px",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "96px",
+                  lineHeight: "120px",
+                  textAlign: "center",
+                  color: "#000000",
+                }}
+              >
+                Blogcast
+              </span>
+              <img src={ASSETS.newTag} alt="New" style={{ width: "80px", height: "80px" }} />
             </div>
-            <div className="px-[54px] py-5 inline-flex justify-center items-center gap-2.5 overflow-hidden">
-              <span className="text-center text-black text-[32px] font-bold font-['Source_Sans_3']">
-                Join women who are embracing their authentic beauty and living with purpose
+            {/* section-subtitle: 918×86px, px 42px py 13px */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "13px 42px",
+                gap: "10px",
+                width: "918px",
+                height: "86px",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "48px",
+                  lineHeight: "60px",
+                  textAlign: "center",
+                  color: "#000000",
+                  width: "834px",
+                  height: "60px",
+                }}
+              >
+                Wisdom You Can Read, Listen, or Watch
               </span>
             </div>
-            <div className="px-5 py-[23px] inline-flex justify-center items-center gap-2.5 overflow-hidden">
-              <Link href="/blogcast">
-                <span className="text-center text-black text-5xl font-bold font-['Source_Sans_3'] cursor-pointer hover:underline">
-                  Explore the Blogcast →
-                </span>
-              </Link>
-            </div>
           </div>
-          <img src={ASSETS.blogcastAuthor} alt="Sharon Danley" className="w-[482px] h-[496px] object-cover" />
-        </div>
-      </section>
+
+          {/* intro-text: 1162×120px, px 63px py 10px */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "10px 63px",
+              gap: "15px",
+              width: "1162px",
+              height: "120px",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                fontWeight: 400,
+                fontSize: "40px",
+                lineHeight: "50px",
+                textAlign: "center",
+                color: "#000000",
+                width: "1036px",
+                height: "100px",
+              }}
+            >
+              Thoughtful explorations of beauty, wellness, and wisdom for confident aging — in the format that works for you
+            </span>
+          </div>
+
+          {/* blogcast-showcase: 1866×794px, bg #D9D9D9, px 19px py 48px, gap 25px */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              padding: "48px 19px",
+              gap: "25px",
+              width: "1866px",
+              height: "794px",
+              background: "#D9D9D9",
+            }}
+          >
+            {/* blogcast-features-info: 1167×698px, flex col, gap 51px */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                padding: "0px",
+                gap: "51px",
+                width: "1167px",
+                height: "698px",
+              }}
+            >
+              {/* content-formats-blocks: 1167×350px, flex row, gap 33px */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "0px",
+                  gap: "33px",
+                  width: "1167px",
+                  height: "350px",
+                }}
+              >
+                {/* read-block: 356×350px */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    padding: "29px 0px",
+                    gap: "33px",
+                    width: "356px",
+                    height: "350px",
+                  }}
+                >
+                  <img src={ASSETS.readIcon} alt="Read" style={{ width: "80px", height: "80px" }} />
+                  <span style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 700, fontSize: "40px", lineHeight: "50px", textAlign: "center", color: "#000000" }}>Read</span>
+                  <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "28px", lineHeight: "32px", textAlign: "center", color: "#000000", width: "356px", height: "96px" }}>
+                    Deep dives into beauty myths, practical advice, and inspiring stories
+                  </span>
+                </div>
+                {/* listen-block: 366×350px */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    padding: "29px 0px",
+                    gap: "33px",
+                    width: "366px",
+                    height: "350px",
+                  }}
+                >
+                  <img src={ASSETS.listenIcon} alt="Listen" style={{ width: "80px", height: "80px" }} />
+                  <span style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 700, fontSize: "40px", lineHeight: "50px", textAlign: "center", color: "#000000" }}>Listen</span>
+                  <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "28px", lineHeight: "32px", textAlign: "center", color: "#000000", width: "354px", height: "96px", padding: "0px 6px" }}>
+                    Empowering conversations on personal growth, wisdom, and holistic health
+                  </span>
+                </div>
+                {/* watch-block: 330×350px */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    padding: "29px 0px",
+                    gap: "33px",
+                    width: "330px",
+                    height: "350px",
+                  }}
+                >
+                  <img src={ASSETS.watchIcon} alt="Watch" style={{ width: "80px", height: "80px" }} />
+                  <span style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 700, fontSize: "40px", lineHeight: "50px", textAlign: "center", color: "#000000" }}>Watch</span>
+                  <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "28px", lineHeight: "32px", textAlign: "center", color: "#000000", width: "306px", height: "96px", padding: "0px 12px" }}>
+                    Visual tutorials and real talk about living with strength and grace
+                  </span>
+                </div>
+              </div>
+
+              {/* social-proof: 891×140px, px 54px py 20px */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "20px 54px",
+                  gap: "10px",
+                  width: "891px",
+                  height: "140px",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                    fontWeight: 400,
+                    fontSize: "40px",
+                    lineHeight: "50px",
+                    textAlign: "center",
+                    color: "#000000",
+                    width: "783px",
+                    height: "100px",
+                  }}
+                >
+                  Join women who are embracing their authentic beauty and living with purpose
+                </span>
+              </div>
+
+              {/* cta-link: 510×106px, px 20px py 23px */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "23px 20px",
+                  gap: "10px",
+                  width: "510px",
+                  height: "106px",
+                }}
+              >
+                <Link href="/blogcast">
+                  <span
+                    style={{
+                      fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                      fontWeight: 700,
+                      fontSize: "48px",
+                      lineHeight: "60px",
+                      textAlign: "center",
+                      color: "#000000",
+                      width: "470px",
+                      height: "60px",
+                      cursor: "pointer",
+                    }}
+                    className="hover:underline"
+                  >
+                    Explore the Blogcast →
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* author image: 608×602px */}
+            <img
+              src={ASSETS.blogcastAuthor}
+              alt="Sharon Danley"
+              style={{ width: "608px", height: "602px", objectFit: "cover", flexShrink: 0 }}
+            />
+          </div>
+        </section>
+      </div>
 
       {/* Mobile Blogcast */}
       <section className="w-full py-2.5 md:hidden flex flex-col justify-start items-start gap-2.5">
