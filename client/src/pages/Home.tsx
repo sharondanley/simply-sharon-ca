@@ -5,7 +5,7 @@
  * Colors: Dark charcoal/gray backgrounds, white text on dark, black text on white
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ChevronDown, ChevronUp, Menu, X, Mail, Youtube, Facebook } from "lucide-react";
 
@@ -22,8 +22,8 @@ const NAV_ITEMS = [
 // ─── CDN asset URLs ───────────────────────────────────────────────────────────
 const ASSETS = {
   // Hero section assets (from hero-section Figma export - correct assets)
-  heroLogo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/hero-logo-correct_3c19972d.webp",
-  heroSharon: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/hero-sharon-correct_0a0b4071.webp",
+  heroLogo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/hero-logo-v2_1c4afdca.webp",
+  heroSharon: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/hero-sharon-v2_78b1f4e2.webp",
   // Hero (legacy - kept for mobile)
   sharonHero: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/81-436_a928ba59.webp",
   heroMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-3_a429c158.webp",
@@ -82,22 +82,47 @@ const ASSETS = {
   innerUMobileIcon: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-196_1459df3c.webp",
 };
 
+// ─── Viewport scale hook for Figma-designed sections ────────────────────────
+function useHeroScale() {
+  const [scale, setScale] = useState(() =>
+    typeof window !== "undefined" ? Math.min(1, window.innerWidth / 1920) : 1
+  );
+  useEffect(() => {
+    const update = () => setScale(Math.min(1, window.innerWidth / 1920));
+    window.addEventListener("resize", update);
+    update();
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  return scale;
+}
+
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const scale = useHeroScale();
 
   return (
     <>
       {/* ── Desktop Navbar (exact Figma CSS: 1543px wide, 108px tall, pl-60px, gap-63px) ── */}
       <nav
-        className="w-full z-30 hidden md:flex items-center"
+        className="w-full z-30 hidden md:flex items-center overflow-visible"
         style={{
-          paddingLeft: "60px",
-          gap: "63px",
-          height: "108px",
+          height: `${108 * scale}px`,
           background: "transparent",
         }}
       >
+        {/* Scaled inner nav container */}
+        <div
+          className="flex items-center origin-left"
+          style={{
+            paddingLeft: "60px",
+            gap: "63px",
+            height: "108px",
+            width: "1920px",
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
+          }}
+        >
         {/* brand-logo: flex row, gap 15px, 336×108px */}
         <Link href="/" className="flex items-center no-underline flex-shrink-0" style={{ gap: "15px", height: "108px" }}>
           {/* site-logo: 75×108px */}
@@ -143,6 +168,7 @@ function Navbar() {
             </Link>
           ))}
         </div>
+        </div>{/* end scaled inner nav */}
       </nav>
 
       {/* ── Mobile Navbar ── */}
@@ -282,7 +308,7 @@ const heroBg = {
 
 // Diagonal light ray overlay - matches the Figma's Darker-right-1.jpg light streak
 const heroRayOverlay = {
-  background: "linear-gradient(145deg, transparent 20%, rgba(160,160,170,0.22) 40%, rgba(200,200,210,0.28) 50%, rgba(160,160,170,0.18) 60%, transparent 75%)",
+  background: "linear-gradient(135deg, transparent 15%, rgba(180,180,195,0.18) 35%, rgba(210,210,225,0.32) 48%, rgba(190,190,205,0.22) 58%, transparent 72%)",
   position: "absolute" as const,
   inset: 0,
   pointerEvents: "none" as const,
@@ -290,6 +316,7 @@ const heroRayOverlay = {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Home() {
+  const heroScale = useHeroScale();
   return (
     <div className="w-full bg-white flex flex-col items-center overflow-hidden">
 
@@ -315,20 +342,23 @@ export default function Home() {
         {/* Navbar */}
         <Navbar />
 
-        {/* ── Desktop Hero Content (exact Figma CSS) ── */}
+        {/* ── Desktop Hero Content (exact Figma CSS, scales to viewport) ── */}
         {/* hero-content: flex row, gap 64px, 1488px wide, 791px tall */}
+        {/* Scale factor: viewport/1920 so it looks identical at any width */}
         <div
-          className="hidden md:flex relative z-10 items-center"
+          className="hidden md:flex relative z-10 items-center origin-top"
           style={{
             width: "1488px",
-            maxWidth: "calc(100vw - 40px)",
             gap: "64px",
+            transform: `scale(${heroScale})`,
+            transformOrigin: "top center",
+            marginBottom: heroScale < 1 ? `${(791 * heroScale - 791) * 0.5}px` : "0",
           }}
         >
           {/* hero-text-group: flex col, gap 20px, 1039×791px */}
           <div
-            className="flex flex-col items-center"
-            style={{ gap: "20px", flex: "0 0 auto" }}
+            className="flex flex-col items-start"
+            style={{ gap: "20px", flex: "0 0 auto", width: "1039px" }}
           >
             {/* heading-title: Italianno 140px/175px */}
             <div style={{ padding: "10px" }}>
@@ -340,6 +370,7 @@ export default function Home() {
                   lineHeight: "175px",
                   color: "#FFFFFF",
                   margin: 0,
+                  textAlign: "left",
                 }}
               >
                 Simlpy Sharon.ca
@@ -356,7 +387,7 @@ export default function Home() {
                   lineHeight: "112px",
                   color: "#FFFFFF",
                   margin: 0,
-                  whiteSpace: "nowrap",
+                  textAlign: "left",
                 }}
               >
                 Healthy Beauty &amp; Confident Aging
@@ -380,7 +411,7 @@ export default function Home() {
               >
                 Achieve Radiant Beauty, Glowing Health<br />
                 Meaningful Aging<br />
-                with Simplicity, Strength, Style &amp; Grace
+                with <strong>Simplicity, Strength, Style &amp; Grace</strong>
               </p>
             </div>
 
@@ -417,16 +448,27 @@ export default function Home() {
             </div>
           </div>
 
-          {/* hero-image: 453×586px, Sharon photo (transparent bg PNG/WebP) */}
-          <div style={{ padding: "10px", flexShrink: 0 }}>
+          {/* hero-image: 453×586px, Sharon photo with circular crop */}
+          <div
+            style={{
+              padding: "10px",
+              flexShrink: 0,
+              width: "473px",
+              height: "605px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <img
               src={ASSETS.heroSharon}
               alt="Sharon Danley"
               style={{
                 width: "453px",
-                height: "585.78px",
-                objectFit: "contain",
+                height: "585px",
+                objectFit: "cover",
                 objectPosition: "top center",
+                borderRadius: "50%",
               }}
             />
           </div>
