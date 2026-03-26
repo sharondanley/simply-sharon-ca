@@ -2558,36 +2558,32 @@ export default function Home() {
                     </span>
                   </div>
 
-                  {/* Private Group block: left=286, top=182 */}
-                  <div style={{ position: "absolute", left: 286, top: 182, width: "1152px", padding: "10px 0px 10px 10px", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
-                      <a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer"
-                        style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "45px", textDecoration: "underline", color: "#FFFFFF" }}>
-                        Facebook.com/groups/GoinGray.LovinIt<br />
-                        For biological women going gray; please confirm your agreement to the join question.
-                      </a>
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: "10px" }}>
-                      <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", color: "#FFFFFF" }}>
-                        Private Group:
-                      </span>
-                    </div>
+                  {/* Private Group row: label + link side-by-side at top=182, starting at left=286 */}
+                  <div style={{ position: "absolute", left: 286, top: 182, width: "1152px", padding: "10px 0px 10px 10px", display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "10px" }}>
+                    {/* Private Group: label */}
+                    <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "45px", color: "#FFFFFF", whiteSpace: "nowrap", flexShrink: 0 }}>
+                      Private Group:
+                    </span>
+                    {/* Private Group link + description */}
+                    <a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer"
+                      style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "45px", textDecoration: "underline", color: "#FFFFFF" }}>
+                      Facebook.com/groups/GoinGray.LovinIt<br />
+                      <span style={{ textDecoration: "none" }}>For biological women going gray; please confirm your agreement to the join question.</span>
+                    </a>
                   </div>
 
-                  {/* Public Page block: left=286, top=367 */}
-                  <div style={{ position: "absolute", left: 286, top: 367, width: "1048px", padding: "10px 0px 10px 10px", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-                    <div style={{ width: "795px", display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
-                      <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer"
-                        style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "45px", textDecoration: "underline", color: "#FFFFFF" }}>
-                        Facebook.com/SharonDanleyBeauty<br />
-                        For everyone, including those who've completed their gray hair journey.
-                      </a>
-                    </div>
-                    <div style={{ alignSelf: "stretch", display: "flex", justifyContent: "center", alignItems: "flex-start", gap: "10px" }}>
-                      <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "41px", color: "#FFFFFF", width: "233px" }}>
-                        Public Page:
-                      </span>
-                    </div>
+                  {/* Public Page row: label + link side-by-side at top=367, starting at left=286 */}
+                  <div style={{ position: "absolute", left: 286, top: 367, width: "1048px", padding: "10px 0px 10px 10px", display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "10px" }}>
+                    {/* Public Page: label */}
+                    <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "45px", color: "#FFFFFF", whiteSpace: "nowrap", flexShrink: 0 }}>
+                      Public Page:
+                    </span>
+                    {/* Public Page link + description */}
+                    <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer"
+                      style={{ fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif", fontWeight: 400, fontSize: "36px", lineHeight: "45px", textDecoration: "underline", color: "#FFFFFF" }}>
+                      Facebook.com/SharonDanleyBeauty<br />
+                      <span style={{ textDecoration: "none" }}>For everyone, including those who've completed their gray hair journey.</span>
+                    </a>
                   </div>
                 </div>
               </div>
