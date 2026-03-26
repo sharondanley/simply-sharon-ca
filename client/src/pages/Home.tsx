@@ -37,6 +37,7 @@ const ASSETS = {
   blogcastMobileLeft: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-29_a3fcdaf5.webp",
   blogcastMobileRight: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-30_386acd72.webp",
   // Full-section images (kept as images - complex photo grids without individual assets)
+  makeBetterGallery: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/make-better-gallery_6a98b124.webp",
   makeBetterDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/84-446_3212980c.webp",
   makeBetterMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-54_8e41af54.webp",
   realLifeMakeBettersDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/92-3_2de42173.webp",
@@ -811,9 +812,235 @@ export default function Home() {
       </section>
 
       {/* ── Pay-Forward Digital Make-Betters Section ── */}
-      <section id="make-betters" className="w-full">
-        <img src={ASSETS.makeBetterDesktop} alt="Pay-Forward Digital Make-Betters" className="w-full h-auto block hidden md:block" />
-        <img src={ASSETS.makeBetterMobile} alt="Pay-Forward Digital Make-Betters" className="w-full h-auto block md:hidden" />
+      {/* Desktop Make-Betters — 1920px wide, scales like navbar */}
+      <div id="make-betters" className="w-full hidden md:block relative" style={{ height: "1554px" }}>
+        <section
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1920px",
+            height: "1554px",
+            transform: "scale(min(1, calc(100vw / 1920)))",
+            transformOrigin: "top left",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingTop: "53px",
+            paddingBottom: "91px",
+            paddingLeft: "42px",
+            gap: "89px",
+            background: "linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 40%, #3a3535 70%, #4a3f3f 100%)",
+          }}
+        >
+          {/* section-header: 1305×190px */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              padding: "10px",
+              width: "1305px",
+              height: "190px",
+            }}
+          >
+            {/* blogcast-title: 1285×120px, px 156px */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "0px 156px",
+                gap: "10px",
+                width: "1285px",
+                height: "120px",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "96px",
+                  lineHeight: "120px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  width: "973px",
+                }}
+              >
+                Pay-Forward Digital Make-Betters
+              </span>
+            </div>
+            {/* section-subtitle: 1285×71px, px 42px py 13px */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "13px 42px",
+                gap: "10px",
+                width: "1285px",
+                height: "71px",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "48px",
+                  lineHeight: "60px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  width: "1201px",
+                }}
+              >
+                Enhance Your Natural Beauty
+              </span>
+            </div>
+          </div>
+
+          {/* make-better-showcase: 1920×1131px, flex row, gap 107px */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              padding: "0px",
+              gap: "107px",
+              width: "1920px",
+              height: "1131px",
+            }}
+          >
+            {/* section-texts: 669×1059px, flex col, gap 45px */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                padding: "0px",
+                gap: "45px",
+                width: "669px",
+                height: "1059px",
+              }}
+            >
+              {/* narrative-text-block: 669×799px, p 10px */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  padding: "10px",
+                  gap: "10px",
+                  width: "669px",
+                  height: "799px",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "Helvetica, Arial, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "36px",
+                    lineHeight: "41px",
+                    color: "#FFFFFF",
+                    width: "649px",
+                    margin: 0,
+                  }}
+                >
+                  Make-Betters “enhance” your natural look simply and realistically through expert instruction from a Master Artist, rather than unrealistic “Make-Overs”.
+                  <br /><br />
+                  With practice, simple products and tools, and personal video instruction, you can easily replicate your refreshed look.
+                  <br /><br />
+                  Instead of a fee, simply “Pay-Forward” your time, talent, or treasure, in honour of my Children, Andrea &amp; Matthew Main, to a person or group in need.
+                  <br /><br />
+                  Send your digital photo to Sharon for a “Photoshop Spa” treatment, a “how-to” YouTube video, and a digital copy to use with credit — free with your “Pay-Forward” promise.
+                </p>
+              </div>
+
+              {/* make-better-links: 553×179px, py 28px, gap 33px */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  padding: "28px 0px",
+                  gap: "33px",
+                  width: "553px",
+                  height: "179px",
+                }}
+              >
+                <Link href="/make-betters">
+                  <span
+                    style={{
+                      fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                      fontWeight: 700,
+                      fontSize: "36px",
+                      lineHeight: "45px",
+                      textAlign: "center",
+                      textDecoration: "underline",
+                      color: "#FFFFFF",
+                      width: "553px",
+                      display: "block",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Here’s how to submit your photo →
+                  </span>
+                </Link>
+                <Link href="/make-betters">
+                  <span
+                    style={{
+                      fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                      fontWeight: 700,
+                      fontSize: "36px",
+                      lineHeight: "45px",
+                      textAlign: "center",
+                      textDecoration: "underline",
+                      color: "#FFFFFF",
+                      width: "553px",
+                      display: "block",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Digital &amp; Live Video Make-Betters →
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* make-better-gallery: 621×1140px, px 10px py 8px */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                padding: "8px 10px",
+                gap: "10px",
+                width: "621px",
+                height: "1140px",
+              }}
+            >
+              <img
+                src={ASSETS.makeBetterGallery}
+                alt="Make-Better before and after gallery"
+                style={{
+                  width: "613.04px",
+                  alignSelf: "stretch",
+                  objectFit: "cover",
+                  flexShrink: 0,
+                }}
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+      {/* Mobile Make-Betters */}
+      <section id="make-betters-mobile" className="w-full md:hidden">
+        <img src={ASSETS.makeBetterMobile} alt="Pay-Forward Digital Make-Betters" className="w-full h-auto block" />
       </section>
 
       {/* ── Real Life Make-Betters Section ── */}
