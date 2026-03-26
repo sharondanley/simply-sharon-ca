@@ -40,6 +40,10 @@ const ASSETS = {
   makeBetterGallery: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/make-better-gallery_6a98b124.webp",
   makeBetterDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/84-446_3212980c.webp",
   makeBetterMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-54_8e41af54.webp",
+  rlmbGallery: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/rlmb-gallery_ec0a1627.webp",
+  rlmbBefore: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/rlmb-before_8c536842.webp",
+  rlmbBusiness: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/rlmb-business_676435c9.webp",
+  rlmbEvening: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/rlmb-evening_cf80d24c.webp",
   realLifeMakeBettersDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/92-3_2de42173.webp",
   realLifeMakeBettersMobile: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-72_0756d509.webp",
   grayIsGorgeousDesktop: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/93-53_88b9047e.webp",
@@ -1044,9 +1048,259 @@ export default function Home() {
       </section>
 
       {/* ── Real Life Make-Betters Section ── */}
-      <section className="w-full">
-        <img src={ASSETS.realLifeMakeBettersDesktop} alt="Real Life Make-Betters" className="w-full h-auto block hidden md:block" />
-        <img src={ASSETS.realLifeMakeBettersMobile} alt="Real Life Make-Betters" className="w-full h-auto block md:hidden" />
+      {/* Desktop: 1920px wide, scales like other sections */}
+      <div className="w-full hidden md:block relative" style={{ height: "2381px" }}>
+        <section
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "1920px",
+            height: "2381px",
+            transform: "scale(min(1, calc(100vw / 1920)))",
+            transformOrigin: "top left",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "47px 202px",
+            background: "linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 40%, #3a3535 70%, #4a3f3f 100%)",
+          }}
+        >
+          {/* section-header: 1516×140px */}
+          <div
+            style={{
+              alignSelf: "stretch",
+              padding: "10px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              overflow: "hidden",
+            }}
+          >
+            {/* blogcast-title: 1496×120px, px 156px */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                padding: "0px 156px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                overflow: "hidden",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "Italianno, cursive",
+                  fontWeight: 400,
+                  fontSize: "96px",
+                  lineHeight: "120px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  width: "651px",
+                }}
+              >
+                Real Life Make-Betters
+              </span>
+            </div>
+          </div>
+
+          {/* image-gallery: 1516×1092px */}
+          <div
+            style={{
+              alignSelf: "stretch",
+              height: "1092px",
+              padding: "10px 0px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "10px",
+            }}
+          >
+            <img
+              src={ASSETS.rlmbGallery}
+              alt="Real Life Make-Betters gallery"
+              style={{
+                alignSelf: "stretch",
+                height: "1044.47px",
+                objectFit: "cover",
+              }}
+            />
+          </div>
+
+          {/* testimonial: 1269×267px, flex col, gap 37px, items-end */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "flex-end",
+              gap: "37px",
+              width: "1269px",
+              height: "267px",
+            }}
+          >
+            {/* quote: 1269×138px */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                width: "1269px",
+                height: "138px",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Helvetica, Arial, sans-serif",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  fontSize: "40px",
+                  lineHeight: "46px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  width: "1269px",
+                  margin: 0,
+                }}
+              >
+                “I’ve had my makeup professionally done for years — and by some very good artists, but you are definitely the best I’ve ever experienced. You really get it. Thank you so much Sharon.”
+              </p>
+            </div>
+            {/* quote-citation: 534×92px, justify-end */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "flex-end",
+                gap: "10px",
+                width: "534px",
+                height: "92px",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Helvetica, Arial, sans-serif",
+                  fontWeight: 400,
+                  fontSize: "40px",
+                  lineHeight: "46px",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  width: "534px",
+                  margin: 0,
+                }}
+              >
+                Carol Off, Journalist, Author<br />CBC Co-host, “As it Happens”
+              </p>
+            </div>
+          </div>
+
+          {/* testimonial-highlight: 1384×788px, flex row, gap 141px, pt 74px */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              paddingTop: "74px",
+              gap: "141px",
+              width: "1384px",
+              height: "788px",
+            }}
+          >
+            {/* image-showcase: Before */}
+            <div
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "75px",
+              }}
+            >
+              <img
+                src={ASSETS.rlmbBefore}
+                alt="Before Make-Better"
+                style={{ alignSelf: "stretch", height: "540.08px", objectFit: "cover" }}
+              />
+              <span
+                style={{
+                  alignSelf: "stretch",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  fontSize: "48px",
+                  lineHeight: "60px",
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                }}
+              >
+                Before
+              </span>
+            </div>
+            {/* image-showcase: Business */}
+            <div
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "75px",
+              }}
+            >
+              <img
+                src={ASSETS.rlmbBusiness}
+                alt="Business Make-Better"
+                style={{ alignSelf: "stretch", height: "541.73px", objectFit: "cover" }}
+              />
+              <span
+                style={{
+                  alignSelf: "stretch",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  fontSize: "48px",
+                  lineHeight: "60px",
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                }}
+              >
+                Business
+              </span>
+            </div>
+            {/* image-showcase: Evening */}
+            <div
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "75px",
+              }}
+            >
+              <img
+                src={ASSETS.rlmbEvening}
+                alt="Evening Make-Better"
+                style={{ alignSelf: "stretch", height: "526.61px", objectFit: "cover" }}
+              />
+              <span
+                style={{
+                  alignSelf: "stretch",
+                  textAlign: "center",
+                  color: "#FFFFFF",
+                  fontSize: "48px",
+                  lineHeight: "60px",
+                  fontFamily: "'Source Sans Pro', 'Source Sans 3', sans-serif",
+                  fontWeight: 400,
+                }}
+              >
+                Evening
+              </span>
+            </div>
+          </div>
+        </section>
+      </div>
+      {/* Mobile Real-Life Make-Betters */}
+      <section className="w-full md:hidden">
+        <img src={ASSETS.realLifeMakeBettersMobile} alt="Real Life Make-Betters" className="w-full h-auto block" />
       </section>
 
       {/* ── Gray is Gorgeous Section ── */}
