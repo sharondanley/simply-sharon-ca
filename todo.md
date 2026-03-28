@@ -87,3 +87,14 @@
 - [x] Replace navbar in BlogPage.tsx with shared component
 - [x] Update Home.tsx Navbar function to use same shared component
 - [x] Preserve mobile hamburger menu
+
+## Phase 13: Footer Rebuild
+- [x] Create shared SiteFooter component matching Figma spec exactly
+- [x] Dark gradient background, Italianno "Connect with Sharon" heading, social icons row
+- [x] Contact links: Email, YouTube, Facebook (Private Group + Public Page) with proper layout
+- [x] Caricature portrait on the right side
+- [x] Disclaimer and copyright text at bottom
+- [x] Replace footer in Home.tsx with shared component
+- [x] Replace footer in BlogPost.tsx with shared component
+- [x] Replace footer in BlogcastArchive.tsx with shared component
+- [x] Replace footer in BlogPage.tsx with shared component

@@ -7,6 +7,7 @@
 import { Link } from "wouter";
 import { CommentSection } from "@/components/CommentSection";
 import { SiteNavbar } from "@/components/SiteNavbar";
+import { SiteFooter } from "@/components/SiteFooter";
 
 // ─── CDN Assets (Figma node-id mapped) ───────────────────────────────────────
 const ASSETS = {
@@ -229,72 +230,7 @@ export default function BlogPost() {
       </div>
 
       {/* ── FOOTER ── */}
-      <div style={{ width: "100vw", overflow: "hidden", position: "relative" }}>
-        <div style={{
-          width: "1920px",
-          transformOrigin: "top left", transform: `scale(${SCALE})`,
-          backgroundImage: `url(${ASSETS.footerBg})`, backgroundSize: "cover", backgroundPosition: "center",
-          display: "flex", flexDirection: "column", alignItems: "center",
-          padding: "54px 0 14px", gap: "49px", minHeight: "790px",
-        }}>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "10px", width: "1640px" }}>
-            {/* Left: connect info */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "18px", flex: 1 }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", padding: "14px 0", gap: "26px" }}>
-                <span style={{ fontFamily: "Italianno", fontSize: "96px", lineHeight: "120px", color: "#fff" }}>Connect with Sharon</span>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "30px" }}>
-                  <a href="mailto:info@SimplySharon.ca"><img src={ASSETS.emailIcon} alt="Email" style={{ width: "70px", height: "70px", cursor: "pointer" }} /></a>
-                  <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer"><img src={ASSETS.facebookIcon} alt="Facebook" style={{ width: "70px", height: "70px", cursor: "pointer" }} /></a>
-                  <a href="https://www.youtube.com/@SimplySharonTips/featured" target="_blank" rel="noopener noreferrer"><img src={ASSETS.youtubeIcon} alt="YouTube" style={{ width: "70px", height: "70px", cursor: "pointer" }} /></a>
-                </div>
-              </div>
-              {/* Contact table */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "32px", paddingTop: "20px" }}>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "80px" }}>
-                  <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", textDecoration: "underline", whiteSpace: "nowrap" }}>Email:</span>
-                  <a href="mailto:info@SimplySharon.ca" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", textDecoration: "underline" }}>info@SimplySharon.ca</a>
-                </div>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "80px" }}>
-                  <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", textDecoration: "underline", whiteSpace: "nowrap" }}>YouTube:</span>
-                  <a href="https://www.youtube.com/@SimplySharonTips/featured" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", textDecoration: "underline" }}>YouTube.com/@SimplySharonTips</a>
-                </div>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "80px" }}>
-                  <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", textDecoration: "underline", whiteSpace: "nowrap" }}>Facebook:</span>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "16px" }}>
-                      <span style={{ fontFamily: "'Source Sans Pro', sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", whiteSpace: "nowrap" }}>Private Group:</span>
-                      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                        <a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", textDecoration: "underline" }}>Facebook.com/groups/GoinGray.LovinIt</a>
-                        <span style={{ fontFamily: "'Source Sans Pro', sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff" }}>For biological women going gray; please confirm your agreement to the join question.</span>
-                      </div>
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "16px" }}>
-                      <span style={{ fontFamily: "'Source Sans Pro', sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", whiteSpace: "nowrap" }}>Public Page:</span>
-                      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                        <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff", textDecoration: "underline" }}>Facebook.com/SharonDanleyBeauty</a>
-                        <span style={{ fontFamily: "'Source Sans Pro', sans-serif", fontSize: "36px", lineHeight: "41px", color: "#fff" }}>For everyone, including those who've completed their gray hair journey.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Right: caricature */}
-            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-end" }}>
-              <img src={ASSETS.caricatureLogo} alt="Simply Sharon caricature" style={{ width: "242px", height: "591px", objectFit: "contain" }} />
-            </div>
-          </div>
-          {/* Disclaimer + copyright */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", padding: "0 200px", textAlign: "center" }}>
-            <p style={{ fontFamily: "'Source Sans Pro', sans-serif", fontSize: "24px", lineHeight: "30px", color: "#fff", margin: 0 }}>
-              Not monetized, sponsored, or compensated. Shared freely to inspire a <strong>legacy of giving in honour of my children Andrea &amp; Matthew Main</strong> and to encourage paying it forward in your own way.
-            </p>
-            <p style={{ fontFamily: "'Source Sans Pro', sans-serif", fontSize: "24px", lineHeight: "30px", color: "#fff", margin: 0 }}>
-              © 2025 Sharon Danley | All images, content and design created by Sharon Danley.
-            </p>
-          </div>
-        </div>
-      </div>
+      <SiteFooter />
 
     </div>
   );

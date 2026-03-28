@@ -1,5 +1,7 @@
 import { SiteNavbar } from "@/components/SiteNavbar";
 
+import { SiteFooter } from "@/components/SiteFooter";
+
 export default function BlogPage() {
   return (
     <div data-layer="blog-post-desktop" data-node-id="116-75" className="BlogPostDesktop w-full flex flex-col justify-start items-start overflow-x-hidden">
@@ -99,7 +101,7 @@ export default function BlogPage() {
     </div>
     <div data-layer="comment-section" data-node-id="116-28" className="CommentSection self-stretch h-[718px] px-[116px] bg-[#e1e1e1] flex flex-col justify-start items-start gap-[39px]" />
   </div>
-  <img data-layer="footer-section" data-node-id="116-36" className="FooterSection self-stretch h-[790px] py-3.5 flex flex-col justify-start items-center gap-[49px]" src="https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/116-36_04d51412.webp" />
+  <SiteFooter />
 </div>
   )
 }

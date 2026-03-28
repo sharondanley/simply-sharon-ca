@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { SiteNavbar } from "@/components/SiteNavbar";
+import { SiteFooter } from "@/components/SiteFooter";
 
 // ── CDN asset map ──────────────────────────────────────────────────────────
 const CDN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz";
@@ -19,58 +20,7 @@ const A = {
   thumb4:     `${CDN}/182-671_cfc5680b.webp`,
 };
 
-// Navbar is now the shared SiteNavbar component
-
-function SiteFooter() {
-  return (
-    <footer id="contact" style={{ width: "100%", background: "linear-gradient(135deg, #4a4a4a 0%, #3a3a3a 40%, #5a5a5a 70%, #3d3d3d 100%)", overflow: "hidden" }}>
-      <div style={{ width: 1920, transformOrigin: "top left", transform: `scale(min(1, calc(100vw / 1920)))`, padding: "80px 60px 60px 60px", boxSizing: "border-box" as const }}>
-        <div style={{ fontFamily: "Italianno, serif", fontSize: 96, color: "#fff", lineHeight: 1.1, marginBottom: 40 }}>Connect with Sharon</div>
-        <div style={{ display: "flex", gap: 24, marginBottom: 60 }}>
-          {[{ href: "mailto:info@SimplySharon.ca", l: "E" }, { href: "https://www.facebook.com/SharonDanleyBeauty", l: "F" }, { href: "https://www.youtube.com/@SimplySharonTips/featured", l: "Y" }].map(({ href, l }) => (
-            <a key={l} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 70, height: 70, borderRadius: "50%", border: "2px solid #fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", textDecoration: "none", fontSize: 20, fontWeight: 700, fontFamily: "Helvetica, Arial, sans-serif" }}>{l}</a>
-          ))}
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" as const, gap: 36, marginBottom: 60 }}>
-          {[{ label: "Email:", value: "info@SimplySharon.ca", href: "mailto:info@SimplySharon.ca" }, { label: "YouTube:", value: "YouTube.com/@SimplySharonTips", href: "https://www.youtube.com/@SimplySharonTips/featured" }].map(({ label, value, href }) => (
-            <div key={label} style={{ display: "flex", alignItems: "flex-start", gap: 60 }}>
-              <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline", minWidth: 200 }}>{label}</span>
-              <a href={href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline" }}>{value}</a>
-            </div>
-          ))}
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 60 }}>
-            <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline", minWidth: 200 }}>Facebook:</span>
-            <div style={{ display: "flex", flexDirection: "column" as const, gap: 32 }}>
-              <div style={{ display: "flex", alignItems: "flex-start", gap: 24 }}>
-                <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 36, color: "#fff", minWidth: 220, flexShrink: 0 }}>Private Group:</span>
-                <div>
-                  <a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline", display: "block" }}>Facebook.com/groups/GoinGray.LovinIt</a>
-                  <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 36, color: "#fff" }}>For biological women going gray; please confirm your agreement to the join question.</span>
-                </div>
-              </div>
-              <div style={{ display: "flex", alignItems: "flex-start", gap: 24 }}>
-                <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 36, color: "#fff", minWidth: 220, flexShrink: 0 }}>Public Page:</span>
-                <div>
-                  <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline", display: "block" }}>Facebook.com/SharonDanleyBeauty</a>
-                  <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 36, color: "#fff" }}>For everyone, including those who've completed their gray hair journey.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style={{ textAlign: "center" as const, marginBottom: 16 }}>
-          <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 24, color: "#fff" }}>Not monetized, sponsored, or compensated. Shared freely to inspire a </span>
-          <strong style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 24, color: "#fff" }}>legacy of giving in honour of my children Andrea &amp; Matthew Main</strong>
-          <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 24, color: "#fff" }}> and to encourage paying it forward in your own way.</span>
-        </div>
-        <div style={{ textAlign: "center" as const }}>
-          <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 24, color: "#fff" }}>© 2025 Sharon Danley | All images, content and design created by Sharon Danley.</span>
-        </div>
-      </div>
-      <div style={{ height: `calc(600px * min(1, calc(100vw / 1920)))` }} />
-    </footer>
-  );
-}
+// Local SiteFooter replaced by shared component
 
 const SEED_POSTS = [
   { id: 1, title: "The Art of Color Picking", date: "March 25th 2026", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur nulla id tortor suscipit consequat. Pellentesque varius venenatis ornare. Phasellus.", thumbnail: A.thumb1, slug: "the-art-of-color-picking" },
