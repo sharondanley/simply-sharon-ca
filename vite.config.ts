@@ -154,6 +154,11 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(
 
 export default defineConfig({
   plugins,
+  define: {
+    // Replaced at build time; fall back to empty string when not set (e.g. Hostinger)
+    __ANALYTICS_ENDPOINT__: JSON.stringify(process.env.VITE_ANALYTICS_ENDPOINT ?? ''),
+    __ANALYTICS_WEBSITE_ID__: JSON.stringify(process.env.VITE_ANALYTICS_WEBSITE_ID ?? ''),
+  },
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
