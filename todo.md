@@ -105,3 +105,9 @@
 - [x] Update context.ts to handle local:admin openId without Manus OAuth sync
 - [x] Replace Manus sign-in button in Admin.tsx with username/password form
 - [x] Test login, dashboard access, and logout flow
+
+## Phase 17: Admin Dashboard Accessibility & UX
+- [x] Increase all admin font sizes (labels, inputs, buttons, sidebar, stats) for readability
+- [x] Fix grey-on-grey contrast: replace all text-gray-400/500 on grey backgrounds with darker text
+- [x] Add dark mode toggle button in admin sidebar/header that persists via localStorage
+- [x] Add live post preview panel alongside the block editor (split-pane: editor left, preview right)
