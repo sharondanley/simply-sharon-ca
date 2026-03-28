@@ -6,6 +6,7 @@
 
 import { Link } from "wouter";
 import { CommentSection } from "@/components/CommentSection";
+import { SiteNavbar } from "@/components/SiteNavbar";
 
 // ─── CDN Assets (Figma node-id mapped) ───────────────────────────────────────
 const ASSETS = {
@@ -40,30 +41,7 @@ export default function BlogPost() {
     <div style={{ overflowX: "hidden", background: "#fff" }}>
 
       {/* ── NAVBAR ── */}
-      <div style={{ width: "100vw", height: `calc(108px * ${SCALE})`, overflow: "hidden", position: "relative" }}>
-        <div style={{
-          width: "1920px", height: "108px",
-          transformOrigin: "top left", transform: `scale(${SCALE})`,
-          backgroundImage: `url(${ASSETS.navbarBg})`, backgroundSize: "cover", backgroundPosition: "center",
-          display: "flex", flexDirection: "row", alignItems: "center", padding: "0 60px",
-        }}>
-          <Link href="/">
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px", width: "336px", height: "108px", cursor: "pointer" }}>
-              <img src={ASSETS.siteLogo} alt="Simply Sharon logo" style={{ width: "75px", height: "108px", objectFit: "contain" }} />
-              <span style={{ fontFamily: "Italianno", fontSize: "64px", lineHeight: "80px", color: "#fff", whiteSpace: "nowrap" }}>SimplySharon</span>
-            </div>
-          </Link>
-          <div style={{ flex: 1, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "26px", height: "108px" }}>
-            {NAV_LINKS.map((link) => (
-              <Link key={link.label} href={link.href}>
-                <span style={{ fontFamily: "Inter", fontSize: "26px", lineHeight: "31px", color: "#fff", cursor: "pointer", filter: "drop-shadow(0px 4px 4px rgba(0,0,0,0.25))", whiteSpace: "nowrap" }}>
-                  {link.label}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
+      <SiteNavbar />
 
       {/* ── BLOG PAGE CONTAINER ── */}
       <div style={{ width: "100vw", overflow: "hidden", position: "relative" }}>

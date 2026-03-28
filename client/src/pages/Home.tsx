@@ -7,7 +7,8 @@
 
 import { useState } from "react";
 import { Link } from "wouter";
-import { ChevronDown, ChevronUp, Menu, X, Mail, Youtube, Facebook } from "lucide-react";
+import { ChevronDown, ChevronUp, Mail, Youtube, Facebook } from "lucide-react";
+import { SiteNavbar } from "@/components/SiteNavbar";
 
 // ─── Nav Items ───────────────────────────────────────────────────────────────
 const NAV_ITEMS = [
@@ -99,144 +100,7 @@ const ASSETS = {
   innerUMobileIcon: "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/1-196_1459df3c.webp",
 };
 
-// ─── Navbar ───────────────────────────────────────────────────────────────────
-function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  return (
-    <>
-      {/* ── Desktop Navbar ── */}
-      {/* Outer wrapper: full width, 108px tall, clips overflow, centers the scaled inner bar */}
-      <div
-        className="w-full hidden md:block relative z-30"
-        style={{ height: "108px", overflow: "visible" }}
-      >
-        {/* Inner bar: fixed at 1920px wide (Figma design width), scaled down to fit viewport */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "1920px",
-            height: "108px",
-            transform: "scale(min(1, calc(100vw / 1920)))",
-            transformOrigin: "top left",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            paddingLeft: "60px",
-            paddingRight: "60px",
-          }}
-        >
-          {/* brand-logo: flex row, gap 15px, 336×108px — fixed left */}
-          <Link href="/" className="flex items-center no-underline flex-shrink-0" style={{ gap: "15px", height: "108px" }}>
-            {/* site-logo: 75×108px */}
-            <img
-              src={ASSETS.heroLogo}
-              alt="Simply Sharon Logo"
-              style={{ width: "75px", height: "108px", objectFit: "contain" }}
-            />
-            {/* site-name: Italianno 64px/80px */}
-            <span
-              style={{
-                fontFamily: "Italianno, cursive",
-                fontWeight: 400,
-                fontSize: "64px",
-                lineHeight: "80px",
-                color: "#FFFFFF",
-                whiteSpace: "nowrap",
-              }}
-            >
-              SimplySharon
-            </span>
-          </Link>
-
-          {/* navlink-group: centered in remaining space — flex:1, justify-content:center, gap 26px */}
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "26px",
-            }}
-          >
-            {NAV_ITEMS.map((item) => (
-              <Link key={item.label} href={item.href}>
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "40px",
-                    lineHeight: "48px",
-                    color: "#FFFFFF",
-                    filter: "drop-shadow(0px 4px 4px rgba(0,0,0,0.25))",
-                    whiteSpace: "nowrap",
-                    cursor: "pointer",
-                  }}
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  {item.label}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Mobile Navbar ── */}
-      <nav
-        className="w-full z-30 flex md:hidden items-center justify-between px-5"
-        style={{ height: "64px", background: "transparent" }}
-      >
-        <Link href="/" className="flex items-center no-underline" style={{ gap: "10px" }}>
-          <img src={ASSETS.heroLogo} alt="Simply Sharon Logo" style={{ width: "40px", height: "58px", objectFit: "contain" }} />
-          <span style={{ fontFamily: "Italianno, cursive", fontSize: "36px", lineHeight: "45px", color: "#FFFFFF" }}>
-            SimplySharon
-          </span>
-        </Link>
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="w-10 h-10 flex items-center justify-center text-white"
-          aria-label="Toggle navigation"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
-
-      {/* Mobile full-screen overlay */}
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center gap-8 md:hidden"
-          onClick={() => setMobileOpen(false)}
-        >
-          <button
-            className="absolute top-5 right-5 text-white"
-            onClick={() => setMobileOpen(false)}
-          >
-            <X size={28} />
-          </button>
-          <span className="text-white text-[56px] font-normal font-['Italianno'] mb-4">
-            Simply Sharon
-          </span>
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
-              <span className="text-white text-3xl font-bold font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer">
-                {item.label}
-              </span>
-            </Link>
-          ))}
-          <Link href="/admin" onClick={() => setMobileOpen(false)}>
-            <span className="text-gray-400 text-sm mt-8 hover:text-white transition-colors cursor-pointer">
-              Admin Login
-            </span>
-          </Link>
-        </div>
-      )}
-    </>
-  );
-}
+// ─── Navbar is now the shared SiteNavbar component ───────────────────────────
 
 // ─── Collapsible Gallery Accordion ───────────────────────────────────────────
 const GALLERY_CATEGORIES = [
@@ -353,7 +217,7 @@ export default function Home() {
         <div style={heroRayOverlay} />
 
         {/* Navbar */}
-        <Navbar />
+        <SiteNavbar />
 
         {/* ── Desktop Hero Content (exact Figma CSS) ── */}
         {/* hero-content: flex row, gap 64px, 1488px wide, 791px tall */}

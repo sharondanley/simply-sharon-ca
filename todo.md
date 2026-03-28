@@ -78,3 +78,12 @@
 ## Phase 11: Reaction Button Update
 - [x] Replace smiley/frown icons with thumbs up/down SVG icons
 - [x] Always show both thumbs up and thumbs down on every comment (even when count is 0)
+
+## Phase 12: Navbar Rebuild
+- [x] Create shared SiteNavbar component matching Figma spec exactly
+- [x] Dark gradient background (no background image), logo + Italianno name left, Inter links right
+- [x] Replace navbar in BlogPost.tsx with shared component
+- [x] Replace navbar in BlogcastArchive.tsx with shared component
+- [x] Replace navbar in BlogPage.tsx with shared component
+- [x] Update Home.tsx Navbar function to use same shared component
+- [x] Preserve mobile hamburger menu

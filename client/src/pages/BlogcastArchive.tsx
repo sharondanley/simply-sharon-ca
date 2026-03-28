@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { SiteNavbar } from "@/components/SiteNavbar";
 
 // ── CDN asset map ──────────────────────────────────────────────────────────
 const CDN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz";
@@ -18,43 +19,7 @@ const A = {
   thumb4:     `${CDN}/182-671_cfc5680b.webp`,
 };
 
-const NAV_LINKS = [
-  { label: "Blogcast",     href: "/blogcast" },
-  { label: "Make-Betters", href: "/#make-betters" },
-  { label: "Poise",        href: "/#poise" },
-  { label: "About",        href: "/#about" },
-  { label: "Archives",     href: "/archives" },
-  { label: "Contact",      href: "/#contact" },
-];
-
-function Navbar() {
-  return (
-    <div style={{ width: "100%", overflow: "hidden", background: "#3d3d3d" }}>
-      <div style={{
-        width: 1920, transformOrigin: "top left",
-        transform: `scale(min(1, calc(100vw / 1920)))`,
-        height: 73, background: "#3d3d3d",
-        display: "flex", alignItems: "center",
-        paddingLeft: 60, paddingRight: 60, boxSizing: "border-box" as const,
-      }}>
-        <Link href="/">
-          <div style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer", flexShrink: 0 }}>
-            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "#888", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ color: "#fff", fontSize: 20, fontFamily: "Italianno, serif" }}>S</span>
-            </div>
-            <span style={{ fontFamily: "Italianno, serif", fontSize: 36, color: "#fff", lineHeight: 1, whiteSpace: "nowrap" as const }}>SimplySharon</span>
-          </div>
-        </Link>
-        <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", gap: 80 }}>
-          {NAV_LINKS.map(({ label, href }) => (
-            <a key={label} href={href} style={{ fontFamily: "Inter, sans-serif", fontSize: 28, fontWeight: 400, color: "#fff", textDecoration: "none", whiteSpace: "nowrap" as const }}>{label}</a>
-          ))}
-        </div>
-      </div>
-      <div style={{ height: `calc(73px * min(1, calc(100vw / 1920)))` }} />
-    </div>
-  );
-}
+// Navbar is now the shared SiteNavbar component
 
 function SiteFooter() {
   return (
@@ -123,7 +88,7 @@ export default function BlogcastArchive() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
-      <Navbar />
+      <SiteNavbar />
       <div style={{ width: "100%", overflow: "hidden" }}>
         <div style={{ width: 1920, transformOrigin: "top left", transform: `scale(min(1, calc(100vw / 1920)))` }}>
 

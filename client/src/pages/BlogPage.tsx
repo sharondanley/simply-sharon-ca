@@ -1,7 +1,9 @@
+import { SiteNavbar } from "@/components/SiteNavbar";
+
 export default function BlogPage() {
   return (
-    <div data-layer="blog-post-desktop" data-node-id="116-75" className="BlogPostDesktop w-[1920px] inline-flex flex-col justify-start items-start">
-  <img data-layer="navbar" data-node-id="111-531" className="Navbar self-stretch inline-flex justify-start items-center gap-[512px] overflow-hidden" src="https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/111-531_3c5a2f93.webp" />
+    <div data-layer="blog-post-desktop" data-node-id="116-75" className="BlogPostDesktop w-full flex flex-col justify-start items-start overflow-x-hidden">
+  <SiteNavbar />
   <div data-layer="Frame 25" data-node-id="113-680" className="Frame25 self-stretch px-[135px] bg-white flex flex-col justify-start items-start gap-[43px]">
     <div data-layer="breadcrumb" data-node-id="111-623" className="Breadcrumb self-stretch inline-flex justify-start items-start gap-2.5">
       <div data-layer="breadcrumb-icon" data-node-id="111-622" className="BreadcrumbIcon p-2.5 flex justify-start items-center gap-2.5">
