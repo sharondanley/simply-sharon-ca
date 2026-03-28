@@ -1,366 +1,270 @@
-/**
- * Blogcast Archive Page
- * Lists all published posts with search, sort, and pagination.
- * Styled to match the Simply Sharon design system.
- */
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "wouter";
-import { trpc } from "@/lib/trpc";
-import { Search, ChevronLeft, ChevronRight, SortAsc, Menu, X, Mail, Youtube, Facebook } from "lucide-react";
 
-const heroBg = {
-  background: "linear-gradient(135deg, #2a2a2e 0%, #3d3d42 30%, #4a4a50 50%, #3a3a40 70%, #2e2e34 100%)",
+// ── CDN asset map ──────────────────────────────────────────────────────────
+const CDN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz";
+const A = {
+  homeIcon:   `${CDN}/182-537_c4937fad.webp`,
+  readIcon:   `${CDN}/182-307_489ae6c2.webp`,
+  listenIcon: `${CDN}/182-312_9f0e1f01.webp`,
+  watchIcon:  `${CDN}/182-317_3abcb518.webp`,
+  searchIcon: `${CDN}/182-467_28f4eb9d.webp`,
+  readBtn:    `${CDN}/182-267_11a8c31d.webp`,
+  listenBtn:  `${CDN}/182-266_689ae034.webp`,
+  watchBtn:   `${CDN}/182-265_1325a494.webp`,
+  thumb1:     `${CDN}/182-258_5f5beb25.webp`,
+  thumb2:     `${CDN}/182-623_a98179b4.webp`,
+  thumb3:     `${CDN}/182-651_66c45655.webp`,
+  thumb4:     `${CDN}/182-671_cfc5680b.webp`,
 };
 
-const NAV_ITEMS = [
-  { label: "Blogcast", href: "/blogcast" },
+const NAV_LINKS = [
+  { label: "Blogcast",     href: "/blogcast" },
   { label: "Make-Betters", href: "/#make-betters" },
-  { label: "Poise", href: "/#poise" },
-  { label: "About", href: "/#about" },
-  { label: "Archives", href: "/blogcast" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Poise",        href: "/#poise" },
+  { label: "About",        href: "/#about" },
+  { label: "Archives",     href: "/archives" },
+  { label: "Contact",      href: "/#contact" },
 ];
 
 function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   return (
-    <>
-      <nav className="w-full flex items-center justify-between px-8 md:px-12 py-5" style={heroBg}>
-        <Link href="/" className="flex items-center gap-3 no-underline">
-          <div className="w-12 h-12 rounded-full border-2 border-white/80 flex items-center justify-center bg-white/10 flex-shrink-0">
-            <span className="text-white text-xl font-['Italianno'] leading-none">S</span>
+    <div style={{ width: "100%", overflow: "hidden", background: "#3d3d3d" }}>
+      <div style={{
+        width: 1920, transformOrigin: "top left",
+        transform: `scale(min(1, calc(100vw / 1920)))`,
+        height: 73, background: "#3d3d3d",
+        display: "flex", alignItems: "center",
+        paddingLeft: 60, paddingRight: 60, boxSizing: "border-box" as const,
+      }}>
+        <Link href="/">
+          <div style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer", flexShrink: 0 }}>
+            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "#888", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ color: "#fff", fontSize: 20, fontFamily: "Italianno, serif" }}>S</span>
+            </div>
+            <span style={{ fontFamily: "Italianno, serif", fontSize: 36, color: "#fff", lineHeight: 1, whiteSpace: "nowrap" as const }}>SimplySharon</span>
           </div>
-          <span className="text-white text-3xl font-normal font-['Italianno'] leading-none whitespace-nowrap">SimplySharon</span>
         </Link>
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.label} href={item.href}>
-              <span className="text-white text-base lg:text-lg font-normal font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer whitespace-nowrap">{item.label}</span>
-            </Link>
+        <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", gap: 80 }}>
+          {NAV_LINKS.map(({ label, href }) => (
+            <a key={label} href={href} style={{ fontFamily: "Inter, sans-serif", fontSize: 28, fontWeight: 400, color: "#fff", textDecoration: "none", whiteSpace: "nowrap" as const }}>{label}</a>
           ))}
         </div>
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Toggle navigation">
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center gap-8 md:hidden" onClick={() => setMobileOpen(false)}>
-          <button className="absolute top-5 right-5 text-white" onClick={() => setMobileOpen(false)}><X size={28} /></button>
-          <span className="text-white text-[56px] font-normal font-['Italianno'] mb-4">Simply Sharon</span>
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
-              <span className="text-white text-3xl font-bold font-['Source_Sans_3'] hover:text-gray-300 transition-colors cursor-pointer">{item.label}</span>
-            </Link>
-          ))}
-        </div>
-      )}
-    </>
+      </div>
+      <div style={{ height: `calc(73px * min(1, calc(100vw / 1920)))` }} />
+    </div>
   );
 }
 
 function SiteFooter() {
   return (
-    <footer id="contact" className="w-full relative overflow-hidden" style={heroBg}>
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 80% at 75% 40%, rgba(180,180,190,0.18) 0%, transparent 70%)" }} />
-      <div className="relative z-10 max-w-[1100px] mx-auto px-8 md:px-16 py-16 flex flex-col md:flex-row gap-12 justify-between items-start">
-        <div className="flex flex-col gap-6 flex-1">
-          <h2 className="text-white" style={{ fontFamily: "Italianno, cursive", fontSize: "clamp(40px, 4vw, 64px)" }}>Connect with Sharon</h2>
-          <div className="flex items-center gap-4">
-            <a href="mailto:info@SimplySharon.ca" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Mail size={18} /></a>
-            <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Facebook size={18} /></a>
-            <a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-colors"><Youtube size={18} /></a>
+    <footer id="contact" style={{ width: "100%", background: "linear-gradient(135deg, #4a4a4a 0%, #3a3a3a 40%, #5a5a5a 70%, #3d3d3d 100%)", overflow: "hidden" }}>
+      <div style={{ width: 1920, transformOrigin: "top left", transform: `scale(min(1, calc(100vw / 1920)))`, padding: "80px 60px 60px 60px", boxSizing: "border-box" as const }}>
+        <div style={{ fontFamily: "Italianno, serif", fontSize: 96, color: "#fff", lineHeight: 1.1, marginBottom: 40 }}>Connect with Sharon</div>
+        <div style={{ display: "flex", gap: 24, marginBottom: 60 }}>
+          {[{ href: "mailto:info@SimplySharon.ca", l: "E" }, { href: "https://www.facebook.com/SharonDanleyBeauty", l: "F" }, { href: "https://www.youtube.com/@SimplySharonTips/featured", l: "Y" }].map(({ href, l }) => (
+            <a key={l} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 70, height: 70, borderRadius: "50%", border: "2px solid #fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", textDecoration: "none", fontSize: 20, fontWeight: 700, fontFamily: "Helvetica, Arial, sans-serif" }}>{l}</a>
+          ))}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" as const, gap: 36, marginBottom: 60 }}>
+          {[{ label: "Email:", value: "info@SimplySharon.ca", href: "mailto:info@SimplySharon.ca" }, { label: "YouTube:", value: "YouTube.com/@SimplySharonTips", href: "https://www.youtube.com/@SimplySharonTips/featured" }].map(({ label, value, href }) => (
+            <div key={label} style={{ display: "flex", alignItems: "flex-start", gap: 60 }}>
+              <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline", minWidth: 200 }}>{label}</span>
+              <a href={href} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline" }}>{value}</a>
+            </div>
+          ))}
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 60 }}>
+            <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline", minWidth: 200 }}>Facebook:</span>
+            <div style={{ display: "flex", flexDirection: "column" as const, gap: 32 }}>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 24 }}>
+                <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 36, color: "#fff", minWidth: 220, flexShrink: 0 }}>Private Group:</span>
+                <div>
+                  <a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline", display: "block" }}>Facebook.com/groups/GoinGray.LovinIt</a>
+                  <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 36, color: "#fff" }}>For biological women going gray; please confirm your agreement to the join question.</span>
+                </div>
+              </div>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 24 }}>
+                <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 36, color: "#fff", minWidth: 220, flexShrink: 0 }}>Public Page:</span>
+                <div>
+                  <a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, color: "#fff", textDecoration: "underline", display: "block" }}>Facebook.com/SharonDanleyBeauty</a>
+                  <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 36, color: "#fff" }}>For everyone, including those who've completed their gray hair journey.</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col gap-4 text-white font-['Source_Sans_3']">
-            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">Email:</span><a href="mailto:info@SimplySharon.ca" className="text-lg hover:text-gray-300 underline">info@SimplySharon.ca</a></div>
-            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">YouTube:</span><a href="https://www.youtube.com/@SimplySharonTips" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-gray-300 underline">YouTube.com/@SimplySharonTips</a></div>
-            <div className="flex gap-4"><span className="font-bold text-lg w-24 flex-shrink-0">Facebook:</span><div className="flex flex-col gap-2"><a href="https://www.facebook.com/groups/GoinGray.LovinIt" target="_blank" rel="noopener noreferrer" className="text-base hover:text-gray-300 underline">Facebook.com/groups/GoinGray.LovinIt</a><a href="https://www.facebook.com/SharonDanleyBeauty" target="_blank" rel="noopener noreferrer" className="text-base hover:text-gray-300 underline">Facebook.com/SharonDanleyBeauty</a></div></div>
-          </div>
-          <p className="text-white/60 text-sm font-['Source_Sans_3'] max-w-[600px] mt-4">Not monetized, sponsored, or compensated. Shared freely to inspire a <strong className="text-white/80">legacy of giving in honour of my children Andrea &amp; Matthew Main</strong>.</p>
-          <p className="text-white/50 text-sm font-['Source_Sans_3']">© 2025 Sharon Danley | All images, content and design created by Sharon Danley.</p>
-          <Link href="/admin"><span className="text-white/30 text-xs hover:text-white/60 transition-colors cursor-pointer font-['Source_Sans_3']">Admin Login</span></Link>
+        </div>
+        <div style={{ textAlign: "center" as const, marginBottom: 16 }}>
+          <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 24, color: "#fff" }}>Not monetized, sponsored, or compensated. Shared freely to inspire a </span>
+          <strong style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 24, color: "#fff" }}>legacy of giving in honour of my children Andrea &amp; Matthew Main</strong>
+          <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 24, color: "#fff" }}> and to encourage paying it forward in your own way.</span>
+        </div>
+        <div style={{ textAlign: "center" as const }}>
+          <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontSize: 24, color: "#fff" }}>© 2025 Sharon Danley | All images, content and design created by Sharon Danley.</span>
         </div>
       </div>
+      <div style={{ height: `calc(600px * min(1, calc(100vw / 1920)))` }} />
     </footer>
   );
 }
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/75-344_8b8c1a79.webp";
-const PLACEHOLDER_THUMB = "https://d2xsxph8kpxj0f.cloudfront.net/310519663293754909/S7VRvsAR3NFvJQTWWaYkyz/81-436_a928ba59.webp";
-
-// Sample seed posts for when the DB is empty (demo data)
 const SEED_POSTS = [
-  {
-    id: -1, slug: "gray-is-gorgeous-own-your-way", title: "Gray is Gorgeous — Own Your Way",
-    subtitle: "Embracing silver hair with confidence and style",
-    summary: "Discover how to transition to gray hair gracefully, with tips on toning, styling, and owning your silver with pride. Sharon shares her personal journey and expert advice.",
-    thumbnailUrl: PLACEHOLDER_THUMB, hashtags: ["#GrayHair", "#NaturalBeauty", "#AgingGracefully"],
-    topic: "Beauty", episode: 1, authorName: "Sharon Danley", publishedAt: new Date("2025-11-01"), createdAt: new Date("2025-11-01"),
-  },
-  {
-    id: -2, slug: "vocal-power-speak-with-strength", title: "Vocal Power: Speak with Strength",
-    subtitle: "Simple exercises to strengthen and captivate",
-    summary: "Your voice is one of your most powerful tools. Learn easy daily exercises that keep your voice limber, clear, and commanding in any situation — from business meetings to family gatherings.",
-    thumbnailUrl: PLACEHOLDER_THUMB, hashtags: ["#VocalPower", "#PublicSpeaking", "#Confidence"],
-    topic: "Poise", episode: 2, authorName: "Sharon Danley", publishedAt: new Date("2025-11-15"), createdAt: new Date("2025-11-15"),
-  },
-  {
-    id: -3, slug: "makeup-ordinary-to-extraordinary", title: "Makeup: Ordinary to Extraordinary",
-    subtitle: "Transform your look with simple techniques",
-    summary: "Step-by-step guidance on enhancing your natural features with makeup that celebrates your age rather than hiding it. Perfect for women 50+ who want to look polished without looking overdone.",
-    thumbnailUrl: PLACEHOLDER_THUMB, hashtags: ["#Makeup", "#BeautyTips", "#MatureBeauty"],
-    topic: "Makeup", episode: 3, authorName: "Sharon Danley", publishedAt: new Date("2025-12-01"), createdAt: new Date("2025-12-01"),
-  },
-  {
-    id: -4, slug: "wardrobe-wisdom-timeless-style", title: "Wardrobe Wisdom: Timeless Style",
-    subtitle: "Dressing for your body, lifestyle, and personality",
-    summary: "Build a wardrobe that works for your real life. Sharon breaks down the key pieces every woman needs, how to dress for your body type, and how to create a signature style that feels authentically you.",
-    thumbnailUrl: PLACEHOLDER_THUMB, hashtags: ["#Wardrobe", "#Style", "#FashionOver50"],
-    topic: "Style", episode: 4, authorName: "Sharon Danley", publishedAt: new Date("2025-12-15"), createdAt: new Date("2025-12-15"),
-  },
-  {
-    id: -5, slug: "inner-u-cultivating-positive-mindset", title: "Inner U: Cultivating a Positive Mindset",
-    subtitle: "Overcoming limiting beliefs and embracing your power",
-    summary: "Your thoughts shape your reality. Learn practical strategies to identify and overcome limiting beliefs, build emotional resilience, and create a compelling vision for your future.",
-    thumbnailUrl: PLACEHOLDER_THUMB, hashtags: ["#Mindset", "#PersonalGrowth", "#InnerStrength"],
-    topic: "Mindset", episode: 5, authorName: "Sharon Danley", publishedAt: new Date("2026-01-01"), createdAt: new Date("2026-01-01"),
-  },
+  { id: 1, title: "The Art of Color Picking", date: "March 25th 2026", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur nulla id tortor suscipit consequat. Pellentesque varius venenatis ornare. Phasellus.", thumbnail: A.thumb1, slug: "the-art-of-color-picking" },
+  { id: 2, title: "The Art of Color Picking", date: "March 25th 2026", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur nulla id tortor suscipit consequat. Pellentesque varius venenatis ornare. Phasellus.", thumbnail: A.thumb2, slug: "the-art-of-color-picking-2" },
+  { id: 3, title: "The Art of Color Picking", date: "March 25th 2026", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur nulla id tortor suscipit consequat. Pellentesque varius venenatis ornare. Phasellus.", thumbnail: A.thumb3, slug: "the-art-of-color-picking-3" },
+  { id: 4, title: "The Art of Color Picking", date: "March 25th 2026", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur nulla id tortor suscipit consequat. Pellentesque varius venenatis ornare. Phasellus.", thumbnail: A.thumb4, slug: "the-art-of-color-picking-4" },
 ];
 
-type SortOption = "title" | "date" | "topic";
-
-function ArticleCard({ post }: { post: typeof SEED_POSTS[0] }) {
-  const hashtags = Array.isArray(post.hashtags) ? post.hashtags : [];
-  const date = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "";
-
-  return (
-    <Link href={`/blogcast/${post.slug}`}>
-      <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col h-full">
-        {/* Thumbnail */}
-        <div className="relative overflow-hidden aspect-video bg-gray-100">
-          <img
-            src={post.thumbnailUrl || PLACEHOLDER_THUMB}
-            alt={post.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          {post.topic && (
-            <span className="absolute top-3 left-3 bg-black text-white text-xs font-bold px-3 py-1 rounded-full font-['Source_Sans_3']">
-              {post.topic}
-            </span>
-          )}
-          {post.episode && (
-            <span className="absolute top-3 right-3 bg-white/90 text-black text-xs font-bold px-3 py-1 rounded-full font-['Source_Sans_3']">
-              Ep. {post.episode}
-            </span>
-          )}
-        </div>
-
-        {/* Content */}
-        <div className="p-5 flex flex-col gap-3 flex-1">
-          <div>
-            <h3 className="text-black text-xl font-bold font-['Source_Sans_3'] leading-tight group-hover:underline line-clamp-2">
-              {post.title}
-            </h3>
-            {post.subtitle && (
-              <p className="text-gray-600 text-sm font-['Source_Sans_3'] mt-1 line-clamp-1">
-                {post.subtitle}
-              </p>
-            )}
-          </div>
-
-          {post.summary && (
-            <p className="text-gray-700 text-sm leading-relaxed line-clamp-3 flex-1" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
-              {post.summary}
-            </p>
-          )}
-
-          {/* Hashtags */}
-          {hashtags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
-              {hashtags.slice(0, 3).map((tag) => (
-                <span key={tag} className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded font-['Source_Sans_3']">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Footer */}
-          <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-            <span className="text-xs text-gray-400 font-['Source_Sans_3']">{post.authorName}</span>
-            <span className="text-xs text-gray-400 font-['Source_Sans_3']">{date}</span>
-          </div>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-function Pagination({
-  page,
-  totalPages,
-  onPageChange,
-}: {
-  page: number;
-  totalPages: number;
-  onPageChange: (p: number) => void;
-}) {
-  if (totalPages <= 1) return null;
-
-  const pages = Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
-    if (totalPages <= 7) return i + 1;
-    if (page <= 4) return i + 1;
-    if (page >= totalPages - 3) return totalPages - 6 + i;
-    return page - 3 + i;
-  });
-
-  return (
-    <div className="flex items-center justify-center gap-2 mt-10">
-      <button
-        onClick={() => onPageChange(page - 1)}
-        disabled={page === 1}
-        className="flex items-center gap-1 px-4 py-2 rounded-lg border border-gray-300 text-sm font-['Source_Sans_3'] disabled:opacity-40 hover:bg-gray-50 transition-colors"
-      >
-        <ChevronLeft size={16} /> Prev
-      </button>
-
-      {pages.map((p) => (
-        <button
-          key={p}
-          onClick={() => onPageChange(p)}
-          className={`w-10 h-10 rounded-lg text-sm font-bold font-['Source_Sans_3'] transition-colors ${
-            p === page
-              ? "bg-black text-white"
-              : "border border-gray-300 text-black hover:bg-gray-50"
-          }`}
-        >
-          {p}
-        </button>
-      ))}
-
-      <button
-        onClick={() => onPageChange(page + 1)}
-        disabled={page === totalPages}
-        className="flex items-center gap-1 px-4 py-2 rounded-lg border border-gray-300 text-sm font-['Source_Sans_3'] disabled:opacity-40 hover:bg-gray-50 transition-colors"
-      >
-        Next <ChevronRight size={16} />
-      </button>
-    </div>
-  );
-}
+const TOTAL_PAGES = 10;
 
 export default function BlogcastArchive() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [sortBy, setSortBy] = useState<SortOption>("date");
-
-  // Debounce search input
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedSearch(search), 400);
-    return () => clearTimeout(timer);
-  }, [search]);
-
-  // Reset to page 1 when search/sort changes
-  useEffect(() => { setPage(1); }, [debouncedSearch, sortBy]);
-
-  const { data, isLoading } = trpc.posts.list.useQuery({
-    page,
-    limit: 15,
-    search: debouncedSearch || undefined,
-    sortBy,
-  });
-
-  // Use real data or seed data for demo
-  const posts = (data?.items && data.items.length > 0) ? data.items : SEED_POSTS;
-  const total = data?.total ?? SEED_POSTS.length;
-  const totalPages = Math.ceil(total / 15);
+  const [timePeriod, setTimePeriod] = useState("");
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* ── Navbar ── */}
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Navbar />
+      <div style={{ width: "100%", overflow: "hidden" }}>
+        <div style={{ width: 1920, transformOrigin: "top left", transform: `scale(min(1, calc(100vw / 1920)))` }}>
 
-      {/* ── Header ── */}
-      <section className="w-full bg-gradient-to-b from-gray-50 to-white py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-black text-7xl font-normal font-['Italianno'] mb-4">Blogcast</h1>
-          <p className="text-black text-2xl font-bold font-['Source_Sans_3'] mb-3">Wisdom You Can Read, Listen, or Watch</p>
-          <p className="text-gray-600 text-lg" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
-            Thoughtful explorations of beauty, wellness, and wisdom for confident aging
-          </p>
-        </div>
-      </section>
-
-      {/* ── Search & Sort Controls ── */}
-      <section className="w-full bg-white border-b border-gray-100 py-5 px-6 sticky top-[73px] z-20 shadow-sm">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row gap-4 items-center">
-          {/* Search */}
-          <div className="relative flex-1 max-w-lg">
-            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search articles..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm font-['Source_Sans_3'] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-            />
+          {/* Breadcrumb */}
+          <div style={{ display: "flex", alignItems: "center", padding: "10px 0 0 10px" }}>
+            <div style={{ padding: 10 }}>
+              <img src={A.homeIcon} alt="home" style={{ width: 29, height: 29 }} />
+            </div>
+            <div style={{ padding: 10 }}>
+              <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 24, fontWeight: 700, color: "#000" }}>home / Blogcast Home</span>
+            </div>
           </div>
 
-          {/* Sort */}
-          <div className="flex items-center gap-2">
-            <SortAsc size={18} className="text-gray-500" />
-            <span className="text-sm text-gray-500 font-['Source_Sans_3']">Sort by:</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="border border-gray-300 rounded-lg px-3 py-2.5 text-sm font-['Source_Sans_3'] focus:outline-none focus:ring-2 focus:ring-black bg-white"
-            >
-              <option value="date">Date</option>
-              <option value="title">Title</option>
-              <option value="topic">Topic</option>
-            </select>
+          {/* Header section */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 45, paddingTop: 53 }}>
+
+            {/* Showcase card */}
+            <div style={{ width: 1698, background: "#f0f0f0", borderRadius: 14, paddingTop: 48, paddingBottom: 48, display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 25 }}>
+              <div style={{ width: "100%", padding: 10, display: "flex", flexDirection: "column" as const, alignItems: "center" }}>
+                <div style={{ padding: "0 156px", display: "flex", justifyContent: "center" }}>
+                  <span style={{ fontFamily: "Italianno, serif", fontSize: 96, color: "#000", textAlign: "center" as const }}>The Blogcast</span>
+                </div>
+                <div style={{ padding: "0 42px", display: "flex", justifyContent: "center" }}>
+                  <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 36, fontWeight: 700, color: "#000", textAlign: "center" as const }}>Beauty · Wellness · Wisdom</span>
+                </div>
+                <div style={{ paddingTop: 46, display: "flex", justifyContent: "center" }}>
+                  <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 64, fontWeight: 700, color: "#000", textAlign: "center" as const }}>WELCOME !</span>
+                </div>
+                <div style={{ paddingTop: 27, display: "flex", justifyContent: "center" }}>
+                  <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 36, fontWeight: 400, color: "#000", textAlign: "center" as const, maxWidth: 1003 }}>
+                    You're currently on the landing page of my Blogcast. Enjoy exploring and thank you for being here.
+                  </span>
+                </div>
+              </div>
+              <div style={{ width: 1167, display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 51 }}>
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "stretch", gap: 33 }}>
+                  {[
+                    { icon: A.readIcon, label: "Read", text: "Deep dives into beauty myths, practical advice, and inspiring stories", width: 356 },
+                    { icon: A.listenIcon, label: "Listen", text: "Empowering conversations on personal growth, wisdom, and holistic health", width: 366 },
+                    { icon: A.watchIcon, label: "Watch", text: "Visual tutorials and real talk about living with strength and grace", width: 330 },
+                  ].map(({ icon, label, text, width }) => (
+                    <div key={label} style={{ width, paddingTop: 29, paddingBottom: 29, display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 33 }}>
+                      <img src={icon} alt={label} style={{ width: 80, height: 80 }} />
+                      <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 40, fontWeight: 700, color: "#000" }}>{label}</span>
+                      <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 28, color: "#000", textAlign: "center" as const }}>{text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Search area */}
+            <div style={{ width: 1920, height: 305, paddingTop: 16, background: "#4d4d4d", display: "flex", flexDirection: "column" as const, alignItems: "center", gap: 53 }}>
+              <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+                <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 60, fontWeight: 400, color: "#fff", textAlign: "center" as const }}>Search the Knowledge Base</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 53 }}>
+                <div style={{ width: 1078, height: 88, background: "#fff", borderRadius: 14, display: "flex", alignItems: "center", padding: 10, boxSizing: "border-box" as const, justifyContent: "space-between" }}>
+                  <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="" style={{ flex: 1, border: "none", outline: "none", fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, background: "transparent" }} />
+                  <img src={A.searchIcon} alt="search" style={{ width: 47, height: 47 }} />
+                </div>
+                <div style={{ height: 88, background: "#fff", borderRadius: 14, display: "flex", alignItems: "center", padding: 10, boxSizing: "border-box" as const }}>
+                  <select value={timePeriod} onChange={(e) => setTimePeriod(e.target.value)} style={{ border: "none", outline: "none", fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, background: "transparent", cursor: "pointer", paddingLeft: 10, paddingRight: 10 }}>
+                    <option value="">Select a Time Period</option>
+                    <option value="2026">2026</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Result count */}
-          <span className="text-sm text-gray-400 font-['Source_Sans_3'] whitespace-nowrap">
-            {total} article{total !== 1 ? "s" : ""}
-          </span>
-        </div>
-      </section>
-
-      {/* ── Article Grid ── */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
-        {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="bg-gray-100 rounded-xl h-80 animate-pulse" />
+          {/* Post container */}
+          <div style={{ width: 1698, margin: "97px auto 0 auto", display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 72 }}>
+            {SEED_POSTS.map((post, idx) => (
+              <div key={post.id} style={{ width: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 113 }}>
+                  <img src={post.thumbnail} alt={post.title} style={{ width: 386, height: 386, borderRadius: 13, objectFit: "cover" as const, flexShrink: 0 }} />
+                  <div style={{ width: 1141, display: "flex", flexDirection: "column" as const, justifyContent: "center", alignItems: "flex-start", gap: 43 }}>
+                    <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "flex-start" }}>
+                      <div style={{ padding: 10 }}>
+                        <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 48, fontWeight: 700, color: "#000" }}>{post.title}</span>
+                      </div>
+                      <div style={{ padding: 10 }}>
+                        <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 36, fontWeight: 400, color: "#ababab" }}>Posted on {post.date}</span>
+                      </div>
+                      <div style={{ padding: 10, width: "100%", boxSizing: "border-box" as const }}>
+                        <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 40, fontWeight: 400, color: "#000", lineHeight: "46px" }}>{post.description}</span>
+                      </div>
+                    </div>
+                    <div style={{ paddingLeft: 14, paddingRight: 14, display: "flex", alignItems: "center", gap: 108 }}>
+                      {[
+                        { icon: A.readBtn, label: "Read", w: 48, h: 48, r: 16 },
+                        { icon: A.listenBtn, label: "Listen", w: 43, h: 42, r: 0 },
+                        { icon: A.watchBtn, label: "Watch", w: 42, h: 42, r: 0 },
+                      ].map(({ icon, label, w, h, r }) => (
+                        <div key={label} style={{ paddingLeft: 39, paddingRight: 39, paddingTop: 14, paddingBottom: 14, background: "#D4D4D4", borderRadius: 20, display: "flex", alignItems: "center", gap: 23, cursor: "pointer" }}>
+                          <img src={icon} alt={label} style={{ width: w, height: h, borderRadius: r }} />
+                          <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 40, fontWeight: 700, color: "#000" }}>{label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {idx < SEED_POSTS.length - 1 && (
+                  <div style={{ height: 40, paddingLeft: 10, paddingRight: 10, paddingTop: 36, paddingBottom: 36, background: "#fff" }}>
+                    <div style={{ width: "100%", height: 0, borderTop: "1px solid #000" }} />
+                  </div>
+                )}
+              </div>
             ))}
           </div>
-        ) : posts.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-gray-400 text-xl font-['Source_Sans_3']">No articles found.</p>
-            {search && (
-              <button
-                onClick={() => setSearch("")}
-                className="mt-4 text-black underline text-sm font-['Source_Sans_3']"
-              >
-                Clear search
+
+          {/* Pagination */}
+          <div style={{ paddingTop: 50, paddingBottom: 82, display: "flex", justifyContent: "center", alignItems: "center", gap: 113 }}>
+            <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} style={{ height: 86, paddingLeft: 32, paddingRight: 16, paddingTop: 13, paddingBottom: 13, background: "#dadada", borderRadius: 14, border: "none", cursor: page === 1 ? "not-allowed" : "pointer", display: "flex", alignItems: "center", opacity: page === 1 ? 0.5 : 1 }}>
+              <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, fontWeight: 700, color: "#000" }}>Previous Page</span>
+            </button>
+            <div style={{ display: "flex", alignItems: "center", gap: 35 }}>
+              {[1, 2, 3].map((n) => (
+                <button key={n} onClick={() => setPage(n)} style={{ width: 87, paddingLeft: 21, paddingRight: 21, paddingTop: 20, paddingBottom: 20, background: page === n ? "#636363" : "#dadada", borderRadius: 45, border: "none", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                  <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 40, fontWeight: 700, color: page === n ? "#fff" : "#000" }}>{n}</span>
+                </button>
+              ))}
+              <div style={{ padding: 10 }}>
+                <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 40, fontWeight: 700, color: "#000" }}>. . .</span>
+              </div>
+              <button onClick={() => setPage(TOTAL_PAGES)} style={{ paddingLeft: 21, paddingRight: 21, paddingTop: 20, paddingBottom: 20, background: page === TOTAL_PAGES ? "#636363" : "#dadada", borderRadius: 51, border: "none", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 40, fontWeight: 700, color: page === TOTAL_PAGES ? "#fff" : "#000" }}>10</span>
               </button>
-            )}
+            </div>
+            <button onClick={() => setPage(p => Math.min(TOTAL_PAGES, p + 1))} disabled={page === TOTAL_PAGES} style={{ width: 276, height: 86, paddingRight: 50, paddingTop: 13, paddingBottom: 13, background: "#dadada", borderRadius: 14, border: "none", cursor: page === TOTAL_PAGES ? "not-allowed" : "pointer", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 74, opacity: page === TOTAL_PAGES ? 0.5 : 1 }}>
+              <span style={{ fontFamily: "Helvetica, Arial, sans-serif", fontSize: 36, fontWeight: 700, color: "#000" }}>Next Page</span>
+            </button>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => (
-              <ArticleCard key={post.id} post={post as any} />
-            ))}
-          </div>
-        )}
 
-        <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
-      </section>
-
-      {/* ── Footer ── */}
+        </div>
+        <div style={{ height: `calc(5500px * min(1, calc(100vw / 1920)))` }} />
+      </div>
       <SiteFooter />
     </div>
   );
