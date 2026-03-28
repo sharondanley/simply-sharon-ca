@@ -8,7 +8,6 @@ interface Comment {
   initials: string;
   avatarUrl?: string;
   verified?: boolean;
-  online?: boolean;
   content: string; // HTML string
   timestamp: string;
   timestampMs: number;
@@ -17,6 +16,21 @@ interface Comment {
   userReaction: "like" | "dislike" | null;
   replies: Comment[];
 }
+
+// ─── Typography constants (matching blog post body) ───────────────────────────
+// Blog post body: Helvetica 36px / 41px line-height
+// We scale proportionally inside the 1920px transform container.
+const T = {
+  fontFamily: "Helvetica, Arial, sans-serif",
+  body: { fontSize: "36px", lineHeight: "46px" },
+  author: { fontSize: "32px", lineHeight: "40px", fontWeight: 700 },
+  meta: { fontSize: "28px", lineHeight: "36px" },
+  heading: { fontSize: "44px", lineHeight: "54px", fontWeight: 700 },
+  toolbar: { fontSize: "30px", lineHeight: "1" },
+  sendBtn: { fontSize: "28px", lineHeight: "36px", fontWeight: 600 },
+  sortBtn: { fontSize: "26px", lineHeight: "32px", fontWeight: 500 },
+  menu: { fontSize: "28px", lineHeight: "36px" },
+};
 
 // ─── Seed Data ────────────────────────────────────────────────────────────────
 
@@ -28,10 +42,9 @@ const INITIAL_COMMENTS: Comment[] = [
     id: "1",
     author: "Floyd Miles",
     initials: "FM",
-    online: false,
     content:
       "Actually, now that I try out the links on my message, above, none of them take me to the secure site. Only my shortcut on my desktop, which I created years ago.",
-    timestamp: "6 hour",
+    timestamp: "6 hours ago",
     timestampMs: Date.now() - 6 * 60 * 60 * 1000,
     likes: 4,
     dislikes: 1,
@@ -42,10 +55,9 @@ const INITIAL_COMMENTS: Comment[] = [
     id: "2",
     author: "Albert Flores",
     initials: "AF",
-    online: true,
     content:
       "Before installing this plugin please put back again your wordpress and site url back to http.",
-    timestamp: "2 min",
+    timestamp: "2 min ago",
     timestampMs: Date.now() - 2 * 60 * 1000,
     likes: 0,
     dislikes: 0,
@@ -57,10 +69,9 @@ const INITIAL_COMMENTS: Comment[] = [
         initials: "SD",
         avatarUrl: SHARON_AVATAR,
         verified: true,
-        online: true,
         content:
           'Hi <span class="comment-mention">@Albert Flores</span> .Thanks for your reply.',
-        timestamp: "18 sec",
+        timestamp: "18 sec ago",
         timestampMs: Date.now() - 18 * 1000,
         likes: 2,
         dislikes: 0,
@@ -73,10 +84,9 @@ const INITIAL_COMMENTS: Comment[] = [
     id: "3",
     author: "Esther Howard",
     initials: "EH",
-    online: false,
     content:
       "Thank you Sharon! This was incredibly helpful. I've been going gray for two years and your tips have given me so much confidence.",
-    timestamp: "1 day",
+    timestamp: "1 day ago",
     timestampMs: Date.now() - 24 * 60 * 60 * 1000,
     likes: 12,
     dislikes: 0,
@@ -85,9 +95,9 @@ const INITIAL_COMMENTS: Comment[] = [
   },
 ];
 
-// ─── Smiley Reaction Icon (SVG) ───────────────────────────────────────────────
+// ─── Smiley Icon ──────────────────────────────────────────────────────────────
 
-function SmileyIcon({ size = 18 }: { size?: number }) {
+function SmileyIcon({ size = 28 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -120,26 +130,23 @@ function ReactionPill({
   userReaction: "like" | "dislike" | null;
   onReact: (r: "like" | "dislike") => void;
 }) {
-  const total = likes + dislikes;
   const hasLikes = likes > 0;
   const hasDislikes = dislikes > 0;
-  const hasAny = total > 0;
 
   return (
     <div
       style={{
-        display: "flex",
+        display: "inline-flex",
         alignItems: "center",
         gap: 0,
-        border: "1px solid #e5e7eb",
-        borderRadius: 20,
-        padding: "3px 10px",
-        height: 30,
-        cursor: "default",
+        border: "1px solid #d1d5db",
+        borderRadius: 100,
+        padding: "6px 16px",
+        height: 52,
         userSelect: "none",
       }}
     >
-      {/* Smiley button — opens a reaction picker (for now toggles like) */}
+      {/* Smiley / like button */}
       <button
         onClick={() => onReact("like")}
         title="React"
@@ -164,37 +171,38 @@ function ReactionPill({
             userReaction === "like" ? "#f59e0b" : "#6b7280";
         }}
       >
-        <SmileyIcon size={17} />
+        <SmileyIcon size={28} />
       </button>
 
       {/* Like count */}
       {hasLikes && (
         <span
           style={{
-            fontSize: 13,
+            ...T.meta,
+            fontFamily: T.fontFamily,
             color: userReaction === "like" ? "#1d4ed8" : "#374151",
-            fontWeight: userReaction === "like" ? 600 : 400,
-            marginLeft: 5,
+            fontWeight: userReaction === "like" ? 700 : 400,
+            marginLeft: 8,
           }}
         >
           {likes}
         </span>
       )}
 
-      {/* Divider between like and dislike counts */}
+      {/* Divider */}
       {hasLikes && hasDislikes && (
         <span
           style={{
             width: 1,
-            height: 14,
-            background: "#e5e7eb",
-            margin: "0 6px",
+            height: 22,
+            background: "#d1d5db",
+            margin: "0 10px",
             display: "inline-block",
           }}
         />
       )}
 
-      {/* Dislike count */}
+      {/* Dislike count + icon */}
       {hasDislikes && (
         <>
           <button
@@ -219,8 +227,8 @@ function ReactionPill({
             }}
           >
             <svg
-              width={15}
-              height={15}
+              width={24}
+              height={24}
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -236,10 +244,11 @@ function ReactionPill({
           </button>
           <span
             style={{
-              fontSize: 13,
+              ...T.meta,
+              fontFamily: T.fontFamily,
               color: userReaction === "dislike" ? "#dc2626" : "#374151",
-              fontWeight: userReaction === "dislike" ? 600 : 400,
-              marginLeft: 4,
+              fontWeight: userReaction === "dislike" ? 700 : 400,
+              marginLeft: 6,
             }}
           >
             {dislikes}
@@ -247,9 +256,9 @@ function ReactionPill({
         </>
       )}
 
-      {/* If no reactions yet, show placeholder space */}
-      {!hasAny && (
-        <span style={{ width: 4, display: "inline-block" }} />
+      {/* Spacer when no counts */}
+      {!hasLikes && !hasDislikes && (
+        <span style={{ width: 6, display: "inline-block" }} />
       )}
     </div>
   );
@@ -271,8 +280,8 @@ function RichTextEditor({
   const editorRef = useRef<HTMLDivElement>(null);
   const [isEmpty, setIsEmpty] = useState(true);
 
-  const execCmd = useCallback((cmd: string, value?: string) => {
-    document.execCommand(cmd, false, value);
+  const execCmd = useCallback((cmd: string) => {
+    document.execCommand(cmd, false, undefined);
     editorRef.current?.focus();
   }, []);
 
@@ -286,9 +295,7 @@ function RichTextEditor({
     const text = editorRef.current?.innerText ?? "";
     if (!text.trim()) return;
     onSend(html);
-    if (editorRef.current) {
-      editorRef.current.innerHTML = "";
-    }
+    if (editorRef.current) editorRef.current.innerHTML = "";
     setIsEmpty(true);
   };
 
@@ -303,7 +310,7 @@ function RichTextEditor({
     <div
       style={{
         border: "1px solid #d1d5db",
-        borderRadius: 8,
+        borderRadius: 10,
         background: "#fff",
         overflow: "hidden",
       }}
@@ -318,13 +325,12 @@ function RichTextEditor({
         onKeyDown={handleKeyDown}
         data-placeholder={placeholder}
         style={{
-          minHeight: compact ? 56 : 88,
-          padding: "14px 16px",
+          minHeight: compact ? 80 : 120,
+          padding: "18px 20px",
           outline: "none",
-          fontSize: 15,
+          ...T.body,
+          fontFamily: T.fontFamily,
           color: "#111827",
-          lineHeight: 1.6,
-          fontFamily: "inherit",
         }}
         className="comment-editor"
       />
@@ -334,38 +340,36 @@ function RichTextEditor({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "8px 12px",
+          padding: "10px 16px",
           borderTop: "1px solid #e5e7eb",
           background: "#f9fafb",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
           {[
-            { cmd: "bold", label: "B", extraStyle: { fontWeight: 700 } },
-            { cmd: "italic", label: "I", extraStyle: { fontStyle: "italic" } },
-            { cmd: "underline", label: "U", extraStyle: { textDecoration: "underline" } },
-            { cmd: "insertUnorderedList", label: "≡", extraStyle: {} },
-          ].map(({ cmd, label, extraStyle }) => (
+            { cmd: "bold",                label: "B",  extra: { fontWeight: 700 } },
+            { cmd: "italic",              label: "I",  extra: { fontStyle: "italic" as const } },
+            { cmd: "underline",           label: "U",  extra: { textDecoration: "underline" } },
+            { cmd: "insertUnorderedList", label: "≡",  extra: {} },
+          ].map(({ cmd, label, extra }) => (
             <button
               key={cmd}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                execCmd(cmd);
-              }}
+              onMouseDown={(e) => { e.preventDefault(); execCmd(cmd); }}
               title={cmd}
               style={{
-                width: 32,
-                height: 32,
+                width: 44,
+                height: 44,
                 border: "none",
                 background: "transparent",
-                borderRadius: 4,
+                borderRadius: 6,
                 cursor: "pointer",
-                fontSize: 14,
+                ...T.toolbar,
+                fontFamily: T.fontFamily,
                 color: "#374151",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                ...extraStyle,
+                ...extra,
               }}
               onMouseEnter={(e) =>
                 ((e.currentTarget as HTMLElement).style.background = "#e5e7eb")
@@ -377,23 +381,24 @@ function RichTextEditor({
               {label}
             </button>
           ))}
-          {/* Mention button */}
+          {/* @ mention */}
           <button
             onMouseDown={(e) => e.preventDefault()}
             title="Mention"
             style={{
-              width: 32,
-              height: 32,
+              width: 44,
+              height: 44,
               border: "none",
               background: "transparent",
-              borderRadius: 4,
+              borderRadius: 6,
               cursor: "pointer",
-              fontSize: 15,
+              ...T.toolbar,
+              fontFamily: T.fontFamily,
               color: "#6b7280",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              marginLeft: 8,
+              marginLeft: 12,
             }}
             onMouseEnter={(e) =>
               ((e.currentTarget as HTMLElement).style.background = "#e5e7eb")
@@ -409,16 +414,15 @@ function RichTextEditor({
           onClick={handleSend}
           disabled={isEmpty}
           style={{
-            padding: "7px 20px",
-            borderRadius: 6,
+            padding: "10px 28px",
+            borderRadius: 8,
             border: "none",
             background: isEmpty ? "#9ca3af" : "#374151",
             color: "#fff",
-            fontSize: 14,
-            fontWeight: 600,
+            ...T.sendBtn,
+            fontFamily: T.fontFamily,
             cursor: isEmpty ? "not-allowed" : "pointer",
             transition: "background 0.15s",
-            letterSpacing: "0.01em",
           }}
         >
           Send
@@ -442,13 +446,11 @@ function Avatar({
   author,
   initials,
   avatarUrl,
-  online,
-  size = 40,
+  size = 56,
 }: {
   author: string;
   initials: string;
   avatarUrl?: string;
-  online?: boolean;
   size?: number;
 }) {
   const bg = AVATAR_COLORS[initials] ?? "#6b7280";
@@ -480,26 +482,13 @@ function Avatar({
             justifyContent: "center",
             fontSize: size * 0.36,
             fontWeight: 700,
-            fontFamily: "inherit",
+            fontFamily: T.fontFamily,
           }}
         >
           {initials}
         </div>
       )}
-      {online !== undefined && (
-        <span
-          style={{
-            position: "absolute",
-            bottom: 1,
-            right: 1,
-            width: size * 0.27,
-            height: size * 0.27,
-            borderRadius: "50%",
-            background: online ? "#22c55e" : "#9ca3af",
-            border: "2px solid #fff",
-          }}
-        />
-      )}
+      {/* No online/offline dot */}
     </div>
   );
 }
@@ -518,9 +507,9 @@ function ThreeDotMenu() {
           border: "none",
           cursor: "pointer",
           color: "#9ca3af",
-          padding: "2px 6px",
-          borderRadius: 4,
-          fontSize: 18,
+          padding: "4px 10px",
+          borderRadius: 6,
+          fontSize: 26,
           lineHeight: 1,
           letterSpacing: "0.05em",
         }}
@@ -541,10 +530,10 @@ function ThreeDotMenu() {
             top: "100%",
             background: "#fff",
             border: "1px solid #e5e7eb",
-            borderRadius: 8,
-            boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+            borderRadius: 10,
+            boxShadow: "0 6px 20px rgba(0,0,0,0.12)",
             zIndex: 20,
-            minWidth: 130,
+            minWidth: 180,
             overflow: "hidden",
           }}
         >
@@ -555,11 +544,12 @@ function ThreeDotMenu() {
               style={{
                 display: "block",
                 width: "100%",
-                padding: "9px 16px",
+                padding: "12px 20px",
                 background: "none",
                 border: "none",
                 textAlign: "left",
-                fontSize: 13,
+                ...T.menu,
+                fontFamily: T.fontFamily,
                 cursor: "pointer",
                 color: "#374151",
               }}
@@ -599,24 +589,22 @@ function CommentItem({
     setShowReplyEditor(false);
   };
 
-  const avatarSize = depth > 0 ? 36 : 40;
+  const avatarSize = depth > 0 ? 48 : 56;
 
   return (
-    <div style={{ marginLeft: depth > 0 ? avatarSize + 12 : 0 }}>
-      {/* Comment row */}
+    <div style={{ marginLeft: depth > 0 ? avatarSize + 16 : 0 }}>
       <div
         style={{
           display: "flex",
-          gap: 12,
-          paddingTop: 16,
-          paddingBottom: 12,
+          gap: 16,
+          paddingTop: 24,
+          paddingBottom: 16,
         }}
       >
         <Avatar
           author={comment.author}
           initials={comment.initials}
           avatarUrl={comment.avatarUrl}
-          online={comment.online}
           size={avatarSize}
         />
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -626,22 +614,21 @@ function CommentItem({
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: 6,
+              marginBottom: 8,
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span
                 style={{
-                  fontWeight: 600,
-                  fontSize: 14,
+                  ...T.author,
+                  fontFamily: T.fontFamily,
                   color: "#111827",
-                  fontFamily: "inherit",
                 }}
               >
                 {comment.author}
               </span>
               {comment.verified && (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="none">
                   <circle cx="8" cy="8" r="8" fill="#3b82f6" />
                   <path
                     d="M5 8l2 2 4-4"
@@ -659,11 +646,10 @@ function CommentItem({
           {/* Content */}
           <div
             style={{
-              fontSize: 14,
+              ...T.body,
+              fontFamily: T.fontFamily,
               color: "#111827",
-              lineHeight: 1.65,
-              fontFamily: "inherit",
-              marginBottom: 10,
+              marginBottom: 14,
             }}
             dangerouslySetInnerHTML={{ __html: comment.content }}
           />
@@ -673,9 +659,7 @@ function CommentItem({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 12,
-              fontSize: 13,
-              color: "#6b7280",
+              gap: 20,
             }}
           >
             <ReactionPill
@@ -691,7 +675,8 @@ function CommentItem({
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                fontSize: 13,
+                ...T.meta,
+                fontFamily: T.fontFamily,
                 color: "#6b7280",
                 padding: 0,
                 fontWeight: 500,
@@ -708,10 +693,11 @@ function CommentItem({
 
             <span
               style={{
+                ...T.meta,
+                fontFamily: T.fontFamily,
                 color: "#9ca3af",
-                fontSize: 12,
                 borderLeft: "1px solid #e5e7eb",
-                paddingLeft: 12,
+                paddingLeft: 20,
               }}
             >
               {comment.timestamp}
@@ -720,7 +706,7 @@ function CommentItem({
 
           {/* Reply editor */}
           {showReplyEditor && (
-            <div style={{ marginTop: 12 }}>
+            <div style={{ marginTop: 16 }}>
               <RichTextEditor
                 placeholder={`Reply to ${comment.author}...`}
                 onSend={handleReplySend}
@@ -770,7 +756,6 @@ export function CommentSection() {
       id: `c-${Date.now()}`,
       author: "You",
       initials: "YO",
-      online: true,
       content: html,
       timestamp: "Just now",
       timestampMs: Date.now(),
@@ -787,7 +772,6 @@ export function CommentSection() {
       id: `r-${Date.now()}`,
       author: "You",
       initials: "YO",
-      online: true,
       content: html,
       timestamp: "Just now",
       timestampMs: Date.now(),
@@ -799,12 +783,8 @@ export function CommentSection() {
 
     const updateReplies = (list: Comment[]): Comment[] =>
       list.map((c) => {
-        if (c.id === parentId) {
-          return { ...c, replies: [...c.replies, newReply] };
-        }
-        if (c.replies.length > 0) {
-          return { ...c, replies: updateReplies(c.replies) };
-        }
+        if (c.id === parentId) return { ...c, replies: [...c.replies, newReply] };
+        if (c.replies.length > 0) return { ...c, replies: updateReplies(c.replies) };
         return c;
       });
 
@@ -822,25 +802,15 @@ export function CommentSection() {
             userReaction: isSame ? null : reaction,
             likes:
               reaction === "like"
-                ? isSame
-                  ? c.likes - 1
-                  : c.likes + 1
-                : wasOpposite
-                ? c.likes - 1
-                : c.likes,
+                ? isSame ? c.likes - 1 : c.likes + 1
+                : wasOpposite ? c.likes - 1 : c.likes,
             dislikes:
               reaction === "dislike"
-                ? isSame
-                  ? c.dislikes - 1
-                  : c.dislikes + 1
-                : wasOpposite
-                ? c.dislikes - 1
-                : c.dislikes,
+                ? isSame ? c.dislikes - 1 : c.dislikes + 1
+                : wasOpposite ? c.dislikes - 1 : c.dislikes,
           };
         }
-        if (c.replies.length > 0) {
-          return { ...c, replies: updateReaction(c.replies) };
-        }
+        if (c.replies.length > 0) return { ...c, replies: updateReaction(c.replies) };
         return c;
       });
 
@@ -850,10 +820,10 @@ export function CommentSection() {
   return (
     <div
       style={{
-        maxWidth: 780,
+        maxWidth: 1200,
         margin: "0 auto",
-        padding: "0 0 60px",
-        fontFamily: "'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+        padding: "0 0 80px",
+        fontFamily: T.fontFamily,
       }}
     >
       {/* Global styles */}
@@ -866,8 +836,8 @@ export function CommentSection() {
         .comment-mention {
           background: #e5e7eb;
           color: #374151;
-          border-radius: 4px;
-          padding: 1px 5px;
+          border-radius: 5px;
+          padding: 2px 7px;
           font-weight: 500;
         }
       `}</style>
@@ -878,14 +848,14 @@ export function CommentSection() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: 20,
+          marginBottom: 28,
         }}
       >
-        <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
-          <span style={{ fontSize: 22, fontWeight: 700, color: "#111827" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
+          <span style={{ ...T.heading, fontFamily: T.fontFamily, color: "#111827" }}>
             Comments
           </span>
-          <span style={{ fontSize: 16, color: "#6b7280", fontWeight: 400 }}>
+          <span style={{ ...T.body, fontFamily: T.fontFamily, color: "#6b7280", fontWeight: 400 }}>
             {totalCount}
           </span>
         </div>
@@ -895,7 +865,7 @@ export function CommentSection() {
           style={{
             display: "flex",
             border: "1px solid #d1d5db",
-            borderRadius: 8,
+            borderRadius: 10,
             overflow: "hidden",
           }}
         >
@@ -904,12 +874,12 @@ export function CommentSection() {
               key={opt}
               onClick={() => setSortBy(opt)}
               style={{
-                padding: "6px 18px",
+                padding: "10px 26px",
                 border: "none",
                 background: sortBy === opt ? "#374151" : "#fff",
                 color: sortBy === opt ? "#fff" : "#374151",
-                fontSize: 13,
-                fontWeight: 500,
+                ...T.sortBtn,
+                fontFamily: T.fontFamily,
                 cursor: "pointer",
                 transition: "background 0.15s, color 0.15s",
               }}
@@ -921,7 +891,7 @@ export function CommentSection() {
       </div>
 
       {/* New comment editor */}
-      <div style={{ marginBottom: 28 }}>
+      <div style={{ marginBottom: 36 }}>
         <RichTextEditor placeholder="Hi @Sharon" onSend={addComment} />
       </div>
 
@@ -943,26 +913,27 @@ export function CommentSection() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: 8,
-          paddingTop: 24,
+          gap: 10,
+          paddingTop: 32,
+          ...T.meta,
+          fontFamily: T.fontFamily,
           color: "#9ca3af",
-          fontSize: 13,
         }}
       >
         <svg
-          width="16"
-          height="16"
+          width="22"
+          height="22"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          style={{ animation: "spin 1s linear infinite" }}
+          style={{ animation: "cs-spin 1s linear infinite" }}
         >
           <path d="M21 12a9 9 0 1 1-6.219-8.56" />
         </svg>
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        <style>{`@keyframes cs-spin { to { transform: rotate(360deg); } }`}</style>
         Loading
       </div>
     </div>

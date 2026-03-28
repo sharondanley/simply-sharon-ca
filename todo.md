@@ -67,3 +67,10 @@
 - [x] Three-dot menu per comment (Report/Copy link/Hide)
 - [x] Online/offline status dot on avatars
 - [x] Blue verified checkmark for Sharon Danley
+
+## Phase 10: Comment Section Typography Update
+- [x] Scale comment text to match blog post body (Helvetica 36px/46px)
+- [x] Scale author names to 32px bold, meta/timestamps to 28px
+- [x] Scale "Comments" heading to 44px bold
+- [x] Scale toolbar buttons, Send button, and sort toggle to match
+- [x] Remove online/offline status dots from all avatars
