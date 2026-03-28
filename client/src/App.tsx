@@ -15,6 +15,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/blogcast"} component={BlogcastArchive} />
       <Route path={"/blogcast/:slug"} component={BlogPost} />
+      <Route path={"/blog-post/:id"} component={BlogPost} />
       <Route path={"/admin"} component={Admin} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />

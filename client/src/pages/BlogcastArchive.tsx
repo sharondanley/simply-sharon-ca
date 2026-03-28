@@ -218,14 +218,16 @@ export default function BlogcastArchive() {
                     </div>
                     <div style={{ paddingLeft: 14, paddingRight: 14, display: "flex", alignItems: "center", gap: 108 }}>
                       {[
-                        { icon: A.readBtn, label: "Read", w: 48, h: 48, r: 16 },
-                        { icon: A.listenBtn, label: "Listen", w: 43, h: 42, r: 0 },
-                        { icon: A.watchBtn, label: "Watch", w: 42, h: 42, r: 0 },
-                      ].map(({ icon, label, w, h, r }) => (
-                        <div key={label} style={{ paddingLeft: 39, paddingRight: 39, paddingTop: 14, paddingBottom: 14, background: "#D4D4D4", borderRadius: 20, display: "flex", alignItems: "center", gap: 23, cursor: "pointer" }}>
-                          <img src={icon} alt={label} style={{ width: w, height: h, borderRadius: r }} />
-                          <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 40, fontWeight: 700, color: "#000" }}>{label}</span>
-                        </div>
+                        { icon: A.readBtn, label: "Read", w: 48, h: 48, r: 16, href: `/blog-post/${post.id}` },
+                        { icon: A.listenBtn, label: "Listen", w: 43, h: 42, r: 0, href: `https://www.youtube.com/@SimplySharonTips/featured` },
+                        { icon: A.watchBtn, label: "Watch", w: 42, h: 42, r: 0, href: `https://www.youtube.com/@SimplySharonTips/featured` },
+                      ].map(({ icon, label, w, h, r, href }) => (
+                        <Link key={label} href={href}>
+                          <div style={{ paddingLeft: 39, paddingRight: 39, paddingTop: 14, paddingBottom: 14, background: "#D4D4D4", borderRadius: 20, display: "flex", alignItems: "center", gap: 23, cursor: "pointer", textDecoration: "none" }}>
+                            <img src={icon} alt={label} style={{ width: w, height: h, borderRadius: r }} />
+                            <span style={{ fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif", fontSize: 40, fontWeight: 700, color: "#000" }}>{label}</span>
+                          </div>
+                        </Link>
                       ))}
                     </div>
                   </div>
