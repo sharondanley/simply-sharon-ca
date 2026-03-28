@@ -703,6 +703,84 @@ function PostsList({ onEdit }: { onEdit: (id: number) => void; onNew: () => void
   );
 }
 
+// ─── Admin Login Form ─────────────────────────────────────────────────────────
+function AdminLoginForm() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const utils = trpc.useUtils();
+  const loginMutation = trpc.auth.adminLogin.useMutation({
+    onSuccess: () => {
+      utils.auth.me.invalidate();
+    },
+    onError: (err) => {
+      setError(err.message || "Invalid credentials");
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    loginMutation.mutate({ username, password });
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full">
+        <div className="text-center mb-8">
+          <h1 className="text-5xl font-normal font-['Italianno'] text-black mb-1">Simply Sharon</h1>
+          <p className="text-gray-500 font-['Source_Sans_3'] text-sm">Admin Dashboard</p>
+        </div>
+        <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+          <Settings size={28} className="text-white" />
+        </div>
+        <h2 className="text-xl font-bold font-['Source_Sans_3'] text-black mb-6 text-center">Sign In</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold font-['Source_Sans_3'] text-gray-700 mb-1">Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoComplete="username"
+              required
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg font-['Source_Sans_3'] text-sm focus:outline-none focus:ring-2 focus:ring-black"
+              placeholder="Enter username"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold font-['Source_Sans_3'] text-gray-700 mb-1">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              required
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg font-['Source_Sans_3'] text-sm focus:outline-none focus:ring-2 focus:ring-black"
+              placeholder="Enter password"
+            />
+          </div>
+          {error && (
+            <p className="text-red-500 text-sm font-['Source_Sans_3'] text-center">{error}</p>
+          )}
+          <button
+            type="submit"
+            disabled={loginMutation.isPending}
+            className="w-full py-3 bg-black text-white font-bold font-['Source_Sans_3'] rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loginMutation.isPending ? "Signing in…" : "Sign In"}
+          </button>
+        </form>
+        <Link href="/">
+          <p className="mt-4 text-sm text-gray-400 hover:text-black cursor-pointer font-['Source_Sans_3'] transition-colors text-center">
+            ← Back to website
+          </p>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Admin Page ──────────────────────────────────────────────────────────
 type AdminView = "dashboard" | "posts" | "new-post";
 
@@ -719,32 +797,7 @@ export default function Admin() {
   }
 
   if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">
-          <h1 className="text-5xl font-normal font-['Italianno'] text-black mb-2">Simply Sharon</h1>
-          <p className="text-gray-500 font-['Source_Sans_3'] mb-8">Admin Dashboard</p>
-          <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-            <Settings size={28} className="text-white" />
-          </div>
-          <h2 className="text-xl font-bold font-['Source_Sans_3'] text-black mb-2">Admin Access</h2>
-          <p className="text-gray-500 text-sm font-['Source_Sans_3'] mb-6">
-            Sign in with your Manus account to access the content management dashboard.
-          </p>
-          <a
-            href={getLoginUrl()}
-            className="block w-full py-3 bg-black text-white font-bold font-['Source_Sans_3'] rounded-lg hover:bg-gray-800 transition-colors"
-          >
-            Sign In to Continue
-          </a>
-          <Link href="/">
-            <p className="mt-4 text-sm text-gray-400 hover:text-black cursor-pointer font-['Source_Sans_3'] transition-colors">
-              ← Back to website
-            </p>
-          </Link>
-        </div>
-      </div>
-    );
+    return <AdminLoginForm />;
   }
 
   const isAdmin = user?.role === "admin";

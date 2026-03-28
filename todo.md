@@ -98,3 +98,10 @@
 - [x] Replace footer in BlogPost.tsx with shared component
 - [x] Replace footer in BlogcastArchive.tsx with shared component
 - [x] Replace footer in BlogPage.tsx with shared component
+
+## Phase 16: Standalone Admin Login (no Manus OAuth)
+- [x] Add ADMIN_USERNAME and ADMIN_PASSWORD env secrets
+- [x] Add admin.login tRPC mutation (verifies credentials, issues JWT session cookie)
+- [x] Update context.ts to handle local:admin openId without Manus OAuth sync
+- [x] Replace Manus sign-in button in Admin.tsx with username/password form
+- [x] Test login, dashboard access, and logout flow

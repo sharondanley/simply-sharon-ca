@@ -256,6 +256,18 @@ class SDKServer {
     } as GetUserInfoWithJwtResponse;
   }
 
+  /**
+   * Extract and verify the session from a request without doing a DB lookup.
+   * Returns the raw session payload or null.
+   */
+  async getSessionFromRequest(
+    req: Request
+  ): Promise<{ openId: string; appId: string; name: string } | null> {
+    const cookies = this.parseCookies(req.headers.cookie);
+    const sessionCookie = cookies.get(COOKIE_NAME);
+    return this.verifySession(sessionCookie);
+  }
+
   async authenticateRequest(req: Request): Promise<User> {
     // Regular authentication flow
     const cookies = this.parseCookies(req.headers.cookie);

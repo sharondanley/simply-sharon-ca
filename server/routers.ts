@@ -20,6 +20,8 @@ import {
 } from "./db";
 import { storagePut } from "./storage";
 import { nanoid } from "nanoid";
+import { sdk } from "./_core/sdk";
+import { ENV } from "./_core/env";
 
 const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
   if (ctx.user.role !== "admin") {
@@ -37,6 +39,30 @@ export const appRouter = router({
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
       return { success: true } as const;
     }),
+    adminLogin: publicProcedure
+      .input(z.object({ username: z.string(), password: z.string() }))
+      .mutation(async ({ input, ctx }) => {
+        const { username, password } = input;
+        // Validate against env-configured credentials
+        if (
+          !ENV.adminPassword ||
+          username !== ENV.adminUsername ||
+          password !== ENV.adminPassword
+        ) {
+          throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "Invalid username or password",
+          });
+        }
+        // Issue a JWT session cookie for the local admin
+        const token = await sdk.signSession(
+          { openId: "local:admin", appId: "local", name: "Admin" },
+          { expiresInMs: 7 * 24 * 60 * 60 * 1000 } // 7 days
+        );
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, token, cookieOptions);
+        return { success: true } as const;
+      }),
   }),
 
   posts: router({
