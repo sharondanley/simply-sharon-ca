@@ -1853,7 +1853,7 @@ export default function Home() {
       </section>
 
       {/* ── Meet Sharon Section — Figma 1920×2605px, scale transform ── */}
-      <div id="about" className="w-full hidden md:block relative" style={{ height: "calc(2605px * min(1, calc(100vw / 1920)))" }}>
+      <div id="about" className="w-full hidden md:block relative" style={{ height: "2605px" }}>
         <section
           style={{
             position: "absolute",
@@ -1868,6 +1868,7 @@ export default function Home() {
             justifyContent: "center",
             alignItems: "center",
             padding: "0px 0px 96px",
+            paddingTop: "40px",
             gap: "30px",
             background: "linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 40%, #1a1a1a 100%)",
           }}
