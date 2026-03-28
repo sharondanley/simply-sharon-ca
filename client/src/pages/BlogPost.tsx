@@ -5,6 +5,7 @@
  */
 
 import { Link } from "wouter";
+import { CommentSection } from "@/components/CommentSection";
 
 // ─── CDN Assets (Figma node-id mapped) ───────────────────────────────────────
 const ASSETS = {
@@ -241,9 +242,9 @@ export default function BlogPost() {
             </div>
           </div>
 
-          {/* Comment section (Figma screenshot — static) */}
-          <div style={{ width: "1574px", padding: "10px", display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <img src={ASSETS.commentSection} alt="Comments section" style={{ width: "1245px", height: "1124px", objectFit: "contain" }} />
+          {/* Functional comment section */}
+          <div style={{ width: "1574px", padding: "10px 0" }}>
+            <CommentSection />
           </div>
 
         </div>

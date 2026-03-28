@@ -54,3 +54,16 @@
 - [x] Add formatting toolbar to paragraph blocks (bold, italic, underline)
 - [x] Add heading size selector to heading blocks (H1, H2, H3)
 - [x] Render formatted HTML in the blog post view
+
+## Phase 9: Comment Section UI Refinement
+- [x] Replace static comment section screenshot with functional CommentSection component
+- [x] Rich text editor with B/I/U/List/@ toolbar and Send button
+- [x] Smiley-face reaction pill (matching reference design) with like/dislike counts
+- [x] Threaded replies with indentation and reply editor
+- [x] Sort by Latest/Popular toggle
+- [x] Total comment count display
+- [x] @mention highlighting in gray
+- [x] Loading indicator at bottom
+- [x] Three-dot menu per comment (Report/Copy link/Hide)
+- [x] Online/offline status dot on avatars
+- [x] Blue verified checkmark for Sharon Danley
