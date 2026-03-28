@@ -57,7 +57,7 @@ export function SiteNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <>
+    <div className="sticky top-0 z-50 w-full">
       {/* ── Desktop Navbar (md+) ─────────────────────────────────────────── */}
       <div
         className="w-full hidden md:block"
@@ -272,6 +272,6 @@ export function SiteNavbar() {
           </Link>
         </div>
       )}
-    </>
+    </div>
   );
 }

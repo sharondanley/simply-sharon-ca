@@ -1868,6 +1868,7 @@ export default function Home() {
             justifyContent: "center",
             alignItems: "center",
             padding: "0px 0px 96px",
+            paddingTop: "40px",
             gap: "30px",
             background: "linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 40%, #1a1a1a 100%)",
           }}
@@ -2169,7 +2170,7 @@ export default function Home() {
                       alignItems: "center",
                       padding: "9px 0px 9px 20px",
                       gap: "14px",
-                      background: "rgba(36, 36, 36, 0.60)",
+                      background: "rgba(69, 69, 69, 0.60)",
                       textDecoration: "none",
                       cursor: "pointer",
                     }}
@@ -2273,16 +2274,7 @@ export default function Home() {
 
       {/* ── Footer Section ── */}
       <SiteFooter />
-      {/* Admin link — hidden, accessible */}
-      <div style={{ background: "#2a2a32", textAlign: "center", padding: "4px 0" }}>
-        <Link href="/admin">
-          <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "14px", cursor: "pointer", fontFamily: "'Source Sans Pro', sans-serif" }}
-            onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
-            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.2)")}>
-            Admin Login
-          </span>
-        </Link>
-      </div>
+
 
     </div>
   );

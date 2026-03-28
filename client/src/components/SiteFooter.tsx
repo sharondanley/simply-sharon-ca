@@ -362,6 +362,25 @@ export function SiteFooter() {
               © 2025 Sharon Danley | All images, content and design created by Sharon Danley.
             </p>
           </div>
+
+          {/* Admin link — hidden, accessible */}
+          <div style={{ paddingBottom: "12px", textAlign: "center" }}>
+            <Link href="/admin">
+              <span
+                style={{
+                  fontFamily: "'Source Sans 3', 'Source Sans Pro', sans-serif",
+                  fontSize: "13px",
+                  color: "rgba(255,255,255,0.18)",
+                  cursor: "pointer",
+                  transition: "color 0.15s",
+                }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.18)")}
+              >
+                Admin Login
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
 
