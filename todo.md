@@ -74,3 +74,7 @@
 - [x] Scale "Comments" heading to 44px bold
 - [x] Scale toolbar buttons, Send button, and sort toggle to match
 - [x] Remove online/offline status dots from all avatars
+
+## Phase 11: Reaction Button Update
+- [x] Replace smiley/frown icons with thumbs up/down SVG icons
+- [x] Always show both thumbs up and thumbs down on every comment (even when count is 0)

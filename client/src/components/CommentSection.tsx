@@ -95,9 +95,9 @@ const INITIAL_COMMENTS: Comment[] = [
   },
 ];
 
-// ─── Smiley Icon ──────────────────────────────────────────────────────────────
+// ─── Thumb Icons ─────────────────────────────────────────────────────────────
 
-function SmileyIcon({ size = 28 }: { size?: number }) {
+function ThumbUpIcon({ size = 28 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -109,10 +109,26 @@ function SmileyIcon({ size = 28 }: { size?: number }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M8 13s1.5 2 4 2 4-2 4-2" />
-      <line x1="9" y1="9" x2="9.01" y2="9" strokeWidth="2.5" />
-      <line x1="15" y1="9" x2="15.01" y2="9" strokeWidth="2.5" />
+      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z" />
+      <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+    </svg>
+  );
+}
+
+function ThumbDownIcon({ size = 28 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z" />
+      <path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17" />
     </svg>
   );
 }
@@ -130,9 +146,6 @@ function ReactionPill({
   userReaction: "like" | "dislike" | null;
   onReact: (r: "like" | "dislike") => void;
 }) {
-  const hasLikes = likes > 0;
-  const hasDislikes = dislikes > 0;
-
   return (
     <div
       style={{
@@ -146,10 +159,10 @@ function ReactionPill({
         userSelect: "none",
       }}
     >
-      {/* Smiley / like button */}
+      {/* Thumbs Up */}
       <button
         onClick={() => onReact("like")}
-        title="React"
+        title="Like"
         style={{
           background: "none",
           border: "none",
@@ -157,109 +170,89 @@ function ReactionPill({
           padding: 0,
           display: "flex",
           alignItems: "center",
-          color: userReaction === "like" ? "#f59e0b" : "#6b7280",
+          color: userReaction === "like" ? "#1d4ed8" : "#6b7280",
           transition: "color 0.15s, transform 0.1s",
           lineHeight: 1,
         }}
         onMouseEnter={(e) => {
           (e.currentTarget as HTMLElement).style.transform = "scale(1.15)";
-          (e.currentTarget as HTMLElement).style.color = "#f59e0b";
+          (e.currentTarget as HTMLElement).style.color = "#1d4ed8";
         }}
         onMouseLeave={(e) => {
           (e.currentTarget as HTMLElement).style.transform = "scale(1)";
           (e.currentTarget as HTMLElement).style.color =
-            userReaction === "like" ? "#f59e0b" : "#6b7280";
+            userReaction === "like" ? "#1d4ed8" : "#6b7280";
         }}
       >
-        <SmileyIcon size={28} />
+        <ThumbUpIcon size={28} />
       </button>
 
-      {/* Like count */}
-      {hasLikes && (
-        <span
-          style={{
-            ...T.meta,
-            fontFamily: T.fontFamily,
-            color: userReaction === "like" ? "#1d4ed8" : "#374151",
-            fontWeight: userReaction === "like" ? 700 : 400,
-            marginLeft: 8,
-          }}
-        >
-          {likes}
-        </span>
-      )}
+      {/* Like count — always rendered, 0 when empty */}
+      <span
+        style={{
+          ...T.meta,
+          fontFamily: T.fontFamily,
+          color: userReaction === "like" ? "#1d4ed8" : "#374151",
+          fontWeight: userReaction === "like" ? 700 : 400,
+          marginLeft: 8,
+          minWidth: 20,
+        }}
+      >
+        {likes}
+      </span>
 
       {/* Divider */}
-      {hasLikes && hasDislikes && (
-        <span
-          style={{
-            width: 1,
-            height: 22,
-            background: "#d1d5db",
-            margin: "0 10px",
-            display: "inline-block",
-          }}
-        />
-      )}
+      <span
+        style={{
+          width: 1,
+          height: 22,
+          background: "#d1d5db",
+          margin: "0 12px",
+          display: "inline-block",
+        }}
+      />
 
-      {/* Dislike count + icon */}
-      {hasDislikes && (
-        <>
-          <button
-            onClick={() => onReact("dislike")}
-            title="Dislike"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              display: "flex",
-              alignItems: "center",
-              color: userReaction === "dislike" ? "#dc2626" : "#6b7280",
-              transition: "color 0.15s, transform 0.1s",
-              lineHeight: 1,
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.transform = "scale(1.15)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.transform = "scale(1)";
-            }}
-          >
-            <svg
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="M8 15s1.5-2 4-2 4 2 4 2" />
-              <line x1="9" y1="9" x2="9.01" y2="9" strokeWidth="2.5" />
-              <line x1="15" y1="9" x2="15.01" y2="9" strokeWidth="2.5" />
-            </svg>
-          </button>
-          <span
-            style={{
-              ...T.meta,
-              fontFamily: T.fontFamily,
-              color: userReaction === "dislike" ? "#dc2626" : "#374151",
-              fontWeight: userReaction === "dislike" ? 700 : 400,
-              marginLeft: 6,
-            }}
-          >
-            {dislikes}
-          </span>
-        </>
-      )}
+      {/* Thumbs Down */}
+      <button
+        onClick={() => onReact("dislike")}
+        title="Dislike"
+        style={{
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          padding: 0,
+          display: "flex",
+          alignItems: "center",
+          color: userReaction === "dislike" ? "#dc2626" : "#6b7280",
+          transition: "color 0.15s, transform 0.1s",
+          lineHeight: 1,
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLElement).style.transform = "scale(1.15)";
+          (e.currentTarget as HTMLElement).style.color = "#dc2626";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+          (e.currentTarget as HTMLElement).style.color =
+            userReaction === "dislike" ? "#dc2626" : "#6b7280";
+        }}
+      >
+        <ThumbDownIcon size={28} />
+      </button>
 
-      {/* Spacer when no counts */}
-      {!hasLikes && !hasDislikes && (
-        <span style={{ width: 6, display: "inline-block" }} />
-      )}
+      {/* Dislike count — always rendered, 0 when empty */}
+      <span
+        style={{
+          ...T.meta,
+          fontFamily: T.fontFamily,
+          color: userReaction === "dislike" ? "#dc2626" : "#374151",
+          fontWeight: userReaction === "dislike" ? 700 : 400,
+          marginLeft: 8,
+          minWidth: 20,
+        }}
+      >
+        {dislikes}
+      </span>
     </div>
   );
 }
